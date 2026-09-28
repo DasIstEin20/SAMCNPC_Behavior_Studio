@@ -1,0 +1,155 @@
+{
+  "format": "samcnpc-studio",
+  "version": 1,
+  "targetCommit": "b92ec0e23164f822f450fc65a006ce9039cec37a",
+  "pack": {
+    "id": "tutorial:cautious_follow",
+    "description": "Stop below 30% health; follow at or above 30%. No healing or fleeing.",
+    "priority": 100,
+    "channels": [
+      "movement",
+      "look"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "6b5976e0cfee",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "stop_when_hurt",
+      "priority": 500,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 55.0
+    },
+    {
+      "id": "674f1e4ddc5a",
+      "kind": "condition",
+      "ref": "samcnpc:health_fraction",
+      "args": {
+        "operator": "lt",
+        "value": 0.3
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 45,
+      "y": 55.0
+    },
+    {
+      "id": "b67afd087258",
+      "kind": "action",
+      "ref": "samcnpc:stop_movement",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 55.0
+    },
+    {
+      "id": "4768f276a613",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "follow_when_healthy",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 312.5
+    },
+    {
+      "id": "1034aacb414a",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 312.5
+    },
+    {
+      "id": "bbbb1ce06beb",
+      "kind": "condition",
+      "ref": "samcnpc:summoner_online",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 245.0
+    },
+    {
+      "id": "30de87839057",
+      "kind": "condition",
+      "ref": "samcnpc:health_fraction",
+      "args": {
+        "operator": "gte",
+        "value": 0.3
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 45,
+      "y": 380.0
+    },
+    {
+      "id": "f634613948a5",
+      "kind": "action",
+      "ref": "samcnpc:move_to_summoner",
+      "args": {
+        "speed": 1.0,
+        "stopDistance": 2.0
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 925,
+      "y": 245.0
+    }
+  ],
+  "edges": [
+    [
+      "674f1e4ddc5a",
+      "6b5976e0cfee"
+    ],
+    [
+      "6b5976e0cfee",
+      "b67afd087258"
+    ],
+    [
+      "bbbb1ce06beb",
+      "1034aacb414a"
+    ],
+    [
+      "30de87839057",
+      "1034aacb414a"
+    ],
+    [
+      "1034aacb414a",
+      "4768f276a613"
+    ],
+    [
+      "4768f276a613",
+      "f634613948a5"
+    ]
+  ]
+}

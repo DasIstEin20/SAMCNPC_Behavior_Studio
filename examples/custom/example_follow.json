@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "example:follow",
+  "description": "Podążaj za przywołującym. Dystans zatrzymania 2, wznowienia 4 bloki.",
+  "priority": 100,
+  "channels": [
+    "movement",
+    "look"
+  ],
+  "rules": [
+    {
+      "id": "follow_summoner",
+      "priority": 100,
+      "when": {
+        "all": [
+          {
+            "test": {
+              "condition": "samcnpc:has_summoner"
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:summoner_online"
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:move_to_summoner",
+          "args": {
+            "speed": 1.0,
+            "stopDistance": 2.0
+          }
+        }
+      ]
+    }
+  ]
+}

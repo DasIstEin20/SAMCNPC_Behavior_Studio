@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "samcnpc:demo_lumberjack",
+  "description": "REFERENCJA: krok istniejącego demo joba. Samo przypisanie tej paczki NIE uruchamia drwala.",
+  "priority": 100000,
+  "channels": [
+    "movement",
+    "look",
+    "main_hand",
+    "block_action",
+    "inventory",
+    "interaction"
+  ],
+  "rules": [
+    {
+      "id": "advance_demo_job",
+      "priority": 100000,
+      "when": {
+        "test": {
+          "condition": "samcnpc:always"
+        }
+      },
+      "actions": [
+        {
+          "action": "samcnpc:run_lumberjack_demo"
+        }
+      ]
+    }
+  ]
+}

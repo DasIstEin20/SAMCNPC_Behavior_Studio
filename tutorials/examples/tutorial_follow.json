@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "tutorial:follow",
+  "description": "Follow the available summoner. Stop at 2 blocks; start beyond 4.",
+  "priority": 100,
+  "channels": [
+    "movement",
+    "look"
+  ],
+  "rules": [
+    {
+      "id": "follow_summoner",
+      "priority": 100,
+      "when": {
+        "all": [
+          {
+            "test": {
+              "condition": "samcnpc:has_summoner"
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:summoner_online"
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:move_to_summoner",
+          "args": {
+            "speed": 1.0,
+            "stopDistance": 2.0,
+            "startDistance": 4.0
+          }
+        }
+      ]
+    }
+  ]
+}

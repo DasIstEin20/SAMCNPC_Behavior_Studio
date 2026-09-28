@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "example:tool_preparation",
+  "description": "Equip a carried usable axe. Chest acquisition uses durable ENSURE or authorized task preparation.",
+  "priority": 200,
+  "channels": [
+    "inventory",
+    "main_hand",
+    "off_hand"
+  ],
+  "rules": [
+    {
+      "id": "equip_usable_axe",
+      "priority": 100,
+      "when": {
+        "all": [
+          {
+            "test": {
+              "condition": "samcnpc:inventory_count",
+              "args": {
+                "query": "@axe",
+                "operator": "gte",
+                "count": 1,
+                "minimumDurability": 0.2
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:equipment_matches",
+                "args": {
+                  "query": "@axe",
+                  "destination": "MAIN_HAND",
+                  "minimumDurability": 0.2
+                }
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:ensure_equipment",
+          "args": {
+            "query": "@axe",
+            "destination": "MAIN_HAND",
+            "minimumDurability": 0.2
+          }
+        }
+      ]
+    }
+  ]
+}

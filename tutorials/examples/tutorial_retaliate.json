@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "id": "tutorial:retaliate",
+  "description": "Retaliate against an eligible recent attacker. Players are not allowed targets.",
+  "priority": 500,
+  "channels": [
+    "movement",
+    "look",
+    "combat",
+    "main_hand"
+  ],
+  "rules": [
+    {
+      "id": "acquire_attacker",
+      "priority": 1000,
+      "when": {
+        "all": [
+          {
+            "test": {
+              "condition": "samcnpc:has_unhandled_damage"
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:has_attack_target"
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:set_attack_target_from_recent_attacker",
+          "args": {
+            "leash": 24.0,
+            "durationTicks": 600,
+            "allowPlayers": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "approach_and_attack",
+      "priority": 500,
+      "when": {
+        "all": [
+          {
+            "test": {
+              "condition": "samcnpc:has_attack_target"
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:target_alive"
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:move_to_target",
+          "args": {
+            "speed": 1.1,
+            "stopDistance": 2.4
+          }
+        },
+        {
+          "action": "samcnpc:attack_target"
+        }
+      ]
+    }
+  ]
+}

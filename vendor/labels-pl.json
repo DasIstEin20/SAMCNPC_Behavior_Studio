@@ -1,0 +1,211 @@
+{
+  "samcnpc:always": {
+    "label": "Zawsze",
+    "description": "Warunek zawsze prawdziwy.",
+    "args": {}
+  },
+  "samcnpc:has_summoner": {
+    "label": "Ma przywołującego",
+    "description": "NPC ma przypisany UUID summonnera. To nie znaczy, że gracz jest dostępny.",
+    "args": {}
+  },
+  "samcnpc:summoner_online": {
+    "label": "Przywołujący dostępny",
+    "description": "Przywołujący jest żywym graczem dostępnym w ograniczonej obserwacji Behavior.",
+    "args": {}
+  },
+  "samcnpc:distance_to_summoner": {
+    "label": "Dystans do przywołującego",
+    "description": "Porównuje poziomy dystans do obserwowanego summonnera.",
+    "args": {
+      "operator": "Porównanie",
+      "blocks": "Dystans [bloki]"
+    }
+  },
+  "samcnpc:has_unhandled_damage": {
+    "label": "Nowe obrażenia",
+    "description": "Nowe, jeszcze nieobsłużone zdarzenie obrażeń; pamięć reakcji ogranicza jego wiek.",
+    "args": {}
+  },
+  "samcnpc:has_attack_target": {
+    "label": "Ma cel walki",
+    "description": "Behavior ma żywy cel walki; nie wyszukuje nowego przeciwnika.",
+    "args": {}
+  },
+  "samcnpc:target_alive": {
+    "label": "Cel jest żywy",
+    "description": "Aktualny cel walki nadal jest żywy.",
+    "args": {}
+  },
+  "samcnpc:was_hurt_recently": {
+    "label": "Niedawno zraniony",
+    "description": "Sprawdza wiek ostatniego zdarzenia obrażeń.",
+    "args": {
+      "withinTicks": "Ostatnie N ticków"
+    }
+  },
+  "samcnpc:health_fraction": {
+    "label": "Poziom zdrowia",
+    "description": "Ułamek maksymalnego zdrowia: 0.3 oznacza 30%.",
+    "args": {
+      "operator": "Porównanie",
+      "value": "Ułamek zdrowia"
+    }
+  },
+  "samcnpc:task_ready": {
+    "label": "Zadanie gotowe",
+    "description": "Istniejący task jest gotowy do kroku wykonania. Nie tworzy taska ani nie sprawdza jego typu.",
+    "args": {}
+  },
+  "samcnpc:task_combat_ready": {
+    "label": "Przerwanie walką gotowe",
+    "description": "Gotowy jest aktualny task walki/przerwanie.",
+    "args": {}
+  },
+  "samcnpc:task_reaction_ready": {
+    "label": "Reakcja zadania gotowa",
+    "description": "Polityka istniejącego taska zgłasza gotową reakcję.",
+    "args": {}
+  },
+  "samcnpc:task_inventory_ready": {
+    "label": "Logistyka zadania gotowa",
+    "description": "Gotowe jest istniejące zadanie pracy z ekwipunkiem.",
+    "args": {}
+  },
+  "samcnpc:task_inventory_requested": {
+    "label": "Zadanie żąda logistyki",
+    "description": "Istniejący task zgłasza potrzebę logistycznego przerwania.",
+    "args": {}
+  },
+  "samcnpc:look_at_summoner": {
+    "label": "Patrz na przywołującego",
+    "description": "Obraca widok w stronę obserwowanego gracza.",
+    "args": {}
+  },
+  "samcnpc:look_at_target": {
+    "label": "Patrz na cel",
+    "description": "Obraca widok w stronę aktualnego celu walki.",
+    "args": {}
+  },
+  "samcnpc:move_to_summoner": {
+    "label": "Podążaj za przywołującym",
+    "description": "Nawigacja do gracza z histerezą. Puste startDistance oznacza stopDistance + 2. Musi być większe od stopDistance.",
+    "args": {
+      "speed": "Prędkość (powyżej 1: sprint)",
+      "stopDistance": "Dystans zatrzymania",
+      "startDistance": "Dystans wznowienia"
+    }
+  },
+  "samcnpc:move_to_target": {
+    "label": "Podejdź do celu walki",
+    "description": "Steruje ruchem w stronę aktualnego celu walki; nie jest nowym taskiem nawigacji.",
+    "args": {
+      "speed": "Prędkość (powyżej 1: sprint)",
+      "stopDistance": "Dystans zatrzymania"
+    }
+  },
+  "samcnpc:stop_movement": {
+    "label": "Zatrzymaj ruch",
+    "description": "Zwalnia bieżące sterowanie ruchem.",
+    "args": {}
+  },
+  "samcnpc:attack_target": {
+    "label": "Uderz cel",
+    "description": "Melee w aktualny cel; sprawdza rzeczywisty cooldown, zasięg i mechanikę Core.",
+    "args": {}
+  },
+  "samcnpc:set_attack_target_from_recent_attacker": {
+    "label": "Ustaw ostatniego napastnika",
+    "description": "Wybiera kwalifikującego się napastnika z nowego zdarzenia obrażeń. Nie wyszukuje najbliższego wroga.",
+    "args": {
+      "leash": "Zasięg pościgu",
+      "durationTicks": "Limit pościgu [ticki]",
+      "allowPlayers": "Dopuść graczy (nie włączać pochopnie)"
+    }
+  },
+  "samcnpc:clear_attack_target": {
+    "label": "Wyczyść cel walki",
+    "description": "Czyści przejściowy cel Behavior.",
+    "args": {}
+  },
+  "samcnpc:begin_task_inventory": {
+    "label": "Rozpocznij przerwanie logistyką",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: istniejący task + polityka logistyki.",
+    "args": {}
+  },
+  "samcnpc:run_inventory_task": {
+    "label": "Krok pracy ekwipunku",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: samcnpc:task_inventory (lub przerwanie taska).",
+    "args": {}
+  },
+  "samcnpc:begin_task_reaction": {
+    "label": "Rozpocznij reakcję taska",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: istniejący task + polityka reakcji.",
+    "args": {}
+  },
+  "samcnpc:run_combat_task": {
+    "label": "Krok walki taska",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: samcnpc:task_combat (lub przerwanie taska).",
+    "args": {}
+  },
+  "samcnpc:run_navigation_task": {
+    "label": "Krok nawigacji",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: samcnpc:task_navigation.",
+    "args": {}
+  },
+  "samcnpc:run_delivery_task": {
+    "label": "Krok dostawy / transportu",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: samcnpc:task_delivery.",
+    "args": {}
+  },
+  "samcnpc:run_mining_task": {
+    "label": "Krok minera",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: samcnpc:task_mining.",
+    "args": {}
+  },
+  "samcnpc:run_food_task": {
+    "label": "Krok pozyskiwania żywności",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: samcnpc:task_food.",
+    "args": {}
+  },
+  "samcnpc:run_explorer_task": {
+    "label": "Krok eksploratora",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: samcnpc:task_explorer.",
+    "args": {}
+  },
+  "samcnpc:run_fishing_task": {
+    "label": "Krok łowienia",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: samcnpc:task_fishing.",
+    "args": {}
+  },
+  "samcnpc:run_machine_task": {
+    "label": "Krok operatora maszyny",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: samcnpc:task_machine.",
+    "args": {}
+  },
+  "samcnpc:run_prepare_field_task": {
+    "label": "Krok przygotowania poletka",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: samcnpc:task_prepare_field.",
+    "args": {}
+  },
+  "samcnpc:run_planting_task": {
+    "label": "Krok sadzenia drzew",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: samcnpc:task_planting.",
+    "args": {}
+  },
+  "samcnpc:run_farm_task": {
+    "label": "Krok farmera",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: samcnpc:task_farming.",
+    "args": {}
+  },
+  "samcnpc:run_lumberjack_task": {
+    "label": "Krok drwala",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: samcnpc:task_lumberjack.",
+    "args": {}
+  },
+  "samcnpc:run_lumberjack_demo": {
+    "label": "Krok demo drwala",
+    "description": "Kontynuuje istniejące wykonanie. Nie uruchamia operacji i nie przyjmuje jej parametrów. Wymaga: aktywny job /samcnpc behavior lumberjack <NPC>.",
+    "args": {}
+  }
+}

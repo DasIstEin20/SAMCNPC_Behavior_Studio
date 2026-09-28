@@ -1,0 +1,1410 @@
+{
+  "format": "samcnpc-studio",
+  "version": 1,
+  "targetCommit": "b92ec0e23164f822f450fc65a006ce9039cec37a",
+  "pack": {
+    "id": "example:guardian_escort",
+    "description": "Zaawansowany ochroniarz: eskortuje summonnera, reaguje na obrażenia, walczy tylko przy wystarczającym zdrowiu i w trybie paniki zrywa kontakt oraz wraca do summonnera.",
+    "priority": 750,
+    "channels": [
+      "movement",
+      "look",
+      "main_hand",
+      "combat"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "3bb634d29ba2",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "panic_disengage",
+      "priority": 1000,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 1185,
+      "y": 257.5
+    },
+    {
+      "id": "ad49590263e8",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 900,
+      "y": 308.125
+    },
+    {
+      "id": "f93442e5df3b",
+      "kind": "any",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 156.25
+    },
+    {
+      "id": "6c16b8d2e1f4",
+      "kind": "condition",
+      "ref": "samcnpc:health_fraction",
+      "args": {
+        "operator": "lte",
+        "value": 0.22
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 330,
+      "y": 55.0
+    },
+    {
+      "id": "17e7b9e89814",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 257.5
+    },
+    {
+      "id": "57b574855a91",
+      "kind": "condition",
+      "ref": "samcnpc:was_hurt_recently",
+      "args": {
+        "withinTicks": 20
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 45,
+      "y": 190.0
+    },
+    {
+      "id": "f67fd61197ae",
+      "kind": "condition",
+      "ref": "samcnpc:health_fraction",
+      "args": {
+        "operator": "lte",
+        "value": 0.35
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 45,
+      "y": 325.0
+    },
+    {
+      "id": "b3fbf3fe87bd",
+      "kind": "condition",
+      "ref": "samcnpc:has_attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 460.0
+    },
+    {
+      "id": "1b387401f1c9",
+      "kind": "action",
+      "ref": "samcnpc:clear_attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 1495,
+      "y": 55.0
+    },
+    {
+      "id": "bfc2d26a4d3b",
+      "kind": "action",
+      "ref": "samcnpc:stop_movement",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 1495,
+      "y": 190.0
+    },
+    {
+      "id": "727d21b3637c",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "panic_return_to_summoner",
+      "priority": 950,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 1185,
+      "y": 987.5
+    },
+    {
+      "id": "a93359e98234",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 900,
+      "y": 1080.3125
+    },
+    {
+      "id": "a6ac9c1bd285",
+      "kind": "any",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 751.25
+    },
+    {
+      "id": "b4d93e4bfc1f",
+      "kind": "condition",
+      "ref": "samcnpc:health_fraction",
+      "args": {
+        "operator": "lte",
+        "value": 0.22
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 330,
+      "y": 650.0
+    },
+    {
+      "id": "b9c399abdc55",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 852.5
+    },
+    {
+      "id": "832010bb3c1e",
+      "kind": "condition",
+      "ref": "samcnpc:was_hurt_recently",
+      "args": {
+        "withinTicks": 20
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 45,
+      "y": 785.0
+    },
+    {
+      "id": "3fee957f5aac",
+      "kind": "condition",
+      "ref": "samcnpc:health_fraction",
+      "args": {
+        "operator": "lte",
+        "value": 0.35
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 45,
+      "y": 920.0
+    },
+    {
+      "id": "f3877dd04821",
+      "kind": "condition",
+      "ref": "samcnpc:summoner_online",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 1055.0
+    },
+    {
+      "id": "3c8e31be21de",
+      "kind": "not",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 1190.0
+    },
+    {
+      "id": "bedd47df5255",
+      "kind": "condition",
+      "ref": "samcnpc:has_attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 1190.0
+    },
+    {
+      "id": "0cc6b4be74cd",
+      "kind": "condition",
+      "ref": "samcnpc:distance_to_summoner",
+      "args": {
+        "operator": "gt",
+        "blocks": 2.5
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 615,
+      "y": 1325.0
+    },
+    {
+      "id": "490b62d6f32d",
+      "kind": "action",
+      "ref": "samcnpc:move_to_summoner",
+      "args": {
+        "speed": 1.3,
+        "stopDistance": 2,
+        "startDistance": 2.6
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 1495,
+      "y": 650.0
+    },
+    {
+      "id": "fafe85fd0b84",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "panic_hold_near_summoner",
+      "priority": 940,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 1185,
+      "y": 1852.5
+    },
+    {
+      "id": "1af52dbda920",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 900,
+      "y": 1945.3125
+    },
+    {
+      "id": "63d13b084a79",
+      "kind": "any",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 1616.25
+    },
+    {
+      "id": "637ff192828d",
+      "kind": "condition",
+      "ref": "samcnpc:health_fraction",
+      "args": {
+        "operator": "lte",
+        "value": 0.22
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 330,
+      "y": 1515.0
+    },
+    {
+      "id": "abfd0e3ce8d8",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 1717.5
+    },
+    {
+      "id": "b288fc1eb681",
+      "kind": "condition",
+      "ref": "samcnpc:was_hurt_recently",
+      "args": {
+        "withinTicks": 20
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 45,
+      "y": 1650.0
+    },
+    {
+      "id": "c1e60c5fb8e3",
+      "kind": "condition",
+      "ref": "samcnpc:health_fraction",
+      "args": {
+        "operator": "lte",
+        "value": 0.35
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 45,
+      "y": 1785.0
+    },
+    {
+      "id": "875675e21c61",
+      "kind": "condition",
+      "ref": "samcnpc:summoner_online",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 1920.0
+    },
+    {
+      "id": "b68b1896ab8f",
+      "kind": "not",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 2055.0
+    },
+    {
+      "id": "57d0ab36a83e",
+      "kind": "condition",
+      "ref": "samcnpc:has_attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 2055.0
+    },
+    {
+      "id": "5c20f30a2304",
+      "kind": "condition",
+      "ref": "samcnpc:distance_to_summoner",
+      "args": {
+        "operator": "lte",
+        "blocks": 2.5
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 615,
+      "y": 2190.0
+    },
+    {
+      "id": "12ed007757e6",
+      "kind": "action",
+      "ref": "samcnpc:stop_movement",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 1495,
+      "y": 1515.0
+    },
+    {
+      "id": "7874c84dc577",
+      "kind": "action",
+      "ref": "samcnpc:look_at_summoner",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 1495,
+      "y": 1650.0
+    },
+    {
+      "id": "279d2d07815f",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "acquire_recent_attacker",
+      "priority": 850,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 900,
+      "y": 2515.0
+    },
+    {
+      "id": "ad28dc66a3ef",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 2515.0
+    },
+    {
+      "id": "5df0c6f5a053",
+      "kind": "condition",
+      "ref": "samcnpc:health_fraction",
+      "args": {
+        "operator": "gt",
+        "value": 0.22
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 330,
+      "y": 2380.0
+    },
+    {
+      "id": "166a4562c058",
+      "kind": "condition",
+      "ref": "samcnpc:has_unhandled_damage",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 2515.0
+    },
+    {
+      "id": "38d9cc237084",
+      "kind": "not",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 2650.0
+    },
+    {
+      "id": "8ec68f392272",
+      "kind": "condition",
+      "ref": "samcnpc:has_attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 2650.0
+    },
+    {
+      "id": "7d78618b49a4",
+      "kind": "action",
+      "ref": "samcnpc:set_attack_target_from_recent_attacker",
+      "args": {
+        "leash": 20,
+        "durationTicks": 500,
+        "allowPlayers": false
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 1210,
+      "y": 2380.0
+    },
+    {
+      "id": "a63eeb794f5d",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "fight_current_target",
+      "priority": 800,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 2975.0
+    },
+    {
+      "id": "6de872456ba7",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 2975.0
+    },
+    {
+      "id": "978b18b7d653",
+      "kind": "condition",
+      "ref": "samcnpc:health_fraction",
+      "args": {
+        "operator": "gt",
+        "value": 0.22
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 45,
+      "y": 2840.0
+    },
+    {
+      "id": "7109ac21e031",
+      "kind": "condition",
+      "ref": "samcnpc:has_attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 2975.0
+    },
+    {
+      "id": "15ac54a7e50a",
+      "kind": "condition",
+      "ref": "samcnpc:target_alive",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 3110.0
+    },
+    {
+      "id": "cc9153df7620",
+      "kind": "action",
+      "ref": "samcnpc:move_to_target",
+      "args": {
+        "speed": 1.15,
+        "stopDistance": 2.2
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 925,
+      "y": 2840.0
+    },
+    {
+      "id": "470f0058e07f",
+      "kind": "action",
+      "ref": "samcnpc:attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 925,
+      "y": 2975.0
+    },
+    {
+      "id": "cb97c4790eb2",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "follow_when_far",
+      "priority": 500,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 900,
+      "y": 3502.5
+    },
+    {
+      "id": "bbae9426cb48",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 3502.5
+    },
+    {
+      "id": "9ce70485d2f9",
+      "kind": "condition",
+      "ref": "samcnpc:health_fraction",
+      "args": {
+        "operator": "gt",
+        "value": 0.22
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 330,
+      "y": 3300.0
+    },
+    {
+      "id": "e1a21b53efba",
+      "kind": "condition",
+      "ref": "samcnpc:summoner_online",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 3435.0
+    },
+    {
+      "id": "97f74d76d24e",
+      "kind": "not",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 3570.0
+    },
+    {
+      "id": "a176e978f9f3",
+      "kind": "condition",
+      "ref": "samcnpc:has_attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 3570.0
+    },
+    {
+      "id": "84b4d18895cf",
+      "kind": "condition",
+      "ref": "samcnpc:distance_to_summoner",
+      "args": {
+        "operator": "gt",
+        "blocks": 8
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 330,
+      "y": 3705.0
+    },
+    {
+      "id": "1f09057cc14d",
+      "kind": "action",
+      "ref": "samcnpc:move_to_summoner",
+      "args": {
+        "speed": 1.15,
+        "stopDistance": 3.5,
+        "startDistance": 7
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 1210,
+      "y": 3300.0
+    },
+    {
+      "id": "78477e72f8bd",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "watch_summoner_midrange",
+      "priority": 350,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 900,
+      "y": 4097.5
+    },
+    {
+      "id": "8cf9c192cc25",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 4097.5
+    },
+    {
+      "id": "3c8afa790a74",
+      "kind": "condition",
+      "ref": "samcnpc:summoner_online",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 3895.0
+    },
+    {
+      "id": "9a1a4e2330b5",
+      "kind": "not",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 4030.0
+    },
+    {
+      "id": "036a2d1a665b",
+      "kind": "condition",
+      "ref": "samcnpc:has_attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 4030.0
+    },
+    {
+      "id": "fb1fbdd443d9",
+      "kind": "condition",
+      "ref": "samcnpc:distance_to_summoner",
+      "args": {
+        "operator": "gt",
+        "blocks": 3.5
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 330,
+      "y": 4165.0
+    },
+    {
+      "id": "a1b45828b7e7",
+      "kind": "condition",
+      "ref": "samcnpc:distance_to_summoner",
+      "args": {
+        "operator": "lte",
+        "blocks": 8
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 330,
+      "y": 4300.0
+    },
+    {
+      "id": "92c14ace6aa4",
+      "kind": "action",
+      "ref": "samcnpc:look_at_summoner",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 1210,
+      "y": 3895.0
+    },
+    {
+      "id": "e9aa3e08ccd0",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "hold_formation_close",
+      "priority": 300,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 900,
+      "y": 4625.0
+    },
+    {
+      "id": "625d7db66b38",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 4625.0
+    },
+    {
+      "id": "3eb45f3acd47",
+      "kind": "condition",
+      "ref": "samcnpc:summoner_online",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 4490.0
+    },
+    {
+      "id": "99db69dc4b36",
+      "kind": "not",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 4625.0
+    },
+    {
+      "id": "a07ffc764744",
+      "kind": "condition",
+      "ref": "samcnpc:has_attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 4625.0
+    },
+    {
+      "id": "001fd29aaeed",
+      "kind": "condition",
+      "ref": "samcnpc:distance_to_summoner",
+      "args": {
+        "operator": "lte",
+        "blocks": 3.5
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 330,
+      "y": 4760.0
+    },
+    {
+      "id": "ce98bffb1c63",
+      "kind": "action",
+      "ref": "samcnpc:stop_movement",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 1210,
+      "y": 4490.0
+    },
+    {
+      "id": "150497e130d8",
+      "kind": "action",
+      "ref": "samcnpc:look_at_summoner",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 1210,
+      "y": 4625.0
+    },
+    {
+      "id": "61fdb0bd33d9",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "offline_safe_idle",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 900,
+      "y": 5017.5
+    },
+    {
+      "id": "b7fdae6dd5b3",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 5017.5
+    },
+    {
+      "id": "40f14e828b2e",
+      "kind": "not",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 4950.0
+    },
+    {
+      "id": "27fa7b5fc25d",
+      "kind": "condition",
+      "ref": "samcnpc:summoner_online",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 4950.0
+    },
+    {
+      "id": "b0aeac93f6e9",
+      "kind": "not",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 5085.0
+    },
+    {
+      "id": "a894841c1a89",
+      "kind": "condition",
+      "ref": "samcnpc:has_attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 5085.0
+    },
+    {
+      "id": "f10a4f09b1ad",
+      "kind": "action",
+      "ref": "samcnpc:stop_movement",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 1210,
+      "y": 4950.0
+    }
+  ],
+  "edges": [
+    [
+      "6c16b8d2e1f4",
+      "f93442e5df3b"
+    ],
+    [
+      "57b574855a91",
+      "17e7b9e89814"
+    ],
+    [
+      "f67fd61197ae",
+      "17e7b9e89814"
+    ],
+    [
+      "17e7b9e89814",
+      "f93442e5df3b"
+    ],
+    [
+      "f93442e5df3b",
+      "ad49590263e8"
+    ],
+    [
+      "b3fbf3fe87bd",
+      "ad49590263e8"
+    ],
+    [
+      "ad49590263e8",
+      "3bb634d29ba2"
+    ],
+    [
+      "3bb634d29ba2",
+      "1b387401f1c9"
+    ],
+    [
+      "3bb634d29ba2",
+      "bfc2d26a4d3b"
+    ],
+    [
+      "b4d93e4bfc1f",
+      "a6ac9c1bd285"
+    ],
+    [
+      "832010bb3c1e",
+      "b9c399abdc55"
+    ],
+    [
+      "3fee957f5aac",
+      "b9c399abdc55"
+    ],
+    [
+      "b9c399abdc55",
+      "a6ac9c1bd285"
+    ],
+    [
+      "a6ac9c1bd285",
+      "a93359e98234"
+    ],
+    [
+      "f3877dd04821",
+      "a93359e98234"
+    ],
+    [
+      "bedd47df5255",
+      "3c8e31be21de"
+    ],
+    [
+      "3c8e31be21de",
+      "a93359e98234"
+    ],
+    [
+      "0cc6b4be74cd",
+      "a93359e98234"
+    ],
+    [
+      "a93359e98234",
+      "727d21b3637c"
+    ],
+    [
+      "727d21b3637c",
+      "490b62d6f32d"
+    ],
+    [
+      "637ff192828d",
+      "63d13b084a79"
+    ],
+    [
+      "b288fc1eb681",
+      "abfd0e3ce8d8"
+    ],
+    [
+      "c1e60c5fb8e3",
+      "abfd0e3ce8d8"
+    ],
+    [
+      "abfd0e3ce8d8",
+      "63d13b084a79"
+    ],
+    [
+      "63d13b084a79",
+      "1af52dbda920"
+    ],
+    [
+      "875675e21c61",
+      "1af52dbda920"
+    ],
+    [
+      "57d0ab36a83e",
+      "b68b1896ab8f"
+    ],
+    [
+      "b68b1896ab8f",
+      "1af52dbda920"
+    ],
+    [
+      "5c20f30a2304",
+      "1af52dbda920"
+    ],
+    [
+      "1af52dbda920",
+      "fafe85fd0b84"
+    ],
+    [
+      "fafe85fd0b84",
+      "12ed007757e6"
+    ],
+    [
+      "fafe85fd0b84",
+      "7874c84dc577"
+    ],
+    [
+      "5df0c6f5a053",
+      "ad28dc66a3ef"
+    ],
+    [
+      "166a4562c058",
+      "ad28dc66a3ef"
+    ],
+    [
+      "8ec68f392272",
+      "38d9cc237084"
+    ],
+    [
+      "38d9cc237084",
+      "ad28dc66a3ef"
+    ],
+    [
+      "ad28dc66a3ef",
+      "279d2d07815f"
+    ],
+    [
+      "279d2d07815f",
+      "7d78618b49a4"
+    ],
+    [
+      "978b18b7d653",
+      "6de872456ba7"
+    ],
+    [
+      "7109ac21e031",
+      "6de872456ba7"
+    ],
+    [
+      "15ac54a7e50a",
+      "6de872456ba7"
+    ],
+    [
+      "6de872456ba7",
+      "a63eeb794f5d"
+    ],
+    [
+      "a63eeb794f5d",
+      "cc9153df7620"
+    ],
+    [
+      "a63eeb794f5d",
+      "470f0058e07f"
+    ],
+    [
+      "9ce70485d2f9",
+      "bbae9426cb48"
+    ],
+    [
+      "e1a21b53efba",
+      "bbae9426cb48"
+    ],
+    [
+      "a176e978f9f3",
+      "97f74d76d24e"
+    ],
+    [
+      "97f74d76d24e",
+      "bbae9426cb48"
+    ],
+    [
+      "84b4d18895cf",
+      "bbae9426cb48"
+    ],
+    [
+      "bbae9426cb48",
+      "cb97c4790eb2"
+    ],
+    [
+      "cb97c4790eb2",
+      "1f09057cc14d"
+    ],
+    [
+      "3c8afa790a74",
+      "8cf9c192cc25"
+    ],
+    [
+      "036a2d1a665b",
+      "9a1a4e2330b5"
+    ],
+    [
+      "9a1a4e2330b5",
+      "8cf9c192cc25"
+    ],
+    [
+      "fb1fbdd443d9",
+      "8cf9c192cc25"
+    ],
+    [
+      "a1b45828b7e7",
+      "8cf9c192cc25"
+    ],
+    [
+      "8cf9c192cc25",
+      "78477e72f8bd"
+    ],
+    [
+      "78477e72f8bd",
+      "92c14ace6aa4"
+    ],
+    [
+      "3eb45f3acd47",
+      "625d7db66b38"
+    ],
+    [
+      "a07ffc764744",
+      "99db69dc4b36"
+    ],
+    [
+      "99db69dc4b36",
+      "625d7db66b38"
+    ],
+    [
+      "001fd29aaeed",
+      "625d7db66b38"
+    ],
+    [
+      "625d7db66b38",
+      "e9aa3e08ccd0"
+    ],
+    [
+      "e9aa3e08ccd0",
+      "ce98bffb1c63"
+    ],
+    [
+      "e9aa3e08ccd0",
+      "150497e130d8"
+    ],
+    [
+      "27fa7b5fc25d",
+      "40f14e828b2e"
+    ],
+    [
+      "40f14e828b2e",
+      "b7fdae6dd5b3"
+    ],
+    [
+      "a894841c1a89",
+      "b0aeac93f6e9"
+    ],
+    [
+      "b0aeac93f6e9",
+      "b7fdae6dd5b3"
+    ],
+    [
+      "b7fdae6dd5b3",
+      "61fdb0bd33d9"
+    ],
+    [
+      "61fdb0bd33d9",
+      "f10a4f09b1ad"
+    ]
+  ]
+}

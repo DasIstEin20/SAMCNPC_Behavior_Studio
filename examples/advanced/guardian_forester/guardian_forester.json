@@ -1,0 +1,2876 @@
+{
+  "schemaVersion": 1,
+  "id": "showcase:guardian_forester",
+  "description": "Guardian / Forester: deterministic escort, bounded retaliation, retreat, carried equipment and authorized durable logistics. Keep the original controller pack for a running task. No LLM, commands or scripts in this pack.",
+  "priority": 750,
+  "channels": [
+    "movement",
+    "look",
+    "main_hand",
+    "off_hand",
+    "combat",
+    "interaction",
+    "block_action",
+    "inventory"
+  ],
+  "rules": [
+    {
+      "id": "a01_respect_manual_pause",
+      "priority": 4000,
+      "when": {
+        "test": {
+          "condition": "samcnpc:task_status",
+          "args": {
+            "status": "PAUSED"
+          }
+        }
+      },
+      "actions": [
+        {
+          "action": "samcnpc:stop_movement"
+        }
+      ]
+    },
+    {
+      "id": "a02_abort_risky_retaliation",
+      "priority": 3900,
+      "when": {
+        "all": [
+          {
+            "not": {
+              "any": [
+                {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "RUNNING"
+                    }
+                  }
+                },
+                {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "WAITING"
+                    }
+                  }
+                },
+                {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "PAUSED"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "any": [
+              {
+                "test": {
+                  "condition": "samcnpc:health_fraction",
+                  "args": {
+                    "operator": "lte",
+                    "value": 0.25
+                  }
+                }
+              },
+              {
+                "all": [
+                  {
+                    "test": {
+                      "condition": "samcnpc:health_fraction",
+                      "args": {
+                        "operator": "lte",
+                        "value": 0.4
+                      }
+                    }
+                  },
+                  {
+                    "any": [
+                      {
+                        "test": {
+                          "condition": "samcnpc:has_attack_target"
+                        }
+                      },
+                      {
+                        "test": {
+                          "condition": "samcnpc:was_hurt_recently",
+                          "args": {
+                            "withinTicks": 100
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:has_attack_target"
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:clear_attack_target"
+        }
+      ]
+    },
+    {
+      "id": "a03_emergency_return_to_summoner",
+      "priority": 3800,
+      "when": {
+        "all": [
+          {
+            "not": {
+              "any": [
+                {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "RUNNING"
+                    }
+                  }
+                },
+                {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "WAITING"
+                    }
+                  }
+                },
+                {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "PAUSED"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "any": [
+              {
+                "test": {
+                  "condition": "samcnpc:health_fraction",
+                  "args": {
+                    "operator": "lte",
+                    "value": 0.25
+                  }
+                }
+              },
+              {
+                "all": [
+                  {
+                    "test": {
+                      "condition": "samcnpc:health_fraction",
+                      "args": {
+                        "operator": "lte",
+                        "value": 0.4
+                      }
+                    }
+                  },
+                  {
+                    "any": [
+                      {
+                        "test": {
+                          "condition": "samcnpc:has_attack_target"
+                        }
+                      },
+                      {
+                        "test": {
+                          "condition": "samcnpc:was_hurt_recently",
+                          "args": {
+                            "withinTicks": 100
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "test": {
+                  "condition": "samcnpc:has_summoner"
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:summoner_online"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:move_to_summoner",
+          "args": {
+            "speed": 1.2,
+            "stopDistance": 3.0,
+            "startDistance": 4.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "a04_emergency_hold_without_summoner",
+      "priority": 3790,
+      "when": {
+        "all": [
+          {
+            "not": {
+              "any": [
+                {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "RUNNING"
+                    }
+                  }
+                },
+                {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "WAITING"
+                    }
+                  }
+                },
+                {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "PAUSED"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "any": [
+              {
+                "test": {
+                  "condition": "samcnpc:health_fraction",
+                  "args": {
+                    "operator": "lte",
+                    "value": 0.25
+                  }
+                }
+              },
+              {
+                "all": [
+                  {
+                    "test": {
+                      "condition": "samcnpc:health_fraction",
+                      "args": {
+                        "operator": "lte",
+                        "value": 0.4
+                      }
+                    }
+                  },
+                  {
+                    "any": [
+                      {
+                        "test": {
+                          "condition": "samcnpc:has_attack_target"
+                        }
+                      },
+                      {
+                        "test": {
+                          "condition": "samcnpc:was_hurt_recently",
+                          "args": {
+                            "withinTicks": 100
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "not": {
+              "all": [
+                {
+                  "test": {
+                    "condition": "samcnpc:has_summoner"
+                  }
+                },
+                {
+                  "test": {
+                    "condition": "samcnpc:summoner_online"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:stop_movement"
+        }
+      ]
+    },
+    {
+      "id": "a05_unarmed_disengage",
+      "priority": 3700,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:has_attack_target"
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:health_fraction",
+                  "args": {
+                    "operator": "gt",
+                    "value": 0.4
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:inventory_count",
+                "args": {
+                  "query": "@melee_weapon",
+                  "operator": "gte",
+                  "count": 1,
+                  "minimumDurability": 0.1
+                }
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:clear_attack_target"
+        }
+      ]
+    },
+    {
+      "id": "b01_accept_one_recent_attacker",
+      "priority": 3400,
+      "when": {
+        "all": [
+          {
+            "not": {
+              "any": [
+                {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "RUNNING"
+                    }
+                  }
+                },
+                {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "WAITING"
+                    }
+                  }
+                },
+                {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "PAUSED"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:health_fraction",
+              "args": {
+                "operator": "gt",
+                "value": 0.4
+              }
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:has_unhandled_damage"
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:was_hurt_recently",
+              "args": {
+                "withinTicks": 80
+              }
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:inventory_count",
+              "args": {
+                "query": "@melee_weapon",
+                "operator": "gte",
+                "count": 1,
+                "minimumDurability": 0.1
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:set_attack_target_from_recent_attacker",
+          "args": {
+            "leash": 12.0,
+            "durationTicks": 240,
+            "allowPlayers": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "b02_equip_carried_melee_weapon",
+      "priority": 3300,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:has_attack_target"
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:health_fraction",
+                  "args": {
+                    "operator": "gt",
+                    "value": 0.4
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:inventory_count",
+              "args": {
+                "query": "@melee_weapon",
+                "operator": "gte",
+                "count": 1,
+                "minimumDurability": 0.1
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:equipment_matches",
+                "args": {
+                  "query": "@melee_weapon",
+                  "destination": "MAIN_HAND",
+                  "minimumDurability": 0.1
+                }
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:ensure_equipment",
+          "args": {
+            "query": "@melee_weapon",
+            "destination": "MAIN_HAND",
+            "minimumDurability": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "b03_equip_carried_shield",
+      "priority": 3290,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:has_attack_target"
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:health_fraction",
+                  "args": {
+                    "operator": "gt",
+                    "value": 0.4
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:inventory_count",
+              "args": {
+                "query": "@shield",
+                "operator": "gte",
+                "count": 1,
+                "minimumDurability": 0.2
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:equipment_matches",
+                "args": {
+                  "query": "@shield",
+                  "destination": "OFF_HAND",
+                  "minimumDurability": 0.2
+                }
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:ensure_equipment",
+          "args": {
+            "query": "@shield",
+            "destination": "OFF_HAND",
+            "minimumDurability": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "b04_bounded_pursuit",
+      "priority": 3200,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:has_attack_target"
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:health_fraction",
+                  "args": {
+                    "operator": "gt",
+                    "value": 0.4
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:inventory_count",
+              "args": {
+                "query": "@melee_weapon",
+                "operator": "gte",
+                "count": 1,
+                "minimumDurability": 0.1
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:move_to_target",
+          "args": {
+            "speed": 1.1,
+            "stopDistance": 2.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "b05_attack_with_suitable_weapon",
+      "priority": 3190,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:has_attack_target"
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:health_fraction",
+                  "args": {
+                    "operator": "gt",
+                    "value": 0.4
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:equipment_matches",
+              "args": {
+                "query": "@melee_weapon",
+                "destination": "MAIN_HAND",
+                "minimumDurability": 0.1
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:attack_target"
+        }
+      ]
+    },
+    {
+      "id": "c01_begin_authorized_task_reaction",
+      "priority": 2800,
+      "when": {
+        "all": [
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:task_status",
+                "args": {
+                  "status": "PAUSED"
+                }
+              }
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:task_reaction_ready"
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:begin_task_reaction"
+        }
+      ]
+    },
+    {
+      "id": "c02_advance_combat_or_patrol",
+      "priority": 2700,
+      "when": {
+        "all": [
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:task_status",
+                "args": {
+                  "status": "PAUSED"
+                }
+              }
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:task_combat_ready"
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:run_combat_task"
+        }
+      ]
+    },
+    {
+      "id": "c03_recover_inventory_space",
+      "priority": 2600,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "PAUSED"
+                    }
+                  }
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:task_inventory_requested"
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:inventory_free_slots",
+              "args": {
+                "operator": "lt",
+                "count": 2
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:begin_task_inventory"
+        }
+      ]
+    },
+    {
+      "id": "c04_prepare_missing_usable_axe",
+      "priority": 2590,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "PAUSED"
+                    }
+                  }
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:task_inventory_requested"
+                }
+              }
+            ]
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:inventory_count",
+                "args": {
+                  "query": "@axe",
+                  "operator": "gte",
+                  "count": 1,
+                  "minimumDurability": 0.25
+                }
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:begin_task_inventory"
+        }
+      ]
+    },
+    {
+      "id": "c05_begin_other_authorized_logistics",
+      "priority": 2580,
+      "when": {
+        "all": [
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:task_status",
+                "args": {
+                  "status": "PAUSED"
+                }
+              }
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:task_inventory_requested"
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:begin_task_inventory"
+        }
+      ]
+    },
+    {
+      "id": "c06_collect_observed_exact_coal",
+      "priority": 2520,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "PAUSED"
+                    }
+                  }
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:task_inventory_ready"
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:container_observed",
+              "args": {
+                "endpoint": "SOURCE",
+                "index": 0
+              }
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:container_count",
+              "args": {
+                "endpoint": "SOURCE",
+                "index": 0,
+                "query": "minecraft:coal",
+                "operator": "gt",
+                "count": 0
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:inventory_count",
+                "args": {
+                  "query": "minecraft:coal",
+                  "operator": "gte",
+                  "count": 2,
+                  "minimumDurability": 0.0
+                }
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:run_inventory_task"
+        }
+      ]
+    },
+    {
+      "id": "c07_collect_observed_tool",
+      "priority": 2510,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "PAUSED"
+                    }
+                  }
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:task_inventory_ready"
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:container_observed",
+              "args": {
+                "endpoint": "SOURCE",
+                "index": 0
+              }
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:container_count",
+              "args": {
+                "endpoint": "SOURCE",
+                "index": 0,
+                "query": "@axe",
+                "operator": "gt",
+                "count": 0
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:inventory_count",
+                "args": {
+                  "query": "@axe",
+                  "operator": "gte",
+                  "count": 1,
+                  "minimumDurability": 0.25
+                }
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:run_inventory_task"
+        }
+      ]
+    },
+    {
+      "id": "c08_approach_unobserved_container",
+      "priority": 2500,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "PAUSED"
+                    }
+                  }
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:task_inventory_ready"
+                }
+              }
+            ]
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:container_observed",
+                "args": {
+                  "endpoint": "SOURCE",
+                  "index": 0
+                }
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:container_observed",
+                "args": {
+                  "endpoint": "DESTINATION",
+                  "index": 0
+                }
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:run_inventory_task"
+        }
+      ]
+    },
+    {
+      "id": "c09_unload_to_observed_destination",
+      "priority": 2490,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:task_status",
+                    "args": {
+                      "status": "PAUSED"
+                    }
+                  }
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:task_inventory_ready"
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:container_observed",
+              "args": {
+                "endpoint": "DESTINATION",
+                "index": 0
+              }
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:container_free_slots",
+              "args": {
+                "endpoint": "DESTINATION",
+                "index": 0,
+                "operator": "gt",
+                "count": 0
+              }
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:inventory_free_slots",
+              "args": {
+                "operator": "lt",
+                "count": 2
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:run_inventory_task"
+        }
+      ]
+    },
+    {
+      "id": "c10_continue_inventory_reobserve_and_verify",
+      "priority": 2480,
+      "when": {
+        "all": [
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:task_status",
+                "args": {
+                  "status": "PAUSED"
+                }
+              }
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:task_inventory_ready"
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:run_inventory_task"
+        }
+      ]
+    },
+    {
+      "id": "d01_prepare_head",
+      "priority": 1800,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:has_attack_target"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:health_fraction",
+                        "args": {
+                          "operator": "lte",
+                          "value": 0.25
+                        }
+                      }
+                    },
+                    {
+                      "all": [
+                        {
+                          "test": {
+                            "condition": "samcnpc:health_fraction",
+                            "args": {
+                              "operator": "lte",
+                              "value": 0.4
+                            }
+                          }
+                        },
+                        {
+                          "any": [
+                            {
+                              "test": {
+                                "condition": "samcnpc:has_attack_target"
+                              }
+                            },
+                            {
+                              "test": {
+                                "condition": "samcnpc:was_hurt_recently",
+                                "args": {
+                                  "withinTicks": 100
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:inventory_count",
+              "args": {
+                "query": "minecraft:leather_helmet|minecraft:chainmail_helmet|minecraft:iron_helmet|minecraft:golden_helmet|minecraft:diamond_helmet|minecraft:netherite_helmet",
+                "operator": "gte",
+                "count": 1,
+                "minimumDurability": 0.2
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:equipment_matches",
+                "args": {
+                  "query": "minecraft:leather_helmet|minecraft:chainmail_helmet|minecraft:iron_helmet|minecraft:golden_helmet|minecraft:diamond_helmet|minecraft:netherite_helmet",
+                  "destination": "HEAD",
+                  "minimumDurability": 0.2
+                }
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:ensure_equipment",
+          "args": {
+            "query": "minecraft:leather_helmet|minecraft:chainmail_helmet|minecraft:iron_helmet|minecraft:golden_helmet|minecraft:diamond_helmet|minecraft:netherite_helmet",
+            "destination": "HEAD",
+            "minimumDurability": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "d02_prepare_chest",
+      "priority": 1790,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:has_attack_target"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:health_fraction",
+                        "args": {
+                          "operator": "lte",
+                          "value": 0.25
+                        }
+                      }
+                    },
+                    {
+                      "all": [
+                        {
+                          "test": {
+                            "condition": "samcnpc:health_fraction",
+                            "args": {
+                              "operator": "lte",
+                              "value": 0.4
+                            }
+                          }
+                        },
+                        {
+                          "any": [
+                            {
+                              "test": {
+                                "condition": "samcnpc:has_attack_target"
+                              }
+                            },
+                            {
+                              "test": {
+                                "condition": "samcnpc:was_hurt_recently",
+                                "args": {
+                                  "withinTicks": 100
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:inventory_count",
+              "args": {
+                "query": "minecraft:leather_chestplate|minecraft:chainmail_chestplate|minecraft:iron_chestplate|minecraft:golden_chestplate|minecraft:diamond_chestplate|minecraft:netherite_chestplate",
+                "operator": "gte",
+                "count": 1,
+                "minimumDurability": 0.2
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:equipment_matches",
+                "args": {
+                  "query": "minecraft:leather_chestplate|minecraft:chainmail_chestplate|minecraft:iron_chestplate|minecraft:golden_chestplate|minecraft:diamond_chestplate|minecraft:netherite_chestplate",
+                  "destination": "CHEST",
+                  "minimumDurability": 0.2
+                }
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:ensure_equipment",
+          "args": {
+            "query": "minecraft:leather_chestplate|minecraft:chainmail_chestplate|minecraft:iron_chestplate|minecraft:golden_chestplate|minecraft:diamond_chestplate|minecraft:netherite_chestplate",
+            "destination": "CHEST",
+            "minimumDurability": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "d03_prepare_legs",
+      "priority": 1780,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:has_attack_target"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:health_fraction",
+                        "args": {
+                          "operator": "lte",
+                          "value": 0.25
+                        }
+                      }
+                    },
+                    {
+                      "all": [
+                        {
+                          "test": {
+                            "condition": "samcnpc:health_fraction",
+                            "args": {
+                              "operator": "lte",
+                              "value": 0.4
+                            }
+                          }
+                        },
+                        {
+                          "any": [
+                            {
+                              "test": {
+                                "condition": "samcnpc:has_attack_target"
+                              }
+                            },
+                            {
+                              "test": {
+                                "condition": "samcnpc:was_hurt_recently",
+                                "args": {
+                                  "withinTicks": 100
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:inventory_count",
+              "args": {
+                "query": "minecraft:leather_leggings|minecraft:chainmail_leggings|minecraft:iron_leggings|minecraft:golden_leggings|minecraft:diamond_leggings|minecraft:netherite_leggings",
+                "operator": "gte",
+                "count": 1,
+                "minimumDurability": 0.2
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:equipment_matches",
+                "args": {
+                  "query": "minecraft:leather_leggings|minecraft:chainmail_leggings|minecraft:iron_leggings|minecraft:golden_leggings|minecraft:diamond_leggings|minecraft:netherite_leggings",
+                  "destination": "LEGS",
+                  "minimumDurability": 0.2
+                }
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:ensure_equipment",
+          "args": {
+            "query": "minecraft:leather_leggings|minecraft:chainmail_leggings|minecraft:iron_leggings|minecraft:golden_leggings|minecraft:diamond_leggings|minecraft:netherite_leggings",
+            "destination": "LEGS",
+            "minimumDurability": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "d04_prepare_feet",
+      "priority": 1770,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:has_attack_target"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:health_fraction",
+                        "args": {
+                          "operator": "lte",
+                          "value": 0.25
+                        }
+                      }
+                    },
+                    {
+                      "all": [
+                        {
+                          "test": {
+                            "condition": "samcnpc:health_fraction",
+                            "args": {
+                              "operator": "lte",
+                              "value": 0.4
+                            }
+                          }
+                        },
+                        {
+                          "any": [
+                            {
+                              "test": {
+                                "condition": "samcnpc:has_attack_target"
+                              }
+                            },
+                            {
+                              "test": {
+                                "condition": "samcnpc:was_hurt_recently",
+                                "args": {
+                                  "withinTicks": 100
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:inventory_count",
+              "args": {
+                "query": "minecraft:leather_boots|minecraft:chainmail_boots|minecraft:iron_boots|minecraft:golden_boots|minecraft:diamond_boots|minecraft:netherite_boots",
+                "operator": "gte",
+                "count": 1,
+                "minimumDurability": 0.2
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:equipment_matches",
+                "args": {
+                  "query": "minecraft:leather_boots|minecraft:chainmail_boots|minecraft:iron_boots|minecraft:golden_boots|minecraft:diamond_boots|minecraft:netherite_boots",
+                  "destination": "FEET",
+                  "minimumDurability": 0.2
+                }
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:ensure_equipment",
+          "args": {
+            "query": "minecraft:leather_boots|minecraft:chainmail_boots|minecraft:iron_boots|minecraft:golden_boots|minecraft:diamond_boots|minecraft:netherite_boots",
+            "destination": "FEET",
+            "minimumDurability": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "d05_prepare_shield",
+      "priority": 1750,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:has_attack_target"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:health_fraction",
+                        "args": {
+                          "operator": "lte",
+                          "value": 0.25
+                        }
+                      }
+                    },
+                    {
+                      "all": [
+                        {
+                          "test": {
+                            "condition": "samcnpc:health_fraction",
+                            "args": {
+                              "operator": "lte",
+                              "value": 0.4
+                            }
+                          }
+                        },
+                        {
+                          "any": [
+                            {
+                              "test": {
+                                "condition": "samcnpc:has_attack_target"
+                              }
+                            },
+                            {
+                              "test": {
+                                "condition": "samcnpc:was_hurt_recently",
+                                "args": {
+                                  "withinTicks": 100
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:inventory_count",
+              "args": {
+                "query": "@shield",
+                "operator": "gte",
+                "count": 1,
+                "minimumDurability": 0.2
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:equipment_matches",
+                "args": {
+                  "query": "@shield",
+                  "destination": "OFF_HAND",
+                  "minimumDurability": 0.2
+                }
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:ensure_equipment",
+          "args": {
+            "query": "@shield",
+            "destination": "OFF_HAND",
+            "minimumDurability": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "d06_replace_worn_carried_axe",
+      "priority": 1740,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:has_attack_target"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:health_fraction",
+                        "args": {
+                          "operator": "lte",
+                          "value": 0.25
+                        }
+                      }
+                    },
+                    {
+                      "all": [
+                        {
+                          "test": {
+                            "condition": "samcnpc:health_fraction",
+                            "args": {
+                              "operator": "lte",
+                              "value": 0.4
+                            }
+                          }
+                        },
+                        {
+                          "any": [
+                            {
+                              "test": {
+                                "condition": "samcnpc:has_attack_target"
+                              }
+                            },
+                            {
+                              "test": {
+                                "condition": "samcnpc:was_hurt_recently",
+                                "args": {
+                                  "withinTicks": 100
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:equipment_matches",
+              "args": {
+                "query": "@axe",
+                "destination": "MAIN_HAND",
+                "minimumDurability": 0.0
+              }
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:durability_fraction",
+              "args": {
+                "destination": "MAIN_HAND",
+                "operator": "lt",
+                "value": 0.25
+              }
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:inventory_count",
+              "args": {
+                "query": "@axe",
+                "operator": "gte",
+                "count": 1,
+                "minimumDurability": 0.25
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:ensure_equipment",
+          "args": {
+            "query": "@axe",
+            "destination": "MAIN_HAND",
+            "minimumDurability": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "id": "d07_prepare_carried_work_tool",
+      "priority": 1730,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:has_attack_target"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:health_fraction",
+                        "args": {
+                          "operator": "lte",
+                          "value": 0.25
+                        }
+                      }
+                    },
+                    {
+                      "all": [
+                        {
+                          "test": {
+                            "condition": "samcnpc:health_fraction",
+                            "args": {
+                              "operator": "lte",
+                              "value": 0.4
+                            }
+                          }
+                        },
+                        {
+                          "any": [
+                            {
+                              "test": {
+                                "condition": "samcnpc:has_attack_target"
+                              }
+                            },
+                            {
+                              "test": {
+                                "condition": "samcnpc:was_hurt_recently",
+                                "args": {
+                                  "withinTicks": 100
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:inventory_count",
+              "args": {
+                "query": "@axe",
+                "operator": "gte",
+                "count": 1,
+                "minimumDurability": 0.25
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:equipment_matches",
+                "args": {
+                  "query": "@axe",
+                  "destination": "MAIN_HAND",
+                  "minimumDurability": 0.25
+                }
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:ensure_equipment",
+          "args": {
+            "query": "@axe",
+            "destination": "MAIN_HAND",
+            "minimumDurability": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "id": "e01_return_for_help_after_logistics_failure",
+      "priority": 1400,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:has_attack_target"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:health_fraction",
+                        "args": {
+                          "operator": "lte",
+                          "value": 0.25
+                        }
+                      }
+                    },
+                    {
+                      "all": [
+                        {
+                          "test": {
+                            "condition": "samcnpc:health_fraction",
+                            "args": {
+                              "operator": "lte",
+                              "value": 0.4
+                            }
+                          }
+                        },
+                        {
+                          "any": [
+                            {
+                              "test": {
+                                "condition": "samcnpc:has_attack_target"
+                              }
+                            },
+                            {
+                              "test": {
+                                "condition": "samcnpc:was_hurt_recently",
+                                "args": {
+                                  "withinTicks": 100
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "test": {
+                  "condition": "samcnpc:has_summoner"
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:summoner_online"
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:task_status",
+              "args": {
+                "status": "FAILED"
+              }
+            }
+          },
+          {
+            "any": [
+              {
+                "test": {
+                  "condition": "samcnpc:last_task_failure",
+                  "args": {
+                    "reason": "MISSING_RESOURCE"
+                  }
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:last_task_failure",
+                  "args": {
+                    "reason": "INVENTORY_FULL"
+                  }
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:last_task_failure",
+                  "args": {
+                    "reason": "STORAGE_FULL"
+                  }
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:last_task_failure",
+                  "args": {
+                    "reason": "SOURCE_UNAVAILABLE"
+                  }
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:last_task_failure",
+                  "args": {
+                    "reason": "RECOVERY_EXHAUSTED"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:move_to_summoner",
+          "args": {
+            "speed": 0.85,
+            "stopDistance": 3.0,
+            "startDistance": 5.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "e02_return_after_completed_task",
+      "priority": 1390,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:has_attack_target"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:health_fraction",
+                        "args": {
+                          "operator": "lte",
+                          "value": 0.25
+                        }
+                      }
+                    },
+                    {
+                      "all": [
+                        {
+                          "test": {
+                            "condition": "samcnpc:health_fraction",
+                            "args": {
+                              "operator": "lte",
+                              "value": 0.4
+                            }
+                          }
+                        },
+                        {
+                          "any": [
+                            {
+                              "test": {
+                                "condition": "samcnpc:has_attack_target"
+                              }
+                            },
+                            {
+                              "test": {
+                                "condition": "samcnpc:was_hurt_recently",
+                                "args": {
+                                  "withinTicks": 100
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "test": {
+                  "condition": "samcnpc:has_summoner"
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:summoner_online"
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:task_status",
+              "args": {
+                "status": "COMPLETED"
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:move_to_summoner",
+          "args": {
+            "speed": 0.9,
+            "stopDistance": 3.0,
+            "startDistance": 5.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "e03_wait_through_bounded_retry_backoff",
+      "priority": 1380,
+      "when": {
+        "all": [
+          {
+            "test": {
+              "condition": "samcnpc:task_status",
+              "args": {
+                "status": "WAITING"
+              }
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:task_attempts_remaining",
+              "args": {
+                "operator": "gt",
+                "count": 0
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:task_ready"
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:task_combat_ready"
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:task_inventory_ready"
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:task_inventory_requested"
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:task_reaction_ready"
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:stop_movement"
+        }
+      ]
+    },
+    {
+      "id": "f01_catch_up_to_summoner",
+      "priority": 500,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:has_attack_target"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:health_fraction",
+                        "args": {
+                          "operator": "lte",
+                          "value": 0.25
+                        }
+                      }
+                    },
+                    {
+                      "all": [
+                        {
+                          "test": {
+                            "condition": "samcnpc:health_fraction",
+                            "args": {
+                              "operator": "lte",
+                              "value": 0.4
+                            }
+                          }
+                        },
+                        {
+                          "any": [
+                            {
+                              "test": {
+                                "condition": "samcnpc:has_attack_target"
+                              }
+                            },
+                            {
+                              "test": {
+                                "condition": "samcnpc:was_hurt_recently",
+                                "args": {
+                                  "withinTicks": 100
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "test": {
+                  "condition": "samcnpc:has_summoner"
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:summoner_online"
+                }
+              }
+            ]
+          },
+          {
+            "test": {
+              "condition": "samcnpc:distance_to_summoner",
+              "args": {
+                "operator": "gt",
+                "blocks": 12.0
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:move_to_summoner",
+          "args": {
+            "speed": 1.15,
+            "stopDistance": 3.0,
+            "startDistance": 5.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "f02_follow_with_hysteresis",
+      "priority": 490,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:has_attack_target"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:health_fraction",
+                        "args": {
+                          "operator": "lte",
+                          "value": 0.25
+                        }
+                      }
+                    },
+                    {
+                      "all": [
+                        {
+                          "test": {
+                            "condition": "samcnpc:health_fraction",
+                            "args": {
+                              "operator": "lte",
+                              "value": 0.4
+                            }
+                          }
+                        },
+                        {
+                          "any": [
+                            {
+                              "test": {
+                                "condition": "samcnpc:has_attack_target"
+                              }
+                            },
+                            {
+                              "test": {
+                                "condition": "samcnpc:was_hurt_recently",
+                                "args": {
+                                  "withinTicks": 100
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "test": {
+                  "condition": "samcnpc:has_summoner"
+                }
+              },
+              {
+                "test": {
+                  "condition": "samcnpc:summoner_online"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:move_to_summoner",
+          "args": {
+            "speed": 0.9,
+            "stopDistance": 3.0,
+            "startDistance": 5.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "f03_wait_when_summoner_unavailable",
+      "priority": 480,
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "RUNNING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "WAITING"
+                        }
+                      }
+                    },
+                    {
+                      "test": {
+                        "condition": "samcnpc:task_status",
+                        "args": {
+                          "status": "PAUSED"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:has_attack_target"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "any": [
+                    {
+                      "test": {
+                        "condition": "samcnpc:health_fraction",
+                        "args": {
+                          "operator": "lte",
+                          "value": 0.25
+                        }
+                      }
+                    },
+                    {
+                      "all": [
+                        {
+                          "test": {
+                            "condition": "samcnpc:health_fraction",
+                            "args": {
+                              "operator": "lte",
+                              "value": 0.4
+                            }
+                          }
+                        },
+                        {
+                          "any": [
+                            {
+                              "test": {
+                                "condition": "samcnpc:has_attack_target"
+                              }
+                            },
+                            {
+                              "test": {
+                                "condition": "samcnpc:was_hurt_recently",
+                                "args": {
+                                  "withinTicks": 100
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "not": {
+              "all": [
+                {
+                  "test": {
+                    "condition": "samcnpc:has_summoner"
+                  }
+                },
+                {
+                  "test": {
+                    "condition": "samcnpc:summoner_online"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:stop_movement"
+        }
+      ]
+    }
+  ]
+}

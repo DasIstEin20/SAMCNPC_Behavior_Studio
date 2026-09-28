@@ -1,0 +1,223 @@
+{
+  "format": "samcnpc-studio",
+  "version": 1,
+  "targetCommit": "b92ec0e23164f822f450fc65a006ce9039cec37a",
+  "pack": {
+    "id": "tutorial:retaliate",
+    "description": "Retaliate against an eligible recent attacker. Players are not allowed targets.",
+    "priority": 500,
+    "channels": [
+      "movement",
+      "look",
+      "combat",
+      "main_hand"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "6f21b3430a77",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "acquire_attacker",
+      "priority": 1000,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 900,
+      "y": 122.5
+    },
+    {
+      "id": "f18a4a939e5d",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 122.5
+    },
+    {
+      "id": "a6ae47efc8ef",
+      "kind": "condition",
+      "ref": "samcnpc:has_unhandled_damage",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 55.0
+    },
+    {
+      "id": "53dca98c1494",
+      "kind": "not",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 190.0
+    },
+    {
+      "id": "c04425efa0df",
+      "kind": "condition",
+      "ref": "samcnpc:has_attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 190.0
+    },
+    {
+      "id": "e609dc5ec512",
+      "kind": "action",
+      "ref": "samcnpc:set_attack_target_from_recent_attacker",
+      "args": {
+        "leash": 24.0,
+        "durationTicks": 600,
+        "allowPlayers": false
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 1210,
+      "y": 55.0
+    },
+    {
+      "id": "0ccb8fbe8b39",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "approach_and_attack",
+      "priority": 500,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 447.5
+    },
+    {
+      "id": "5bfc2aa3ad15",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 447.5
+    },
+    {
+      "id": "6100a78c975b",
+      "kind": "condition",
+      "ref": "samcnpc:has_attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 380.0
+    },
+    {
+      "id": "696146e0177d",
+      "kind": "condition",
+      "ref": "samcnpc:target_alive",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 515.0
+    },
+    {
+      "id": "ba05a418f0cb",
+      "kind": "action",
+      "ref": "samcnpc:move_to_target",
+      "args": {
+        "speed": 1.1,
+        "stopDistance": 2.4
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 925,
+      "y": 380.0
+    },
+    {
+      "id": "136a8f436ef9",
+      "kind": "action",
+      "ref": "samcnpc:attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 925,
+      "y": 515.0
+    }
+  ],
+  "edges": [
+    [
+      "a6ae47efc8ef",
+      "f18a4a939e5d"
+    ],
+    [
+      "c04425efa0df",
+      "53dca98c1494"
+    ],
+    [
+      "53dca98c1494",
+      "f18a4a939e5d"
+    ],
+    [
+      "f18a4a939e5d",
+      "6f21b3430a77"
+    ],
+    [
+      "6f21b3430a77",
+      "e609dc5ec512"
+    ],
+    [
+      "6100a78c975b",
+      "5bfc2aa3ad15"
+    ],
+    [
+      "696146e0177d",
+      "5bfc2aa3ad15"
+    ],
+    [
+      "5bfc2aa3ad15",
+      "0ccb8fbe8b39"
+    ],
+    [
+      "0ccb8fbe8b39",
+      "ba05a418f0cb"
+    ],
+    [
+      "0ccb8fbe8b39",
+      "136a8f436ef9"
+    ]
+  ]
+}

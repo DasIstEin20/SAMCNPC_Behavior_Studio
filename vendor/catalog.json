@@ -1,0 +1,1240 @@
+{
+  "catalogFormat": 2,
+  "repository": "SAMCNPC Behavior registered API",
+  "commit": "schema:107366c897b05d8a7df5e028a7f4a7b606fc40757ab80ae976e72f14fe773e44",
+  "schemaVersion": 1,
+  "catalogVersion": 2,
+  "conditions": [
+    {
+      "id": "samcnpc:always",
+      "label": "always",
+      "description": "always",
+      "args": {},
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:at_position",
+      "label": "at position",
+      "description": "at position",
+      "args": {
+        "x": {
+          "description": "Feet position X.",
+          "type": "number",
+          "minimum": -29999984.0,
+          "maximum": 29999984.0,
+          "required": true,
+          "label": "x",
+          "suggested": -29999984.0
+        },
+        "y": {
+          "description": "Feet position Y.",
+          "type": "number",
+          "minimum": -2048.0,
+          "maximum": 2048.0,
+          "required": true,
+          "label": "y",
+          "suggested": -2048.0
+        },
+        "z": {
+          "description": "Feet position Z.",
+          "type": "number",
+          "minimum": -29999984.0,
+          "maximum": 29999984.0,
+          "required": true,
+          "label": "z",
+          "suggested": -29999984.0
+        },
+        "radius": {
+          "description": "Three-dimensional feet distance.",
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 64.0,
+          "required": true,
+          "label": "radius",
+          "suggested": 0.0
+        }
+      },
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:container_count",
+      "label": "container count",
+      "description": "container count",
+      "args": {
+        "endpoint": {
+          "description": "An explicitly permitted SOURCE or DESTINATION of the current inventory task/logistics/work contract; no arbitrary coordinates.",
+          "type": "string",
+          "enum": [
+            "SOURCE",
+            "DESTINATION"
+          ],
+          "required": true,
+          "label": "endpoint",
+          "suggested": "SOURCE"
+        },
+        "index": {
+          "description": "Zero-based endpoint in that contract. Unknown/unobserved never matches numeric comparisons.",
+          "type": "integer",
+          "minimum": 0.0,
+          "maximum": 7.0,
+          "required": true,
+          "label": "index",
+          "suggested": 0.0
+        },
+        "operator": {
+          "description": "Compare the last authorized observation (at most 20 ticks old); transfers always reobserve.",
+          "type": "string",
+          "enum": [
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "eq"
+          ],
+          "required": true,
+          "label": "operator",
+          "suggested": "gt"
+        },
+        "count": {
+          "description": "Required observed item count or empty slot count.",
+          "type": "integer",
+          "minimum": 0.0,
+          "maximum": 4096.0,
+          "required": true,
+          "label": "count",
+          "suggested": 0.0
+        },
+        "query": {
+          "description": "Exact ID, authoritative @role, or explicit alternatives separated by |.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^(?:(?:[a-z0-9_.-]+:[a-z0-9_./-]+|@(axe|pickaxe|shovel|hoe|food|placeable_block|tool|shield|armor|(?:melee|ranged)_weapon|ammunition))(?:[|](?!$)|$)){1,8}$",
+          "x-samcnpc-example": "minecraft:coal",
+          "x-samcnpc-text-format": "item-query",
+          "required": true,
+          "label": "query",
+          "suggested": "minecraft:coal"
+        }
+      },
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:container_free_slots",
+      "label": "container free slots",
+      "description": "container free slots",
+      "args": {
+        "endpoint": {
+          "description": "An explicitly permitted SOURCE or DESTINATION of the current inventory task/logistics/work contract; no arbitrary coordinates.",
+          "type": "string",
+          "enum": [
+            "SOURCE",
+            "DESTINATION"
+          ],
+          "required": true,
+          "label": "endpoint",
+          "suggested": "SOURCE"
+        },
+        "index": {
+          "description": "Zero-based endpoint in that contract. Unknown/unobserved never matches numeric comparisons.",
+          "type": "integer",
+          "minimum": 0.0,
+          "maximum": 7.0,
+          "required": true,
+          "label": "index",
+          "suggested": 0.0
+        },
+        "operator": {
+          "description": "Compare the last authorized observation (at most 20 ticks old); transfers always reobserve.",
+          "type": "string",
+          "enum": [
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "eq"
+          ],
+          "required": true,
+          "label": "operator",
+          "suggested": "gt"
+        },
+        "count": {
+          "description": "Required observed item count or empty slot count.",
+          "type": "integer",
+          "minimum": 0.0,
+          "maximum": 4096.0,
+          "required": true,
+          "label": "count",
+          "suggested": 0.0
+        }
+      },
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:container_observed",
+      "label": "container observed",
+      "description": "container observed",
+      "args": {
+        "endpoint": {
+          "description": "An explicitly permitted SOURCE or DESTINATION of the current inventory task/logistics/work contract; no arbitrary coordinates.",
+          "type": "string",
+          "enum": [
+            "SOURCE",
+            "DESTINATION"
+          ],
+          "required": true,
+          "label": "endpoint",
+          "suggested": "SOURCE"
+        },
+        "index": {
+          "description": "Zero-based endpoint in that contract. Unknown/unobserved never matches numeric comparisons.",
+          "type": "integer",
+          "minimum": 0.0,
+          "maximum": 7.0,
+          "required": true,
+          "label": "index",
+          "suggested": 0.0
+        }
+      },
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:distance_to_summoner",
+      "label": "distance to summoner",
+      "description": "distance to summoner",
+      "args": {
+        "operator": {
+          "description": "Compare the observed value with the supplied value.",
+          "type": "string",
+          "enum": [
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "eq"
+          ],
+          "required": true,
+          "label": "operator",
+          "suggested": "gt"
+        },
+        "blocks": {
+          "description": "Horizontal distance in blocks.",
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 256.0,
+          "required": true,
+          "label": "blocks",
+          "suggested": 0.0
+        }
+      },
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:durability_fraction",
+      "label": "durability fraction",
+      "description": "durability fraction",
+      "args": {
+        "destination": {
+          "description": "Physical equipment destination; main hand aliases the selected hotbar slot.",
+          "type": "string",
+          "enum": [
+            "MAIN_HAND",
+            "OFF_HAND",
+            "HEAD",
+            "CHEST",
+            "LEGS",
+            "FEET"
+          ],
+          "required": true,
+          "label": "destination",
+          "suggested": "MAIN_HAND"
+        },
+        "operator": {
+          "description": "Numeric comparison.",
+          "type": "string",
+          "enum": [
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "eq"
+          ],
+          "required": true,
+          "label": "operator",
+          "suggested": "gt"
+        },
+        "value": {
+          "description": "Remaining durability; empty equipment never satisfies this condition.",
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "required": true,
+          "label": "value",
+          "suggested": 0.0
+        }
+      },
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:equipment_matches",
+      "label": "equipment matches",
+      "description": "equipment matches",
+      "args": {
+        "query": {
+          "description": "Exact ID, authoritative @role, or 2..8 explicit alternatives separated by |. Coal never implies charcoal.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^(?:(?:[a-z0-9_.-]+:[a-z0-9_./-]+|@(axe|pickaxe|shovel|hoe|food|placeable_block|tool|shield|armor|(?:melee|ranged)_weapon|ammunition))(?:[|](?!$)|$)){1,8}$",
+          "x-samcnpc-example": "@axe",
+          "x-samcnpc-text-format": "item-query",
+          "required": true,
+          "label": "query",
+          "suggested": "@axe"
+        },
+        "destination": {
+          "description": "Physical equipment destination; main hand aliases the selected hotbar slot.",
+          "type": "string",
+          "enum": [
+            "MAIN_HAND",
+            "OFF_HAND",
+            "HEAD",
+            "CHEST",
+            "LEGS",
+            "FEET"
+          ],
+          "required": true,
+          "label": "destination",
+          "suggested": "MAIN_HAND"
+        },
+        "minimumDurability": {
+          "description": "Minimum remaining durability fraction; nondamageable items have fraction 1.",
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.0,
+          "required": false,
+          "label": "minimumDurability",
+          "suggested": 0.0
+        }
+      },
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:has_attack_target",
+      "label": "has attack target",
+      "description": "has attack target",
+      "args": {},
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:has_summoner",
+      "label": "has summoner",
+      "description": "has summoner",
+      "args": {},
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:has_unhandled_damage",
+      "label": "has unhandled damage",
+      "description": "has unhandled damage",
+      "args": {},
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:health_fraction",
+      "label": "health fraction",
+      "description": "health fraction",
+      "args": {
+        "operator": {
+          "description": "Compare the observed value with the supplied value.",
+          "type": "string",
+          "enum": [
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "eq"
+          ],
+          "required": true,
+          "label": "operator",
+          "suggested": "gt"
+        },
+        "value": {
+          "description": "Current health divided by maximum health.",
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "required": true,
+          "label": "value",
+          "suggested": 0.0
+        }
+      },
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:inventory_count",
+      "label": "inventory count",
+      "description": "inventory count",
+      "args": {
+        "query": {
+          "description": "Exact ID, authoritative @role, or 2..8 explicit alternatives separated by |. Coal never implies charcoal.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^(?:(?:[a-z0-9_.-]+:[a-z0-9_./-]+|@(axe|pickaxe|shovel|hoe|food|placeable_block|tool|shield|armor|(?:melee|ranged)_weapon|ammunition))(?:[|](?!$)|$)){1,8}$",
+          "x-samcnpc-example": "@axe",
+          "x-samcnpc-text-format": "item-query",
+          "required": true,
+          "label": "query",
+          "suggested": "@axe"
+        },
+        "operator": {
+          "description": "Numeric comparison.",
+          "type": "string",
+          "enum": [
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "eq"
+          ],
+          "required": true,
+          "label": "operator",
+          "suggested": "gt"
+        },
+        "count": {
+          "description": "Carried and separately equipped item count, without double-counting the selected hand.",
+          "type": "integer",
+          "minimum": 0.0,
+          "maximum": 4096.0,
+          "required": true,
+          "label": "count",
+          "suggested": 0.0
+        },
+        "minimumDurability": {
+          "description": "Minimum remaining durability fraction; nondamageable items have fraction 1.",
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.0,
+          "required": false,
+          "label": "minimumDurability",
+          "suggested": 0.0
+        }
+      },
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:inventory_free_slots",
+      "label": "inventory free slots",
+      "description": "inventory free slots",
+      "args": {
+        "operator": {
+          "description": "Numeric comparison.",
+          "type": "string",
+          "enum": [
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "eq"
+          ],
+          "required": true,
+          "label": "operator",
+          "suggested": "gt"
+        },
+        "count": {
+          "description": "Empty carried slots; partial stacks are not promised NBT-compatible capacity.",
+          "type": "integer",
+          "minimum": 0.0,
+          "maximum": 36.0,
+          "required": true,
+          "label": "count",
+          "suggested": 0.0
+        }
+      },
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:last_task_failure",
+      "label": "last task failure",
+      "description": "last task failure",
+      "args": {
+        "reason": {
+          "description": "Failure reason of the current durable frame/task, only when a failure was recorded.",
+          "type": "string",
+          "enum": [
+            "ASSIGNED",
+            "ARRIVED",
+            "USER_PAUSED",
+            "USER_RESUMED",
+            "USER_CANCELLED",
+            "INTERRUPTED",
+            "RESUMED",
+            "DESTINATION_UNAVAILABLE",
+            "NO_PROGRESS",
+            "RETRY_LIMIT",
+            "TIME_LIMIT",
+            "DIMENSION_CHANGED",
+            "STATE_MISMATCH",
+            "ASSIGNMENT_CHANGED",
+            "NPC_REMOVED",
+            "CHANNEL_UNAVAILABLE",
+            "DELIVERED",
+            "MISSING_RESOURCE",
+            "STORAGE_FULL",
+            "WORK_FAILED",
+            "SOURCE_EMPTY",
+            "SOURCE_UNAVAILABLE",
+            "INVENTORY_FULL",
+            "TARGET_DEFEATED",
+            "TARGET_ENDED",
+            "TARGET_UNAVAILABLE",
+            "LEASH_REACHED",
+            "PERMISSION_CHANGED",
+            "COMBAT_TIME_LIMIT",
+            "COMBAT_NO_PROGRESS",
+            "RECOVERY_EXHAUSTED",
+            "DEFENSE_FINISHED",
+            "AREA_CLEARED",
+            "PATROL_FINISHED",
+            "SUBJECT_UNAVAILABLE",
+            "INVENTORY_FINISHED",
+            "INVENTORY_INCOMPLETE",
+            "MINING_FINISHED",
+            "FOOD_FINISHED",
+            "FARM_FINISHED",
+            "PLANTING_FINISHED",
+            "MACHINE_FINISHED",
+            "FISHING_FINISHED",
+            "EXPLORATION_FINISHED",
+            "FIELD_PREPARED"
+          ],
+          "required": true,
+          "label": "reason",
+          "suggested": "ASSIGNED"
+        }
+      },
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:summoner_online",
+      "label": "summoner online",
+      "description": "summoner online",
+      "args": {},
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:target_alive",
+      "label": "target alive",
+      "description": "target alive",
+      "args": {},
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:task_attempts_remaining",
+      "label": "task attempts remaining",
+      "description": "task attempts remaining",
+      "args": {
+        "operator": {
+          "description": "Numeric comparison.",
+          "type": "string",
+          "enum": [
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "eq"
+          ],
+          "required": true,
+          "label": "operator",
+          "suggested": "gt"
+        },
+        "count": {
+          "description": "Remaining attempts in the current durable frame.",
+          "type": "integer",
+          "minimum": 0.0,
+          "maximum": 8.0,
+          "required": true,
+          "label": "count",
+          "suggested": 0.0
+        }
+      },
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:task_combat_ready",
+      "label": "task combat ready",
+      "description": "task combat ready",
+      "args": {},
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:task_inventory_ready",
+      "label": "task inventory ready",
+      "description": "task inventory ready",
+      "args": {},
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:task_inventory_requested",
+      "label": "task inventory requested",
+      "description": "task inventory requested",
+      "args": {},
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:task_reaction_ready",
+      "label": "task reaction ready",
+      "description": "task reaction ready",
+      "args": {},
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:task_ready",
+      "label": "task ready",
+      "description": "task ready",
+      "args": {},
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:task_status",
+      "label": "task status",
+      "description": "task status",
+      "args": {
+        "status": {
+          "description": "Current durable task status; no task never matches.",
+          "type": "string",
+          "enum": [
+            "RUNNING",
+            "WAITING",
+            "PAUSED",
+            "COMPLETED",
+            "CANCELLED",
+            "FAILED"
+          ],
+          "required": true,
+          "label": "status",
+          "suggested": "RUNNING"
+        }
+      },
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:was_hurt_recently",
+      "label": "was hurt recently",
+      "description": "was hurt recently",
+      "args": {
+        "withinTicks": {
+          "description": "Elapsed game ticks since damage.",
+          "type": "integer",
+          "minimum": 1.0,
+          "maximum": 120000.0,
+          "required": true,
+          "label": "withinTicks",
+          "suggested": 1.0
+        }
+      },
+      "channels": [],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    }
+  ],
+  "actions": [
+    {
+      "id": "samcnpc:attack_target",
+      "label": "attack target",
+      "description": "attack target",
+      "args": {},
+      "channels": [
+        "combat",
+        "main_hand"
+      ],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:begin_task_inventory",
+      "label": "begin task inventory",
+      "description": "begin task inventory",
+      "args": {},
+      "channels": [
+        "block_action",
+        "combat",
+        "interaction",
+        "inventory",
+        "look",
+        "main_hand",
+        "movement",
+        "off_hand"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:begin_task_reaction",
+      "label": "begin task reaction",
+      "description": "begin task reaction",
+      "args": {},
+      "channels": [
+        "combat"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:clear_attack_target",
+      "label": "clear attack target",
+      "description": "clear attack target",
+      "args": {},
+      "channels": [
+        "combat"
+      ],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:ensure_equipment",
+      "label": "ensure equipment",
+      "description": "ensure equipment",
+      "args": {
+        "query": {
+          "description": "Exact ID, authoritative @role, or 2..8 explicit alternatives separated by |. Coal never implies charcoal.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^(?:(?:[a-z0-9_.-]+:[a-z0-9_./-]+|@(axe|pickaxe|shovel|hoe|food|placeable_block|tool|shield|armor|(?:melee|ranged)_weapon|ammunition))(?:[|](?!$)|$)){1,8}$",
+          "x-samcnpc-example": "@axe",
+          "x-samcnpc-text-format": "item-query",
+          "required": true,
+          "label": "query",
+          "suggested": "@axe"
+        },
+        "destination": {
+          "description": "Physical equipment destination; main hand aliases the selected hotbar slot.",
+          "type": "string",
+          "enum": [
+            "MAIN_HAND",
+            "OFF_HAND",
+            "HEAD",
+            "CHEST",
+            "LEGS",
+            "FEET"
+          ],
+          "required": true,
+          "label": "destination",
+          "suggested": "MAIN_HAND"
+        },
+        "minimumDurability": {
+          "description": "Minimum remaining durability fraction; nondamageable items have fraction 1.",
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.0,
+          "required": false,
+          "label": "minimumDurability",
+          "suggested": 0.0
+        }
+      },
+      "channels": [
+        "inventory",
+        "main_hand",
+        "off_hand"
+      ],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:look_at_summoner",
+      "label": "look at summoner",
+      "description": "look at summoner",
+      "args": {},
+      "channels": [
+        "look"
+      ],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:look_at_target",
+      "label": "look at target",
+      "description": "look at target",
+      "args": {},
+      "channels": [
+        "look"
+      ],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:move_to_summoner",
+      "label": "move to summoner",
+      "description": "move to summoner",
+      "args": {
+        "speed": {
+          "description": "Values above 1 request ordinary sprint; no hidden physics boost.",
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 1.5,
+          "required": true,
+          "label": "speed",
+          "suggested": 0.1
+        },
+        "stopDistance": {
+          "description": "Horizontal stopping distance in blocks.",
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 16.0,
+          "required": true,
+          "label": "stopDistance",
+          "suggested": 0.0
+        },
+        "startDistance": {
+          "description": "Horizontal distance needed to start following after stopping.",
+          "type": "number",
+          "minimum": 0.25,
+          "maximum": 32.0,
+          "x-samcnpc-default-from": {
+            "parameter": "stopDistance",
+            "offset": 2.0
+          },
+          "x-samcnpc-greater-than": "stopDistance",
+          "required": false,
+          "label": "startDistance",
+          "suggested": 0.25
+        }
+      },
+      "channels": [
+        "look",
+        "movement"
+      ],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:move_to_target",
+      "label": "move to target",
+      "description": "move to target",
+      "args": {
+        "speed": {
+          "description": "Values above 1 request ordinary sprint; no hidden physics boost.",
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 1.5,
+          "required": true,
+          "label": "speed",
+          "suggested": 0.1
+        },
+        "stopDistance": {
+          "description": "Horizontal stopping distance in blocks.",
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 16.0,
+          "required": true,
+          "label": "stopDistance",
+          "suggested": 0.0
+        }
+      },
+      "channels": [
+        "look",
+        "movement"
+      ],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:run_combat_task",
+      "label": "run combat task",
+      "description": "run combat task",
+      "args": {},
+      "channels": [
+        "combat",
+        "inventory",
+        "look",
+        "main_hand",
+        "movement",
+        "off_hand"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:run_delivery_task",
+      "label": "run delivery task",
+      "description": "run delivery task",
+      "args": {},
+      "channels": [
+        "interaction",
+        "inventory",
+        "look",
+        "movement"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:run_explorer_task",
+      "label": "run explorer task",
+      "description": "run explorer task",
+      "args": {},
+      "channels": [
+        "look",
+        "movement"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:run_farm_task",
+      "label": "run farm task",
+      "description": "run farm task",
+      "args": {},
+      "channels": [
+        "block_action",
+        "interaction",
+        "inventory",
+        "look",
+        "main_hand",
+        "movement"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:run_fishing_task",
+      "label": "run fishing task",
+      "description": "run fishing task",
+      "args": {},
+      "channels": [
+        "block_action",
+        "combat",
+        "interaction",
+        "inventory",
+        "look",
+        "main_hand",
+        "movement",
+        "off_hand"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:run_food_task",
+      "label": "run food task",
+      "description": "run food task",
+      "args": {},
+      "channels": [
+        "block_action",
+        "interaction",
+        "inventory",
+        "look",
+        "main_hand",
+        "movement"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:run_inventory_task",
+      "label": "run inventory task",
+      "description": "run inventory task",
+      "args": {},
+      "channels": [
+        "interaction",
+        "inventory",
+        "look",
+        "movement"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:run_lumberjack_demo",
+      "label": "run lumberjack demo",
+      "description": "run lumberjack demo",
+      "args": {},
+      "channels": [
+        "block_action",
+        "interaction",
+        "inventory",
+        "look",
+        "main_hand",
+        "movement"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:run_lumberjack_task",
+      "label": "run lumberjack task",
+      "description": "run lumberjack task",
+      "args": {},
+      "channels": [
+        "block_action",
+        "interaction",
+        "inventory",
+        "look",
+        "main_hand",
+        "movement"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:run_machine_task",
+      "label": "run machine task",
+      "description": "run machine task",
+      "args": {},
+      "channels": [
+        "block_action",
+        "interaction",
+        "inventory",
+        "look",
+        "main_hand",
+        "movement"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:run_mining_task",
+      "label": "run mining task",
+      "description": "run mining task",
+      "args": {},
+      "channels": [
+        "block_action",
+        "interaction",
+        "inventory",
+        "look",
+        "main_hand",
+        "movement"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:run_navigation_task",
+      "label": "run navigation task",
+      "description": "run navigation task",
+      "args": {},
+      "channels": [
+        "look",
+        "movement"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:run_planting_task",
+      "label": "run planting task",
+      "description": "run planting task",
+      "args": {},
+      "channels": [
+        "block_action",
+        "interaction",
+        "inventory",
+        "look",
+        "main_hand",
+        "movement"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:run_prepare_field_task",
+      "label": "run prepare field task",
+      "description": "run prepare field task",
+      "args": {},
+      "channels": [
+        "block_action",
+        "interaction",
+        "inventory",
+        "look",
+        "main_hand",
+        "movement"
+      ],
+      "advanced": true,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:set_attack_target_from_recent_attacker",
+      "label": "set attack target from recent attacker",
+      "description": "set attack target from recent attacker",
+      "args": {
+        "leash": {
+          "description": "Fixed retaliation pursuit radius in blocks.",
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 32.0,
+          "default": 24.0,
+          "required": false,
+          "label": "leash",
+          "suggested": 24.0
+        },
+        "durationTicks": {
+          "description": "Original retaliation deadline in game ticks.",
+          "type": "integer",
+          "minimum": 20.0,
+          "maximum": 2400.0,
+          "default": 600.0,
+          "required": false,
+          "label": "durationTicks",
+          "suggested": 600.0
+        },
+        "allowPlayers": {
+          "description": "Allow eligible players; summoner/friendly checks still apply.",
+          "type": "boolean",
+          "default": false,
+          "required": false,
+          "label": "allowPlayers",
+          "suggested": false
+        }
+      },
+      "channels": [
+        "combat"
+      ],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    },
+    {
+      "id": "samcnpc:stop_movement",
+      "label": "stop movement",
+      "description": "stop movement",
+      "args": {},
+      "channels": [
+        "movement"
+      ],
+      "advanced": false,
+      "requires": null,
+      "version": 1
+    }
+  ],
+  "channels": [
+    "movement",
+    "look",
+    "main_hand",
+    "off_hand",
+    "combat",
+    "interaction",
+    "block_action",
+    "inventory"
+  ],
+  "builtins": [
+    "samcnpc:idle_look",
+    "samcnpc:follow_summoner",
+    "samcnpc:retaliate",
+    "samcnpc:demo_lumberjack",
+    "samcnpc:task_navigation",
+    "samcnpc:task_delivery",
+    "samcnpc:task_lumberjack",
+    "samcnpc:task_mining",
+    "samcnpc:task_food",
+    "samcnpc:task_farming",
+    "samcnpc:task_prepare_field",
+    "samcnpc:task_planting",
+    "samcnpc:task_machine",
+    "samcnpc:task_fishing",
+    "samcnpc:task_explorer",
+    "samcnpc:task_combat",
+    "samcnpc:task_inventory"
+  ],
+  "note": "Generated from BehaviorSchemaApi; final activation uses the actual Forge compiler."
+}

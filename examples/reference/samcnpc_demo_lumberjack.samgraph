@@ -1,0 +1,69 @@
+{
+  "format": "samcnpc-studio",
+  "version": 1,
+  "targetCommit": "b92ec0e23164f822f450fc65a006ce9039cec37a",
+  "pack": {
+    "id": "samcnpc:demo_lumberjack",
+    "description": "REFERENCJA: krok istniejącego demo joba. Samo przypisanie tej paczki NIE uruchamia drwala.",
+    "priority": 100000,
+    "channels": [
+      "movement",
+      "look",
+      "main_hand",
+      "block_action",
+      "inventory",
+      "interaction"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "0c94f4916e5b",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "advance_demo_job",
+      "priority": 100000,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 55.0
+    },
+    {
+      "id": "a001c5cc7e93",
+      "kind": "condition",
+      "ref": "samcnpc:always",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 55.0
+    },
+    {
+      "id": "678c36c812b4",
+      "kind": "action",
+      "ref": "samcnpc:run_lumberjack_demo",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 55.0
+    }
+  ],
+  "edges": [
+    [
+      "a001c5cc7e93",
+      "0c94f4916e5b"
+    ],
+    [
+      "0c94f4916e5b",
+      "678c36c812b4"
+    ]
+  ]
+}

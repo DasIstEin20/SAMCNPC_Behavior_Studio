@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 1,
+  "id": "example:guardian_escort",
+  "description": "Zaawansowany ochroniarz: eskortuje summonnera, reaguje na obrażenia, walczy tylko przy wystarczającym zdrowiu i w trybie paniki zrywa kontakt oraz wraca do summonnera.",
+  "priority": 750,
+  "channels": [
+    "movement",
+    "look",
+    "main_hand",
+    "combat"
+  ],
+  "rules": [
+    {
+      "id": "panic_disengage",
+      "priority": 1000,
+      "when": {
+        "all": [
+          {
+            "any": [
+              {
+                "test": {
+                  "condition": "samcnpc:health_fraction",
+                  "args": { "operator": "lte", "value": 0.22 }
+                }
+              },
+              {
+                "all": [
+                  {
+                    "test": {
+                      "condition": "samcnpc:was_hurt_recently",
+                      "args": { "withinTicks": 20 }
+                    }
+                  },
+                  {
+                    "test": {
+                      "condition": "samcnpc:health_fraction",
+                      "args": { "operator": "lte", "value": 0.35 }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "test": { "condition": "samcnpc:has_attack_target" }
+          }
+        ]
+      },
+      "actions": [
+        { "action": "samcnpc:clear_attack_target" },
+        { "action": "samcnpc:stop_movement" }
+      ]
+    },
+    {
+      "id": "panic_return_to_summoner",
+      "priority": 950,
+      "when": {
+        "all": [
+          {
+            "any": [
+              {
+                "test": {
+                  "condition": "samcnpc:health_fraction",
+                  "args": { "operator": "lte", "value": 0.22 }
+                }
+              },
+              {
+                "all": [
+                  {
+                    "test": {
+                      "condition": "samcnpc:was_hurt_recently",
+                      "args": { "withinTicks": 20 }
+                    }
+                  },
+                  {
+                    "test": {
+                      "condition": "samcnpc:health_fraction",
+                      "args": { "operator": "lte", "value": 0.35 }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          { "test": { "condition": "samcnpc:summoner_online" } },
+          { "not": { "test": { "condition": "samcnpc:has_attack_target" } } },
+          {
+            "test": {
+              "condition": "samcnpc:distance_to_summoner",
+              "args": { "operator": "gt", "blocks": 2.5 }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:move_to_summoner",
+          "args": {
+            "speed": 1.3,
+            "stopDistance": 2.0,
+            "startDistance": 2.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "panic_hold_near_summoner",
+      "priority": 940,
+      "when": {
+        "all": [
+          {
+            "any": [
+              {
+                "test": {
+                  "condition": "samcnpc:health_fraction",
+                  "args": { "operator": "lte", "value": 0.22 }
+                }
+              },
+              {
+                "all": [
+                  {
+                    "test": {
+                      "condition": "samcnpc:was_hurt_recently",
+                      "args": { "withinTicks": 20 }
+                    }
+                  },
+                  {
+                    "test": {
+                      "condition": "samcnpc:health_fraction",
+                      "args": { "operator": "lte", "value": 0.35 }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          { "test": { "condition": "samcnpc:summoner_online" } },
+          { "not": { "test": { "condition": "samcnpc:has_attack_target" } } },
+          {
+            "test": {
+              "condition": "samcnpc:distance_to_summoner",
+              "args": { "operator": "lte", "blocks": 2.5 }
+            }
+          }
+        ]
+      },
+      "actions": [
+        { "action": "samcnpc:stop_movement" },
+        { "action": "samcnpc:look_at_summoner" }
+      ]
+    },
+    {
+      "id": "acquire_recent_attacker",
+      "priority": 850,
+      "when": {
+        "all": [
+          {
+            "test": {
+              "condition": "samcnpc:health_fraction",
+              "args": { "operator": "gt", "value": 0.22 }
+            }
+          },
+          { "test": { "condition": "samcnpc:has_unhandled_damage" } },
+          { "not": { "test": { "condition": "samcnpc:has_attack_target" } } }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:set_attack_target_from_recent_attacker",
+          "args": {
+            "leash": 20.0,
+            "durationTicks": 500,
+            "allowPlayers": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "fight_current_target",
+      "priority": 800,
+      "when": {
+        "all": [
+          {
+            "test": {
+              "condition": "samcnpc:health_fraction",
+              "args": { "operator": "gt", "value": 0.22 }
+            }
+          },
+          { "test": { "condition": "samcnpc:has_attack_target" } },
+          { "test": { "condition": "samcnpc:target_alive" } }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:move_to_target",
+          "args": { "speed": 1.15, "stopDistance": 2.2 }
+        },
+        { "action": "samcnpc:attack_target" }
+      ]
+    },
+    {
+      "id": "follow_when_far",
+      "priority": 500,
+      "when": {
+        "all": [
+          {
+            "test": {
+              "condition": "samcnpc:health_fraction",
+              "args": { "operator": "gt", "value": 0.22 }
+            }
+          },
+          { "test": { "condition": "samcnpc:summoner_online" } },
+          { "not": { "test": { "condition": "samcnpc:has_attack_target" } } },
+          {
+            "test": {
+              "condition": "samcnpc:distance_to_summoner",
+              "args": { "operator": "gt", "blocks": 8.0 }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:move_to_summoner",
+          "args": {
+            "speed": 1.15,
+            "stopDistance": 3.5,
+            "startDistance": 7.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "watch_summoner_midrange",
+      "priority": 350,
+      "when": {
+        "all": [
+          { "test": { "condition": "samcnpc:summoner_online" } },
+          { "not": { "test": { "condition": "samcnpc:has_attack_target" } } },
+          {
+            "test": {
+              "condition": "samcnpc:distance_to_summoner",
+              "args": { "operator": "gt", "blocks": 3.5 }
+            }
+          },
+          {
+            "test": {
+              "condition": "samcnpc:distance_to_summoner",
+              "args": { "operator": "lte", "blocks": 8.0 }
+            }
+          }
+        ]
+      },
+      "actions": [
+        { "action": "samcnpc:look_at_summoner" }
+      ]
+    },
+    {
+      "id": "hold_formation_close",
+      "priority": 300,
+      "when": {
+        "all": [
+          { "test": { "condition": "samcnpc:summoner_online" } },
+          { "not": { "test": { "condition": "samcnpc:has_attack_target" } } },
+          {
+            "test": {
+              "condition": "samcnpc:distance_to_summoner",
+              "args": { "operator": "lte", "blocks": 3.5 }
+            }
+          }
+        ]
+      },
+      "actions": [
+        { "action": "samcnpc:stop_movement" },
+        { "action": "samcnpc:look_at_summoner" }
+      ]
+    },
+    {
+      "id": "offline_safe_idle",
+      "priority": 100,
+      "when": {
+        "all": [
+          { "not": { "test": { "condition": "samcnpc:summoner_online" } } },
+          { "not": { "test": { "condition": "samcnpc:has_attack_target" } } }
+        ]
+      },
+      "actions": [
+        { "action": "samcnpc:stop_movement" }
+      ]
+    }
+  ]
+}

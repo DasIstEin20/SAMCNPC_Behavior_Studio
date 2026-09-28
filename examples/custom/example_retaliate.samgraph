@@ -1,0 +1,223 @@
+{
+  "format": "samcnpc-studio",
+  "version": 1,
+  "targetCommit": "b92ec0e23164f822f450fc65a006ce9039cec37a",
+  "pack": {
+    "id": "example:retaliate",
+    "description": "Reakcja melee na nowego napastnika. Bez atakowania graczy. Oparta na wbudowanej paczce.",
+    "priority": 500,
+    "channels": [
+      "movement",
+      "look",
+      "combat",
+      "main_hand"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "f0154b365b01",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "acquire_attacker",
+      "priority": 1000,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 900,
+      "y": 122.5
+    },
+    {
+      "id": "f1f56b22d13a",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 122.5
+    },
+    {
+      "id": "f544995ea725",
+      "kind": "condition",
+      "ref": "samcnpc:has_unhandled_damage",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 55.0
+    },
+    {
+      "id": "dc50713211cd",
+      "kind": "not",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 190.0
+    },
+    {
+      "id": "254028e22c05",
+      "kind": "condition",
+      "ref": "samcnpc:has_attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 190.0
+    },
+    {
+      "id": "4af1660cff7a",
+      "kind": "action",
+      "ref": "samcnpc:set_attack_target_from_recent_attacker",
+      "args": {
+        "leash": 24.0,
+        "durationTicks": 600,
+        "allowPlayers": false
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 1210,
+      "y": 55.0
+    },
+    {
+      "id": "678a8be057de",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "approach_and_attack",
+      "priority": 500,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 447.5
+    },
+    {
+      "id": "3f8876a75d87",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 447.5
+    },
+    {
+      "id": "42c513dfc4d1",
+      "kind": "condition",
+      "ref": "samcnpc:has_attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 380.0
+    },
+    {
+      "id": "e074ab794e5f",
+      "kind": "condition",
+      "ref": "samcnpc:target_alive",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 515.0
+    },
+    {
+      "id": "249585e392e5",
+      "kind": "action",
+      "ref": "samcnpc:move_to_target",
+      "args": {
+        "speed": 1.1,
+        "stopDistance": 2.4
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 925,
+      "y": 380.0
+    },
+    {
+      "id": "3fab6ffd8a5c",
+      "kind": "action",
+      "ref": "samcnpc:attack_target",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 925,
+      "y": 515.0
+    }
+  ],
+  "edges": [
+    [
+      "f544995ea725",
+      "f1f56b22d13a"
+    ],
+    [
+      "254028e22c05",
+      "dc50713211cd"
+    ],
+    [
+      "dc50713211cd",
+      "f1f56b22d13a"
+    ],
+    [
+      "f1f56b22d13a",
+      "f0154b365b01"
+    ],
+    [
+      "f0154b365b01",
+      "4af1660cff7a"
+    ],
+    [
+      "42c513dfc4d1",
+      "3f8876a75d87"
+    ],
+    [
+      "e074ab794e5f",
+      "3f8876a75d87"
+    ],
+    [
+      "3f8876a75d87",
+      "678a8be057de"
+    ],
+    [
+      "678a8be057de",
+      "249585e392e5"
+    ],
+    [
+      "678a8be057de",
+      "3fab6ffd8a5c"
+    ]
+  ]
+}

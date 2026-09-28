@@ -1,0 +1,103 @@
+{
+  "format": "samcnpc-studio",
+  "version": 1,
+  "targetCommit": "b92ec0e23164f822f450fc65a006ce9039cec37a",
+  "pack": {
+    "id": "tutorial:follow",
+    "description": "Follow the available summoner. Stop at 2 blocks; start beyond 4.",
+    "priority": 100,
+    "channels": [
+      "movement",
+      "look"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "f4a7fa45393a",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "follow_summoner",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 122.5
+    },
+    {
+      "id": "d5e89118f138",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 122.5
+    },
+    {
+      "id": "cf4af5b2f3c2",
+      "kind": "condition",
+      "ref": "samcnpc:has_summoner",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 55.0
+    },
+    {
+      "id": "f7e7c302a71a",
+      "kind": "condition",
+      "ref": "samcnpc:summoner_online",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 190.0
+    },
+    {
+      "id": "695ba93f665d",
+      "kind": "action",
+      "ref": "samcnpc:move_to_summoner",
+      "args": {
+        "speed": 1.0,
+        "stopDistance": 2.0,
+        "startDistance": 4.0
+      },
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": true,
+      "x": 925,
+      "y": 55.0
+    }
+  ],
+  "edges": [
+    [
+      "cf4af5b2f3c2",
+      "d5e89118f138"
+    ],
+    [
+      "f7e7c302a71a",
+      "d5e89118f138"
+    ],
+    [
+      "d5e89118f138",
+      "f4a7fa45393a"
+    ],
+    [
+      "f4a7fa45393a",
+      "695ba93f665d"
+    ]
+  ]
+}
