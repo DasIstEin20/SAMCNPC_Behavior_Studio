@@ -1,10 +1,6 @@
-> Companion Behavior documentation, captured from the canonical workspace at
-> `b43112aeee24a76038674841294cb59433f82d8b` (2026-09-28). Runtime build commands
-> and workspace reports below refer to that mod checkout, not the Studio repository.
-
 # Deterministic local preparation and recovery
 
-The 2026-09-27 implementation lives in Behavior. Core source is unchanged. It uses
+Deterministic preparation lives in Behavior and uses
 Core's inventory, equipment knowledge, visibility, navigation and physical transfer
 APIs. LLM is optional and never participates in these decisions.
 
@@ -97,8 +93,7 @@ framework, not a second scheduler.
 When an unload returns before required preparation is satisfied, selected parent
 work waits through the existing logistics cooldown before attempting more work.
 The original deadline continues; this does not grant new time or reset attempts.
-This combined full-inventory/missing-tool regression was found by the advanced
-Guardian/Forester Studio example on 2026-09-28.
+
 
 Manual commands (replace coordinates and NPC identifier):
 
@@ -133,13 +128,3 @@ catalog is 5. LLM consumes these published APIs; planner V1 remains default, V2 
 default-disabled, and trusted GoalConstraints / requiredReturnTo are unchanged.
 Constrained planner inventory goals still admit only their supported exact Supply
 contract; adding ENSURE does not implicitly authorize broader substitutions.
-
-## Current evidence
-
-See PROJECT_STATE and the session report for exact commands and final revisions.
-Seven focused Forge scenarios cover chest-tool acquisition then actual chopping,
-low-durability backup, safe full-inventory unloading, exact coal vs charcoal,
-unknown locked stock, two-NPC source reserves, and an actual Studio ZIP driving a
-registered equipment rule. The source-tool test also roundtrips TaskStore between
-transfer and equip. Separate server save/load and client operation probes include
-ENSURE. Historical Planner Qwen results are not evidence of improvement here.

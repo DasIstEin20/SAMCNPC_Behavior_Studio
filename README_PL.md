@@ -9,11 +9,11 @@
 **Edytor wizualny offline do deterministycznych paczek zachowań NPC — SAMCNPC dla Minecraft Forge 1.20.1.**
 
 Łącz warunki i akcje, sprawdzaj wynikowy JSON, waliduj graf i instaluj paczkę w swojej
-instancji Minecraft. Studio **1.2.0** ma ciemny edytor węzłów, interfejs EN/PL/DE,
+instancji Minecraft. Studio **1.3.0** ma ciemny edytor węzłów, interfejs EN/PL/DE,
 przykłady oraz trzy ilustrowane poradniki GitHub. Do edycji paczek nie trzeba programować.
 
-[SAMCNPC Core](https://github.com/DasIstEin20/SAMCNPC_Core) zapewnia ciało i mechanikę NPC,
-a [SAMCNPC Behavior](https://github.com/DasIstEin20/SAMCNPC_Behavior) wykonuje reguły i trwałe zadania.
+SAMCNPC Core zapewnia ciało i mechanikę NPC,
+a SAMCNPC Behavior wykonuje reguły i trwałe zadania.
 Studio przygotowuje ich dane. Działa bez Minecrafta, modelu LLM, kluczy API i usług chmurowych.
 
 ## Możliwości
@@ -80,8 +80,7 @@ skrzyni → wyposaża → wykonuje pracę”. [Projekty ćwiczeń](tutorials/exa
 - [Guardian / Forester](examples/advanced/guardian_forester/guardian_forester.samgraph): **33 reguły, 506 węzłów, 473 połączenia**
   obejmujące bezpieczeństwo, odwet, wyposażenie, trwałą logistykę i eskortę.
 
-Zaawansowany przykład ma eksporty JSON/ZIP, [polską instrukcję](examples/advanced/guardian_forester/README_PL.md)
-i [wyniki testów w grze](examples/advanced/guardian_forester/VALIDATION.md). Otwórz go przez
+Zaawansowany przykład ma eksporty JSON/ZIP, [polską instrukcję](examples/advanced/guardian_forester/README_PL.md). Otwórz go przez
 **Plik → Otwórz**. Samo przypisanie paczki nie tworzy misji ani dostępu do skrzyń.
 
 ![Guardian / Forester w rzeczywistym oknie Studio](examples/advanced/guardian_forester/studio_preview.png)
@@ -143,7 +142,6 @@ python cli.py examples/custom/example_follow.samgraph --json-out follow.json --z
 ```
 
 Testy GUI wymagają pulpitu; na bezekranowym Linux użyj Xvfb. Sam CLI nie importuje Tkintera.
-[Datowany raport](docs/TEST_REPORT.md) oddziela sprawdzenie tej paczki od wcześniejszych
 wyników Forge/klienta. Walidator Studio sprawdza kontrakt grafu; skutki fizyczne trzeba
 potwierdzić przez reload i test w Minecraft. Testowy ZIP jest dołączony, więc zestaw nie
 wymaga sąsiedniego katalogu Behavior.
@@ -151,3 +149,11 @@ wymaga sąsiedniego katalogu Behavior.
 ## Licencja
 
 [MIT](LICENSE).
+
+## Widok misji: prawdziwe połączenia paczek
+
+Otwórz Plik -> Misja. Osobne okno edytuje projekt .sammission; przewody akcji zwykłego .samgraph nadal oznaczają równoległe propozycje. Etapy łączy Po potwierdzonym sukcesie. Po błędzie misja zatrzymuje się do przeglądu; liczba ponowień etapu wynosi zero.
+
+[Tutorial](examples/missions/tutorial.sammission) · [Full mission](examples/missions/full.sammission) · [ZIP](examples/missions/tutorial.zip)
+
+Ekwipunek, wyposażenie, zapas w celu, przygotowana gleba i bezpieczne dojście opisują bieżący stan. Są sprawdzane ponownie na końcu misji. Usunięcie dostarczonych kłód może unieważnić warunek zapasu. Sukces zadania jest historycznym potwierdzeniem konkretnego zlecenia, nie dowodem innych zapasów.

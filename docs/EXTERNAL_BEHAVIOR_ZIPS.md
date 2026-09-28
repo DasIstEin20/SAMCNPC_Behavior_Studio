@@ -1,7 +1,3 @@
-> Companion Behavior documentation, captured from the canonical workspace at
-> `b43112aeee24a76038674841294cb59433f82d8b` (2026-09-28). Runtime build commands
-> and workspace reports below refer to that mod checkout, not the Studio repository.
-
 # External Behavior ZIPs
 
 Put custom archives in `<minecraft-instance>/resources/samcnpc/behaviors/*.zip`.
@@ -18,7 +14,9 @@ my-workers.zip
   README.md
 ```
 
-Only JSON below the case-sensitive `behaviors/` prefix is compiled. Other entries,
+Rule JSON below the case-sensitive `behaviors/` prefix is compiled. Versioned
+mission bundles additionally use `missions/` and `mission-manifest.json`, as
+described in [Missions](MISSIONS.md). Other entries,
 including unrelated root-level JSON, are ignored as documents but still validated
 and counted against every archive limit. Nothing is extracted or executed. ZIP64,
 multipart/encrypted ZIPs, self-extracting preambles and special/link entries are

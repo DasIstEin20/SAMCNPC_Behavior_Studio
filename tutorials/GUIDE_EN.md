@@ -1,4 +1,4 @@
-# SAMCNPC Behavior Studio 1.2.0 — Build your own behavior packs
+# SAMCNPC Behavior Studio 1.3.0 — Build your own behavior packs
 
 English | [Polski](GUIDE_PL.md) | [Deutsch](GUIDE_DE.md)
 
@@ -32,11 +32,15 @@ This GitHub guide replaces the White and Black PDF variants. GitHub applies your
 20. [In-game troubleshooting and reference](#chapter-20)
 21. [Advanced example: Guardian / Forester](#chapter-21)
 
+22. [Mission view: real links between packs](#chapter-22)
+23. [Three-stage tutorial and full mission](#chapter-23)
+24. [Completion, restart and manual control](#chapter-24)
+
 <a id="chapter-1"></a>
 
 ## 1. Start with a safe test
 
-Studio 1.2.0 is an offline editor for SAMCNPC Behavior. It needs Python 3.10+ with Tkinter; the editor itself needs no pip packages. Start START\_WINDOWS.bat, or run python studio.py from its folder.
+Studio 1.3.0 is an offline editor for SAMCNPC Behavior. It needs Python 3.10+ with Tkinter; the editor itself needs no pip packages. Start START\_WINDOWS.bat, or run python studio.py from its folder.
 
 English is the default. Choose Polski, English or Deutsch at the top right or in the Language menu. Switching translates existing controls and preserves your graph, unsaved fields, JSON draft, selection, undo history and view.
 
@@ -118,7 +122,7 @@ Open the retaliation example to study target acquisition and attack as separate 
 
 ![Actual Studio screenshot](images/guardian_en.png)
 
-Open [`examples/complex_guardian_escort.samgraph`](examples/complex_guardian_escort.samgraph) from this guide bundle. The existing project has 9 rules, 80 nodes and 71 wires. It remains compatible with Studio 1.2.0. Select a rule in the left list and zoom into that section.
+Open [`examples/complex_guardian_escort.samgraph`](examples/complex_guardian_escort.samgraph) from this guide bundle. The existing project has 9 rules, 80 nodes and 71 wires. It remains compatible with Studio 1.3.0. Select a rule in the left list and zoom into that section.
 
 The groups are disengage/return (1000, 950, 940), retaliation (850, 800), escort (500, 350, 300) and safe idle without player/target (100). Read these groups before individual wires.
 
@@ -352,7 +356,6 @@ Diagnostics identify ZIP members, for example external-zip:tools.zip!/behaviors/
 
 Use a small matrix: suitable tool already equipped; backup carried; tool only in allowed chest; missing tool; full inventory; unknown chest; exact coal with charcoal only. Check physical quantities and return position, then repeat relevant cases after a restart.
 
-The current native tests cover these important physical cases and a Studio-produced ZIP. Screenshots and a model's summary alone are not gameplay evidence.
 
 [Contents](#contents)
 
@@ -368,7 +371,7 @@ For a bundled update, maintainers run make\_catalog.py with the repository or sc
 
 If a value seems ignored, use its Apply button and inspect JSON. If JSON is marked unapplied, choose JSON -&gt; graph or deliberately restore Graph -&gt; JSON. If nodes disappear, press F and check the selected tab. For rejected numbers, use a decimal point and the displayed bounds.
 
-After a GUI error, keep %USERPROFILE%/samcnpc-studio-error.log plus version, language, OS and a small reproducing project. Current Windows tests exercise all registered components and repeated language switches.
+After a GUI error, keep %USERPROFILE%/samcnpc-studio-error.log plus version, language, OS and a small reproducing project.
 
 [Contents](#contents)
 
@@ -376,7 +379,7 @@ After a GUI error, keep %USERPROFILE%/samcnpc-studio-error.log plus version, lan
 
 ## 20. In-game troubleshooting and reference
 
-Pack missing from the list: check the actual instance, folder, behaviors/ archive prefix and full reload result. Old ZIP bundles containing config/... must be re-exported in Studio 1.2.0. A file name is not the pack ID.
+Pack missing from the list: check the actual instance, folder, behaviors/ archive prefix and full reload result. Old ZIP bundles containing config/... must be re-exported in Studio 1.3.0. A file name is not the pack ID.
 
 Pack listed but inactive: inspect assignments and conditions. A higher-priority action may occupy a required channel. A run\_\* node needs an existing task; a task needs its own controller pack. Use a copied world with one NPC and one custom pack first.
 
@@ -384,9 +387,8 @@ Preparation failed: check allowed source coordinates, distance, visibility, lock
 
 The tutorial projects are included in [examples/](examples/). Keep the editable `.samgraph` file separately from the JSON or ZIP installed in Minecraft.
 
-See [local preparation](../docs/LOCAL_AUTONOMY.md), [ZIP format and limits](../docs/EXTERNAL_BEHAVIOR_ZIPS.md), the [registered schema](../vendor/behavior-pack-registered.schema.json) and [dated validation](../docs/TEST_REPORT.md).
+See [local preparation](../docs/LOCAL_AUTONOMY.md), [ZIP format and limits](../docs/EXTERNAL_BEHAVIOR_ZIPS.md), the [registered schema](../vendor/behavior-pack-registered.schema.json).
 
-Based on the Studio 1.2.0 manual of 27 September 2026; adapted for GitHub on 28 September 2026. The original 20 chapters and command examples are retained, with repository links and one new advanced-example chapter. Native runtime evidence is separate from editor validation.
 
 [Contents](#contents)
 
@@ -398,10 +400,59 @@ Open [guardian_forester.samgraph](../examples/advanced/guardian_forester/guardia
 
 Review the rule groups for safety, retaliation, equipment, durable task preparation/recovery and escort. Validate in Studio, switch the interface language and inspect the JSON. Node layout helps navigation; priorities and channels still determine execution.
 
-The example includes [JSON](../examples/advanced/guardian_forester/guardian_forester.json), [ZIP](../examples/advanced/guardian_forester/guardian_forester.zip), a [Polish walkthrough](../examples/advanced/guardian_forester/README_PL.md) and [dated physical test evidence](../examples/advanced/guardian_forester/VALIDATION.md). Assigning the pack alone does not create a lumberjack mission or authorize a chest. Keep the existing task's controller assigned and configure the explicit preparation/unload policy.
+The example includes [JSON](../examples/advanced/guardian_forester/guardian_forester.json), [ZIP](../examples/advanced/guardian_forester/guardian_forester.zip), a [Polish walkthrough](../examples/advanced/guardian_forester/README_PL.md). Assigning the pack alone does not create a lumberjack mission or authorize a chest. Keep the existing task's controller assigned and configure the explicit preparation/unload policy.
 
-A native regression tested full inventory together with a missing axe: permitted excess was unloaded, an axe was obtained from the authorized chest, and three logs were chopped and delivered. This exposed and fixed a generic Behavior preparation-cooldown issue. Use the matching Behavior build; these results do not apply automatically to older JARs.
 
 ![Actual Studio screenshot](../examples/advanced/guardian_forester/studio_preview.png)
 
 [Contents](#contents)
+
+<a id="chapter-22"></a>
+
+## 22. Mission view: real links between packs
+
+![Studio mission editor](screenshots/mission_en.png)
+
+Open File -> Mission. This separate window edits a .sammission project; ordinary .samgraph action wires remain concurrent proposals. A mission has explicit stages connected by After verified success. On failure it stops for review; stage retries are zero.
+
+Select a stage in the diagram or list. Set its ID, referenced pack, timeout, completion requirement IDs and success destination, then Apply stage. Scroll to reach all nodes. Import a registered operation document and use Edit operation parameters to change its bounded context.
+
+Add / edit requirement offers registered predicates, not executable expressions. Import pack accepts ordinary JSON or .samgraph. Undo/redo preserves the mission; language changes preserve unapplied fields. Save the editable project separately from its runtime ZIP.
+
+The JSON preview is inspectable. Validate before export. A valid local document does not establish that a chest, resource or route exists in the selected world.
+
+<a id="chapter-23"></a>
+
+## 23. Three-stage tutorial and full mission
+
+Open examples/missions/tutorial.sammission. The first stage explicitly admits inventory ENSURE: obtain one usable axe from its permitted source and equip it. The second admits navigation to the selected waypoint. The third admits physical return to the safe anchor. Pack assignment alone does not create these tasks.
+
+Adapt all coordinates and permissions to a copied world. The bundled acceptance fixture uses an axe chest at 3,65,0, waypoint 8.5,65,0.5 and home 0.5,65,0.5. It requires actual equipped inventory, a historical travel-task success and final safe arrival.
+
+full.sammission has ten stages: axe, pickaxe, hoe, armor, 32 oak logs, 30 cobblestone, 2 exact coal, surface return, nine soil cells and final return. Its final chest is 0,65,3. Charcoal is a deliberate nonmatching item; tools and building reserves are separate.
+
+Export bundle ZIP. It contains behaviors/, missions/ and mission-manifest.json with distinct versioned document types. Install the complete ZIP under resources/samcnpc/behaviors. Never put mission JSON among loose rule-pack documents.
+
+`/samcnpc behavior reload`
+
+`/samcnpc behavior mission start Sam acceptance:tutorial`
+
+`/samcnpc behavior mission status Sam`
+
+<a id="chapter-24"></a>
+
+## 24. Completion, restart and manual control
+
+Inventory, equipment, destination stock, prepared soil and safe arrival describe current state. They are checked again at mission end. Removing delivered logs can invalidate the final stock requirement. Task success is a historical receipt for one exact admitted task; it does not prove unrelated stock.
+
+Unknown observations never mean success. Idle movement, accepted actions and elapsed time are not completion. The sequencer advances at most one stage per tick and preserves each admitted operation's identity and remaining budget.
+
+`/samcnpc behavior mission pause Sam`
+
+`/samcnpc behavior mission resume Sam`
+
+`/samcnpc behavior mission cancel Sam`
+
+A compatible manual pause can resume. Cancellation never starts the next stage. Restarted running work is reconciled; an uncertain saved transition or changed/removed pack holds for review instead of replaying assignment. Inspect, cancel and deliberately start new work when appropriate.
+
+Limits: 16 stages, 16 requirements, 3 guards, 20–72000 ticks per stage and zero stage retries. Cycles, unreachable stages and missing references are rejected. The default failure path is stop for review. Operation-specific bounded recovery remains separate.

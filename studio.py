@@ -231,7 +231,7 @@ class GraphCanvas(tk.Canvas):
 
 class Studio(tk.Tk):
     def __init__(self, language: str = DEFAULT_LANGUAGE):
-        super().__init__();self.title('SAMCNPC Behavior Studio 1.2.0');self.geometry('1540x930');self.minsize(1080,700)
+        super().__init__();self.title('SAMCNPC Behavior Studio 1.3.0');self.geometry('1540x930');self.minsize(1080,700)
         self.configure(bg=BG)
         self.lang = language if language in LANGUAGES else DEFAULT_LANGUAGE
         self.language_name = tk.StringVar(self, value=LANGUAGES[self.lang])
@@ -267,6 +267,9 @@ class Studio(tk.Tk):
         if code == self.lang:
             return
         self.lang = code
+        mission_window = getattr(self, 'mission_window', None)
+        if mission_window is not None and mission_window.winfo_exists():
+            mission_window.translate()
         for widget, resolver in list(self._localized_widgets.items()):
             if widget.winfo_exists():
                 widget.configure(text=resolver())
@@ -384,6 +387,7 @@ class Studio(tk.Tk):
                          ('export_json', self.export_json), ('export_zip', self.export_bundle), ('refresh_catalog', self.load_component_catalog)]:
             self._menu_entry(f, 'command', key, command=cmd)
         f.add_separator()
+        f.add_command(label='Mission / Misja / Mission…', command=self.open_mission)
         self._menu_entry(f, 'command', 'close', command=self.close_app)
         ex = tk.Menu(bar, tearoff=False, bg=PANEL, fg=FG)
         self._menu_entry(bar, 'cascade', 'examples', menu=ex)
@@ -401,6 +405,14 @@ class Studio(tk.Tk):
         for code, name in LANGUAGES.items():
             lang.add_radiobutton(label=name, variable=self.language_name,
                                 value=name, command=self.set_language)
+
+    def open_mission(self):
+        from mission_ui import MissionWindow
+        window = getattr(self, 'mission_window', None)
+        if window is not None and window.winfo_exists():
+            window.lift()
+        else:
+            self.mission_window = MissionWindow(self)
 
     def _build(self):
         head=ttk.Frame(self,padding=(20,14));head.pack(fill='x')

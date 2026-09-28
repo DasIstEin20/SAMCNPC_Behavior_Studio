@@ -9,12 +9,12 @@ English | [Polski](README_PL.md) | [Deutsch](README_DE.md)
 **An offline visual editor for deterministic NPC behavior packs — SAMCNPC on Minecraft Forge 1.20.1.**
 
 Build rules by connecting conditions and actions, inspect the generated JSON, validate your graph,
-and install the resulting behavior pack in your Minecraft instance. Studio 1.2.0 includes a dark
+and install the resulting behavior pack in your Minecraft instance. Studio 1.3.0 includes a dark
 node editor, an English/Polish/German interface, working examples and three illustrated GitHub guides.
 You do not need to write code to edit a pack.
 
-[SAMCNPC Core](https://github.com/DasIstEin20/SAMCNPC_Core) provides the NPC's body and mechanics.
-[SAMCNPC Behavior](https://github.com/DasIstEin20/SAMCNPC_Behavior) executes the rules and durable tasks.
+SAMCNPC Core provides the NPC's body and mechanics.
+SAMCNPC Behavior executes the rules and durable tasks.
 Studio authors their data; it runs independently of Minecraft and does not require an LLM,
 API keys, a cloud service or additional Python packages.
 
@@ -78,7 +78,7 @@ a version number, so check the matching catalog, not just the JAR filename.
 
 ## Tutorials
 
-Read the illustrated **Studio 1.2.0** guides directly on GitHub:
+Read the illustrated **Studio 1.3.0** guides directly on GitHub:
 
 | English | Polski | Deutsch |
 | --- | --- | --- |
@@ -109,8 +109,7 @@ The corresponding [tutorial projects](tutorials/examples/) are included, includi
 
 The advanced example includes [JSON](examples/advanced/guardian_forester/guardian_forester.json),
 a directly loadable [ZIP](examples/advanced/guardian_forester/guardian_forester.zip),
-a [Polish walkthrough](examples/advanced/guardian_forester/README_PL.md) and
-[dated runtime validation](examples/advanced/guardian_forester/VALIDATION.md).
+a [Polish walkthrough](examples/advanced/guardian_forester/README_PL.md).
 Open it through **File → Open**. Its rules observe and coordinate existing authorized tasks;
 assigning the pack alone does not create a work mission or grant access to chests.
 
@@ -186,7 +185,6 @@ of skipping them. Offline validation/export also works without importing Tkinter
 python cli.py examples/custom/example_follow.samgraph --json-out follow.json --zip-out follow.zip
 ```
 
-The dated [test report](docs/TEST_REPORT.md) distinguishes the current standalone checks
 from earlier Forge/client validation. Studio's validator checks graph and export contracts;
 actual gameplay still requires `/samcnpc behavior reload` and testing in Minecraft.
 The included runtime fixture preserves the native-tested document without requiring
@@ -195,3 +193,11 @@ Behavior source code in a neighboring directory.
 ## License
 
 [MIT](LICENSE).
+
+## Mission view: real links between packs
+
+Open File -> Mission. This separate window edits a .sammission project; ordinary .samgraph action wires remain concurrent proposals. A mission has explicit stages connected by After verified success. On failure it stops for review; stage retries are zero.
+
+[Tutorial](examples/missions/tutorial.sammission) · [Full mission](examples/missions/full.sammission) · [ZIP](examples/missions/tutorial.zip)
+
+Inventory, equipment, destination stock, prepared soil and safe arrival describe current state. They are checked again at mission end. Removing delivered logs can invalidate the final stock requirement. Task success is a historical receipt for one exact admitted task; it does not prove unrelated stock.

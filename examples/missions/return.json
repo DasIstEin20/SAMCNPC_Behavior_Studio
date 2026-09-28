@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "id": "acceptance:return",
+  "description": "Execute an explicitly assigned finite navigation task; paused/waiting tasks release channels.",
+  "priority": 200,
+  "channels": [
+    "movement",
+    "look",
+    "combat",
+    "main_hand",
+    "off_hand",
+    "inventory",
+    "interaction",
+    "block_action"
+  ],
+  "rules": [
+    {
+      "id": "new_damage",
+      "priority": 1000,
+      "when": {
+        "test": {
+          "condition": "samcnpc:task_reaction_ready"
+        }
+      },
+      "actions": [
+        {
+          "action": "samcnpc:begin_task_reaction"
+        }
+      ]
+    },
+    {
+      "id": "advance_combat",
+      "priority": 900,
+      "when": {
+        "test": {
+          "condition": "samcnpc:task_combat_ready"
+        }
+      },
+      "actions": [
+        {
+          "action": "samcnpc:run_combat_task"
+        }
+      ]
+    },
+    {
+      "id": "begin_inventory",
+      "priority": 800,
+      "when": {
+        "test": {
+          "condition": "samcnpc:task_inventory_requested"
+        }
+      },
+      "actions": [
+        {
+          "action": "samcnpc:begin_task_inventory"
+        }
+      ]
+    },
+    {
+      "id": "advance_inventory",
+      "priority": 700,
+      "when": {
+        "test": {
+          "condition": "samcnpc:task_inventory_ready"
+        }
+      },
+      "actions": [
+        {
+          "action": "samcnpc:run_inventory_task"
+        }
+      ]
+    },
+    {
+      "id": "advance_task",
+      "priority": 100,
+      "when": {
+        "all": [
+          {
+            "test": {
+              "condition": "samcnpc:task_ready"
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:task_combat_ready"
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:task_inventory_ready"
+              }
+            }
+          },
+          {
+            "not": {
+              "test": {
+                "condition": "samcnpc:task_inventory_requested"
+              }
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "action": "samcnpc:run_navigation_task"
+        }
+      ]
+    }
+  ]
+}

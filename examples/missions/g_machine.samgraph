@@ -1,0 +1,310 @@
+{
+  "format": "samcnpc-studio",
+  "version": 1,
+  "targetCommit": "schema:107366c897b05d8a7df5e028a7f4a7b606fc40757ab80ae976e72f14fe773e44",
+  "pack": {
+    "id": "acceptance:g_machine",
+    "description": "Bounded supplied feeds, actual output collection and physical return through generic container endpoints.",
+    "priority": 200,
+    "channels": [
+      "movement",
+      "look",
+      "main_hand",
+      "block_action",
+      "inventory",
+      "interaction",
+      "combat",
+      "off_hand"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "acce9454bd2c",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "new_damage",
+      "priority": 1000,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 55.0
+    },
+    {
+      "id": "f7c543e0c986",
+      "kind": "condition",
+      "ref": "samcnpc:task_reaction_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 55.0
+    },
+    {
+      "id": "ba15fed31829",
+      "kind": "action",
+      "ref": "samcnpc:begin_task_reaction",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 55.0
+    },
+    {
+      "id": "62b3750fe155",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "advance_combat",
+      "priority": 900,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 245.0
+    },
+    {
+      "id": "e26a5190a196",
+      "kind": "condition",
+      "ref": "samcnpc:task_combat_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 245.0
+    },
+    {
+      "id": "f90d29d6b072",
+      "kind": "action",
+      "ref": "samcnpc:run_combat_task",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 245.0
+    },
+    {
+      "id": "eeaf27c0d356",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "begin_inventory",
+      "priority": 800,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 435.0
+    },
+    {
+      "id": "3086c03a9b21",
+      "kind": "condition",
+      "ref": "samcnpc:task_inventory_requested",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 435.0
+    },
+    {
+      "id": "6d82bf40419c",
+      "kind": "action",
+      "ref": "samcnpc:begin_task_inventory",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 435.0
+    },
+    {
+      "id": "cb300f6ed536",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "advance_inventory",
+      "priority": 700,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 625.0
+    },
+    {
+      "id": "a652b2df13bd",
+      "kind": "condition",
+      "ref": "samcnpc:task_inventory_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 625.0
+    },
+    {
+      "id": "ad40e0960a57",
+      "kind": "action",
+      "ref": "samcnpc:run_inventory_task",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 625.0
+    },
+    {
+      "id": "702af0b91de0",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "advance_machine",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 900,
+      "y": 882.5
+    },
+    {
+      "id": "840433d48122",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 882.5
+    },
+    {
+      "id": "6fee96bc55f4",
+      "kind": "condition",
+      "ref": "samcnpc:task_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 815.0
+    },
+    {
+      "id": "432a9198f332",
+      "kind": "not",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 950.0
+    },
+    {
+      "id": "773d5c50ae26",
+      "kind": "condition",
+      "ref": "samcnpc:task_combat_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 950.0
+    },
+    {
+      "id": "5f55b848e643",
+      "kind": "action",
+      "ref": "samcnpc:run_machine_task",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 1210,
+      "y": 815.0
+    }
+  ],
+  "edges": [
+    [
+      "f7c543e0c986",
+      "acce9454bd2c"
+    ],
+    [
+      "acce9454bd2c",
+      "ba15fed31829"
+    ],
+    [
+      "e26a5190a196",
+      "62b3750fe155"
+    ],
+    [
+      "62b3750fe155",
+      "f90d29d6b072"
+    ],
+    [
+      "3086c03a9b21",
+      "eeaf27c0d356"
+    ],
+    [
+      "eeaf27c0d356",
+      "6d82bf40419c"
+    ],
+    [
+      "a652b2df13bd",
+      "cb300f6ed536"
+    ],
+    [
+      "cb300f6ed536",
+      "ad40e0960a57"
+    ],
+    [
+      "6fee96bc55f4",
+      "840433d48122"
+    ],
+    [
+      "773d5c50ae26",
+      "432a9198f332"
+    ],
+    [
+      "432a9198f332",
+      "840433d48122"
+    ],
+    [
+      "840433d48122",
+      "702af0b91de0"
+    ],
+    [
+      "702af0b91de0",
+      "5f55b848e643"
+    ]
+  ]
+}

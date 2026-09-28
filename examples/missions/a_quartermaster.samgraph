@@ -1,0 +1,165 @@
+{
+  "format": "samcnpc-studio",
+  "version": 1,
+  "targetCommit": "schema:107366c897b05d8a7df5e028a7f4a7b606fc40757ab80ae976e72f14fe773e44",
+  "pack": {
+    "id": "acceptance:a_quartermaster",
+    "description": "Finite explicit supply, protected unload or nearby pickup, followed by a physical return.",
+    "priority": 200,
+    "channels": [
+      "movement",
+      "look",
+      "combat",
+      "main_hand",
+      "off_hand",
+      "inventory",
+      "interaction",
+      "block_action"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "1cd4c3d8c2df",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "new_damage",
+      "priority": 1000,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 55.0
+    },
+    {
+      "id": "9d21dfcb82b5",
+      "kind": "condition",
+      "ref": "samcnpc:task_reaction_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 55.0
+    },
+    {
+      "id": "6f5bc5f35bd3",
+      "kind": "action",
+      "ref": "samcnpc:begin_task_reaction",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 55.0
+    },
+    {
+      "id": "b41f5186561e",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "advance_combat",
+      "priority": 900,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 245.0
+    },
+    {
+      "id": "93e0009d38f9",
+      "kind": "condition",
+      "ref": "samcnpc:task_combat_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 245.0
+    },
+    {
+      "id": "e5ba8ddbfd1d",
+      "kind": "action",
+      "ref": "samcnpc:run_combat_task",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 245.0
+    },
+    {
+      "id": "16258e4e72c7",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "advance_inventory",
+      "priority": 700,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 435.0
+    },
+    {
+      "id": "06c65bc5e8b4",
+      "kind": "condition",
+      "ref": "samcnpc:task_inventory_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 435.0
+    },
+    {
+      "id": "10c7dcb6994e",
+      "kind": "action",
+      "ref": "samcnpc:run_inventory_task",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 435.0
+    }
+  ],
+  "edges": [
+    [
+      "9d21dfcb82b5",
+      "1cd4c3d8c2df"
+    ],
+    [
+      "1cd4c3d8c2df",
+      "6f5bc5f35bd3"
+    ],
+    [
+      "93e0009d38f9",
+      "b41f5186561e"
+    ],
+    [
+      "b41f5186561e",
+      "e5ba8ddbfd1d"
+    ],
+    [
+      "06c65bc5e8b4",
+      "16258e4e72c7"
+    ],
+    [
+      "16258e4e72c7",
+      "10c7dcb6994e"
+    ]
+  ]
+}

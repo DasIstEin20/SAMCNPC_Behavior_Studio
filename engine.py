@@ -437,7 +437,7 @@ def installation_text(pack,lang='en'):
       'en':'assign replaces the assigned pack list. Use an idle NPC. run_*/begin_* continue existing durable tasks; they do not create a task. Invalid candidates retain the last working registry.',
       'pl':'assign zastępuje listę przypisanych paczek. Użyj bezczynnego NPC. run_*/begin_* kontynuują istniejące trwałe zadania; nie tworzą zadania. Błędny reload zachowuje ostatni poprawny rejestr.',
       'de':'assign ersetzt die zugewiesene Pack-Liste. Einen untätigen NPC verwenden. run_*/begin_* setzen bestehende dauerhafte Tasks fort; sie erzeugen keine Tasks. Ein ungültiger Reload behält das letzte gültige Register.'}
-    return f"SAMCNPC Behavior Studio 1.2.0 — {pack['id']}\n\n{intro.get(lang,intro['en'])}\n\nJSON: config/samcnpc/behaviors/{filename}\nZIP:  resources/samcnpc/behaviors/{zipname}\nArchive: behaviors/{filename}\n\n/samcnpc behavior reload\n/samcnpc behavior packs\n/samcnpc behavior assign Sam {pack['id']}\n/samcnpc behavior diagnostics Sam\n\n{note.get(lang,note['en'])}\n"
+    return f"SAMCNPC Behavior Studio 1.3.0 — {pack['id']}\n\n{intro.get(lang,intro['en'])}\n\nJSON: config/samcnpc/behaviors/{filename}\nZIP:  resources/samcnpc/behaviors/{zipname}\nArchive: behaviors/{filename}\n\n/samcnpc behavior reload\n/samcnpc behavior packs\n/samcnpc behavior assign Sam {pack['id']}\n/samcnpc behavior diagnostics Sam\n\n{note.get(lang,note['en'])}\n"
 
 
 def export_zip(path: Path,g: Graph, *, overwrite=False):

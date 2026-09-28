@@ -18,7 +18,7 @@ def log_exception(detail: str, root=None) -> Path | None:
             version = str(root.tk.call('package', 'provide', 'Tk'))
         except Exception:
             pass
-    entry = (f'\n--- Behavior Studio 1.2.0 | {datetime.now(timezone.utc).isoformat()} ---\n'
+    entry = (f'\n--- Behavior Studio 1.3.0 | {datetime.now(timezone.utc).isoformat()} ---\n'
              f'Python {platform.python_version()} | platform {sys.platform} | Tk {version}\n'
              f'{detail[-16000:]}\n')
     try:

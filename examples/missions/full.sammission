@@ -1,0 +1,1336 @@
+{
+  "format": "samcnpc-mission-studio",
+  "version": 1,
+  "mission": {
+    "documentType": "samcnpc:mission",
+    "documentVersion": 1,
+    "id": "acceptance:full",
+    "dimensionId": "minecraft:overworld",
+    "requirements": [
+      {
+        "id": "axe_prepared",
+        "predicate": {
+          "type": "task_success",
+          "stageId": "prepare_axe"
+        }
+      },
+      {
+        "id": "pickaxe_prepared",
+        "predicate": {
+          "type": "task_success",
+          "stageId": "prepare_pickaxe"
+        }
+      },
+      {
+        "id": "hoe_prepared",
+        "predicate": {
+          "type": "task_success",
+          "stageId": "prepare_hoe"
+        }
+      },
+      {
+        "id": "armor_prepared",
+        "predicate": {
+          "type": "task_success",
+          "stageId": "prepare_armor"
+        }
+      },
+      {
+        "id": "wood_stock",
+        "predicate": {
+          "type": "destination_count",
+          "position": {
+            "x": 0,
+            "y": 65,
+            "z": 3
+          },
+          "itemId": "minecraft:oak_log",
+          "count": 32
+        }
+      },
+      {
+        "id": "cobble_stock",
+        "predicate": {
+          "type": "destination_count",
+          "position": {
+            "x": 0,
+            "y": 65,
+            "z": 3
+          },
+          "itemId": "minecraft:cobblestone",
+          "count": 30
+        }
+      },
+      {
+        "id": "coal_stock",
+        "predicate": {
+          "type": "destination_count",
+          "position": {
+            "x": 0,
+            "y": 65,
+            "z": 3
+          },
+          "itemId": "minecraft:coal",
+          "count": 2
+        }
+      },
+      {
+        "id": "safe_surface",
+        "predicate": {
+          "type": "at_position",
+          "position": {
+            "x": 0.5,
+            "y": 65,
+            "z": 0.5
+          },
+          "radius": 0.75
+        }
+      },
+      {
+        "id": "soil",
+        "predicate": {
+          "type": "soil_prepared",
+          "cells": [
+            {
+              "x": -2,
+              "y": 64,
+              "z": -4
+            },
+            {
+              "x": -2,
+              "y": 64,
+              "z": -3
+            },
+            {
+              "x": -2,
+              "y": 64,
+              "z": -2
+            },
+            {
+              "x": -1,
+              "y": 64,
+              "z": -4
+            },
+            {
+              "x": -1,
+              "y": 64,
+              "z": -3
+            },
+            {
+              "x": -1,
+              "y": 64,
+              "z": -2
+            },
+            {
+              "x": 0,
+              "y": 64,
+              "z": -4
+            },
+            {
+              "x": 0,
+              "y": 64,
+              "z": -3
+            },
+            {
+              "x": 0,
+              "y": 64,
+              "z": -2
+            }
+          ]
+        }
+      }
+    ],
+    "stages": [
+      {
+        "id": "prepare_axe",
+        "pack": "acceptance:a_quartermaster",
+        "operation": {
+          "documentVersion": 1,
+          "type": "samcnpc:inventory_work",
+          "definitionVersion": 3,
+          "parameters": {
+            "dimensionId": "minecraft:overworld",
+            "work": {
+              "kind": "ENSURE",
+              "query": "@axe",
+              "count": 1,
+              "sources": {
+                "positions": [
+                  {
+                    "x": 3,
+                    "y": 65,
+                    "z": 0
+                  },
+                  {
+                    "x": 3,
+                    "y": 65,
+                    "z": -3
+                  },
+                  {
+                    "x": 3,
+                    "y": 65,
+                    "z": 3
+                  }
+                ]
+              },
+              "minimumDurability": 0.2,
+              "destination": "MAIN_HAND",
+              "sourceReserve": 0
+            },
+            "anchor": {
+              "x": 0.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "workTicks": 1600,
+            "budget": {
+              "ticks": 2000
+            }
+          }
+        },
+        "completion": [
+          "axe_prepared"
+        ],
+        "timeoutTicks": 2200,
+        "retries": 0,
+        "success": "prepare_pickaxe"
+      },
+      {
+        "id": "prepare_pickaxe",
+        "pack": "acceptance:a_quartermaster",
+        "operation": {
+          "documentVersion": 1,
+          "type": "samcnpc:inventory_work",
+          "definitionVersion": 3,
+          "parameters": {
+            "dimensionId": "minecraft:overworld",
+            "work": {
+              "kind": "ENSURE",
+              "query": "@pickaxe",
+              "count": 1,
+              "sources": {
+                "positions": [
+                  {
+                    "x": 3,
+                    "y": 65,
+                    "z": 0
+                  },
+                  {
+                    "x": 3,
+                    "y": 65,
+                    "z": -3
+                  },
+                  {
+                    "x": 3,
+                    "y": 65,
+                    "z": 3
+                  }
+                ]
+              },
+              "minimumDurability": 0.2,
+              "destination": "MAIN_HAND",
+              "sourceReserve": 0
+            },
+            "anchor": {
+              "x": 0.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "workTicks": 1600,
+            "budget": {
+              "ticks": 2000
+            }
+          }
+        },
+        "completion": [
+          "pickaxe_prepared"
+        ],
+        "timeoutTicks": 2200,
+        "retries": 0,
+        "success": "prepare_hoe"
+      },
+      {
+        "id": "prepare_hoe",
+        "pack": "acceptance:a_quartermaster",
+        "operation": {
+          "documentVersion": 1,
+          "type": "samcnpc:inventory_work",
+          "definitionVersion": 3,
+          "parameters": {
+            "dimensionId": "minecraft:overworld",
+            "work": {
+              "kind": "ENSURE",
+              "query": "@hoe",
+              "count": 1,
+              "sources": {
+                "positions": [
+                  {
+                    "x": 3,
+                    "y": 65,
+                    "z": 0
+                  },
+                  {
+                    "x": 3,
+                    "y": 65,
+                    "z": -3
+                  },
+                  {
+                    "x": 3,
+                    "y": 65,
+                    "z": 3
+                  }
+                ]
+              },
+              "minimumDurability": 0.2,
+              "destination": "MAIN_HAND",
+              "sourceReserve": 0
+            },
+            "anchor": {
+              "x": 0.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "workTicks": 1600,
+            "budget": {
+              "ticks": 2000
+            }
+          }
+        },
+        "completion": [
+          "hoe_prepared"
+        ],
+        "timeoutTicks": 2200,
+        "retries": 0,
+        "success": "prepare_armor"
+      },
+      {
+        "id": "prepare_armor",
+        "pack": "acceptance:a_quartermaster",
+        "operation": {
+          "documentVersion": 1,
+          "type": "samcnpc:inventory_work",
+          "definitionVersion": 3,
+          "parameters": {
+            "dimensionId": "minecraft:overworld",
+            "work": {
+              "kind": "ENSURE",
+              "query": "minecraft:iron_chestplate",
+              "count": 1,
+              "sources": {
+                "positions": [
+                  {
+                    "x": 3,
+                    "y": 65,
+                    "z": 0
+                  },
+                  {
+                    "x": 3,
+                    "y": 65,
+                    "z": -3
+                  },
+                  {
+                    "x": 3,
+                    "y": 65,
+                    "z": 3
+                  }
+                ]
+              },
+              "minimumDurability": 0.2,
+              "destination": "CHEST",
+              "sourceReserve": 0
+            },
+            "anchor": {
+              "x": 0.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "workTicks": 1600,
+            "budget": {
+              "ticks": 2000
+            }
+          }
+        },
+        "completion": [
+          "armor_prepared"
+        ],
+        "timeoutTicks": 2200,
+        "retries": 0,
+        "success": "wood"
+      },
+      {
+        "id": "wood",
+        "pack": "acceptance:b_lumberjack",
+        "operation": {
+          "documentVersion": 1,
+          "type": "samcnpc:lumberjack",
+          "definitionVersion": 2,
+          "parameters": {
+            "dimensionId": "minecraft:overworld",
+            "area": {
+              "bounds": {
+                "min": {
+                  "x": 6,
+                  "y": 65,
+                  "z": -6
+                },
+                "max": {
+                  "x": 22,
+                  "y": 70,
+                  "z": 6
+                }
+              }
+            },
+            "wood": [
+              "samcnpc:oak"
+            ],
+            "destination": {
+              "x": 0,
+              "y": 65,
+              "z": 3
+            },
+            "quantity": 32,
+            "budget": {
+              "ticks": 12000
+            }
+          }
+        },
+        "completion": [
+          "wood_stock"
+        ],
+        "timeoutTicks": 12400,
+        "retries": 0,
+        "success": "cobble"
+      },
+      {
+        "id": "cobble",
+        "pack": "acceptance:c_miner",
+        "operation": {
+          "documentVersion": 1,
+          "type": "samcnpc:mine",
+          "definitionVersion": 2,
+          "parameters": {
+            "dimensionId": "minecraft:overworld",
+            "work": {
+              "area": {
+                "bounds": {
+                  "min": {
+                    "x": 10,
+                    "y": 65,
+                    "z": 8
+                  },
+                  "max": {
+                    "x": 19,
+                    "y": 65,
+                    "z": 10
+                  }
+                }
+              },
+              "method": "EXPOSED",
+              "resources": [
+                "minecraft:stone"
+              ]
+            },
+            "outputs": [
+              "minecraft:cobblestone"
+            ],
+            "destinations": {
+              "positions": [
+                {
+                  "x": 0,
+                  "y": 65,
+                  "z": 3
+                }
+              ]
+            },
+            "quantity": 30,
+            "counting": "DELIVERED_ITEMS",
+            "anchor": {
+              "x": 0.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "travelRadius": 48,
+            "returnTo": {
+              "x": 0.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "budget": {
+              "ticks": 10000
+            }
+          }
+        },
+        "completion": [
+          "cobble_stock"
+        ],
+        "timeoutTicks": 10400,
+        "retries": 0,
+        "success": "coal"
+      },
+      {
+        "id": "coal",
+        "pack": "acceptance:c_miner",
+        "operation": {
+          "documentVersion": 1,
+          "type": "samcnpc:mine",
+          "definitionVersion": 2,
+          "parameters": {
+            "dimensionId": "minecraft:overworld",
+            "work": {
+              "area": {
+                "bounds": {
+                  "min": {
+                    "x": 24,
+                    "y": 65,
+                    "z": 8
+                  },
+                  "max": {
+                    "x": 25,
+                    "y": 65,
+                    "z": 8
+                  }
+                }
+              },
+              "method": "EXPOSED",
+              "resources": [
+                "minecraft:coal_ore"
+              ]
+            },
+            "outputs": [
+              "minecraft:coal"
+            ],
+            "destinations": {
+              "positions": [
+                {
+                  "x": 0,
+                  "y": 65,
+                  "z": 3
+                }
+              ]
+            },
+            "quantity": 2,
+            "counting": "DELIVERED_ITEMS",
+            "anchor": {
+              "x": 0.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "travelRadius": 48,
+            "returnTo": {
+              "x": 0.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "budget": {
+              "ticks": 10000
+            }
+          }
+        },
+        "completion": [
+          "coal_stock"
+        ],
+        "timeoutTicks": 10400,
+        "retries": 0,
+        "success": "surface_return"
+      },
+      {
+        "id": "surface_return",
+        "pack": "acceptance:return",
+        "operation": {
+          "documentVersion": 1,
+          "type": "samcnpc:navigate",
+          "definitionVersion": 1,
+          "parameters": {
+            "dimensionId": "minecraft:overworld",
+            "destination": {
+              "x": 0.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "budget": {
+              "ticks": 1200
+            }
+          }
+        },
+        "completion": [
+          "safe_surface"
+        ],
+        "timeoutTicks": 1400,
+        "retries": 0,
+        "success": "field"
+      },
+      {
+        "id": "field",
+        "pack": "acceptance:f_field",
+        "operation": {
+          "documentVersion": 1,
+          "type": "samcnpc:prepare_field",
+          "definitionVersion": 1,
+          "parameters": {
+            "dimensionId": "minecraft:overworld",
+            "area": {
+              "bounds": {
+                "min": {
+                  "x": -2,
+                  "y": 64,
+                  "z": -4
+                },
+                "max": {
+                  "x": 0,
+                  "y": 64,
+                  "z": -2
+                }
+              }
+            },
+            "anchor": {
+              "x": 0.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "returnTo": {
+              "x": 0.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "budget": {
+              "ticks": 2200
+            }
+          }
+        },
+        "completion": [
+          "soil"
+        ],
+        "timeoutTicks": 2400,
+        "retries": 0,
+        "success": "final_return"
+      },
+      {
+        "id": "final_return",
+        "pack": "acceptance:return",
+        "operation": {
+          "documentVersion": 1,
+          "type": "samcnpc:navigate",
+          "definitionVersion": 1,
+          "parameters": {
+            "dimensionId": "minecraft:overworld",
+            "destination": {
+              "x": 0.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "budget": {
+              "ticks": 1200
+            }
+          }
+        },
+        "completion": [
+          "safe_surface"
+        ],
+        "timeoutTicks": 1400,
+        "retries": 0,
+        "success": null
+      }
+    ],
+    "guards": []
+  },
+  "packs": [
+    {
+      "schemaVersion": 1,
+      "id": "acceptance:a_quartermaster",
+      "description": "Finite explicit supply, protected unload or nearby pickup, followed by a physical return.",
+      "priority": 200,
+      "channels": [
+        "movement",
+        "look",
+        "combat",
+        "main_hand",
+        "off_hand",
+        "inventory",
+        "interaction",
+        "block_action"
+      ],
+      "rules": [
+        {
+          "id": "new_damage",
+          "priority": 1000,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_reaction_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:begin_task_reaction"
+            }
+          ]
+        },
+        {
+          "id": "advance_combat",
+          "priority": 900,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_combat_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_combat_task"
+            }
+          ]
+        },
+        {
+          "id": "advance_inventory",
+          "priority": 700,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_inventory_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_inventory_task"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "acceptance:b_lumberjack",
+      "description": "Finite selected wood gathering in an assigned area, with observed resource and world checkpoints.",
+      "priority": 200,
+      "channels": [
+        "movement",
+        "look",
+        "main_hand",
+        "block_action",
+        "inventory",
+        "interaction",
+        "combat",
+        "off_hand"
+      ],
+      "rules": [
+        {
+          "id": "new_damage",
+          "priority": 1000,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_reaction_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:begin_task_reaction"
+            }
+          ]
+        },
+        {
+          "id": "advance_combat",
+          "priority": 900,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_combat_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_combat_task"
+            }
+          ]
+        },
+        {
+          "id": "begin_inventory",
+          "priority": 800,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_inventory_requested"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:begin_task_inventory"
+            }
+          ]
+        },
+        {
+          "id": "advance_inventory",
+          "priority": 700,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_inventory_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_inventory_task"
+            }
+          ]
+        },
+        {
+          "id": "advance_lumberjack",
+          "priority": 100,
+          "when": {
+            "all": [
+              {
+                "test": {
+                  "condition": "samcnpc:task_ready"
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:task_combat_ready"
+                  }
+                }
+              }
+            ]
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_lumberjack_task"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "acceptance:c_miner",
+      "description": "Finite bounded mining with explicit removal permission, produced cargo and durable checkpoints.",
+      "priority": 200,
+      "channels": [
+        "movement",
+        "look",
+        "main_hand",
+        "block_action",
+        "inventory",
+        "interaction",
+        "combat",
+        "off_hand"
+      ],
+      "rules": [
+        {
+          "id": "new_damage",
+          "priority": 1000,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_reaction_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:begin_task_reaction"
+            }
+          ]
+        },
+        {
+          "id": "advance_combat",
+          "priority": 900,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_combat_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_combat_task"
+            }
+          ]
+        },
+        {
+          "id": "begin_inventory",
+          "priority": 800,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_inventory_requested"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:begin_task_inventory"
+            }
+          ]
+        },
+        {
+          "id": "advance_inventory",
+          "priority": 700,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_inventory_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_inventory_task"
+            }
+          ]
+        },
+        {
+          "id": "advance_mining",
+          "priority": 100,
+          "when": {
+            "all": [
+              {
+                "test": {
+                  "condition": "samcnpc:task_ready"
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:task_combat_ready"
+                  }
+                }
+              }
+            ]
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_mining_task"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "acceptance:d_courier",
+      "description": "Deliver an assigned quantity from carried stock while retaining its reserve; reconcile before acting.",
+      "priority": 200,
+      "channels": [
+        "movement",
+        "look",
+        "inventory",
+        "interaction",
+        "combat",
+        "main_hand",
+        "off_hand",
+        "block_action"
+      ],
+      "rules": [
+        {
+          "id": "new_damage",
+          "priority": 1000,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_reaction_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:begin_task_reaction"
+            }
+          ]
+        },
+        {
+          "id": "advance_combat",
+          "priority": 900,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_combat_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_combat_task"
+            }
+          ]
+        },
+        {
+          "id": "begin_inventory",
+          "priority": 800,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_inventory_requested"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:begin_task_inventory"
+            }
+          ]
+        },
+        {
+          "id": "advance_inventory",
+          "priority": 700,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_inventory_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_inventory_task"
+            }
+          ]
+        },
+        {
+          "id": "advance_delivery",
+          "priority": 100,
+          "when": {
+            "all": [
+              {
+                "test": {
+                  "condition": "samcnpc:task_ready"
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:task_combat_ready"
+                  }
+                }
+              }
+            ]
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_delivery_task"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "acceptance:e_bodyguard",
+      "description": "Bounded combat through shared equipment, distance and recovery policy with ordinary Core mechanics.",
+      "priority": 200,
+      "channels": [
+        "movement",
+        "look",
+        "combat",
+        "main_hand",
+        "off_hand",
+        "inventory"
+      ],
+      "rules": [
+        {
+          "id": "advance_combat",
+          "priority": 900,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_combat_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_combat_task"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "acceptance:f_field",
+      "description": "Finite soil preparation with a carried hoe, physical farmland confirmation and optional return.",
+      "priority": 200,
+      "channels": [
+        "movement",
+        "look",
+        "main_hand",
+        "block_action",
+        "inventory",
+        "interaction",
+        "combat",
+        "off_hand"
+      ],
+      "rules": [
+        {
+          "id": "new_damage",
+          "priority": 1000,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_reaction_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:begin_task_reaction"
+            }
+          ]
+        },
+        {
+          "id": "advance_combat",
+          "priority": 900,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_combat_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_combat_task"
+            }
+          ]
+        },
+        {
+          "id": "begin_inventory",
+          "priority": 800,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_inventory_requested"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:begin_task_inventory"
+            }
+          ]
+        },
+        {
+          "id": "advance_inventory",
+          "priority": 700,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_inventory_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_inventory_task"
+            }
+          ]
+        },
+        {
+          "id": "advance_prepare_field",
+          "priority": 100,
+          "when": {
+            "all": [
+              {
+                "test": {
+                  "condition": "samcnpc:task_ready"
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:task_combat_ready"
+                  }
+                }
+              }
+            ]
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_prepare_field_task"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "acceptance:g_machine",
+      "description": "Bounded supplied feeds, actual output collection and physical return through generic container endpoints.",
+      "priority": 200,
+      "channels": [
+        "movement",
+        "look",
+        "main_hand",
+        "block_action",
+        "inventory",
+        "interaction",
+        "combat",
+        "off_hand"
+      ],
+      "rules": [
+        {
+          "id": "new_damage",
+          "priority": 1000,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_reaction_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:begin_task_reaction"
+            }
+          ]
+        },
+        {
+          "id": "advance_combat",
+          "priority": 900,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_combat_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_combat_task"
+            }
+          ]
+        },
+        {
+          "id": "begin_inventory",
+          "priority": 800,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_inventory_requested"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:begin_task_inventory"
+            }
+          ]
+        },
+        {
+          "id": "advance_inventory",
+          "priority": 700,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_inventory_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_inventory_task"
+            }
+          ]
+        },
+        {
+          "id": "advance_machine",
+          "priority": 100,
+          "when": {
+            "all": [
+              {
+                "test": {
+                  "condition": "samcnpc:task_ready"
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:task_combat_ready"
+                  }
+                }
+              }
+            ]
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_machine_task"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "acceptance:return",
+      "description": "Execute an explicitly assigned finite navigation task; paused/waiting tasks release channels.",
+      "priority": 200,
+      "channels": [
+        "movement",
+        "look",
+        "combat",
+        "main_hand",
+        "off_hand",
+        "inventory",
+        "interaction",
+        "block_action"
+      ],
+      "rules": [
+        {
+          "id": "new_damage",
+          "priority": 1000,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_reaction_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:begin_task_reaction"
+            }
+          ]
+        },
+        {
+          "id": "advance_combat",
+          "priority": 900,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_combat_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_combat_task"
+            }
+          ]
+        },
+        {
+          "id": "begin_inventory",
+          "priority": 800,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_inventory_requested"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:begin_task_inventory"
+            }
+          ]
+        },
+        {
+          "id": "advance_inventory",
+          "priority": 700,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_inventory_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_inventory_task"
+            }
+          ]
+        },
+        {
+          "id": "advance_task",
+          "priority": 100,
+          "when": {
+            "all": [
+              {
+                "test": {
+                  "condition": "samcnpc:task_ready"
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:task_combat_ready"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:task_inventory_ready"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "test": {
+                    "condition": "samcnpc:task_inventory_requested"
+                  }
+                }
+              }
+            ]
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_navigation_task"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

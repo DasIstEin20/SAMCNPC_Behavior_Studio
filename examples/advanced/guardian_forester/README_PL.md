@@ -1,6 +1,6 @@
 # Strażnik–robotnik: zaawansowana autonomia NPC
 
-Otwórz **guardian_forester.samgraph** w Behavior Studio 1.2.0 (Plik → Otwórz).
+Otwórz **guardian_forester.samgraph** w Behavior Studio 1.3.0 (Plik → Otwórz).
 W lewym panelu „Reguły w paczce” wybierz interesującą regułę, aby szybko do niej przejść.
 Projekt zawiera **33 reguły, 506 węzłów i 473 połączenia**, w sześciu obszarach.
 Powiększaj kółkiem, przesuwaj płótno środkowym przyciskiem myszy. Wybór reguły pokazuje
@@ -119,5 +119,4 @@ podstawowe. Graf nie tworzy automatycznie następnej misji po zakończeniu obecn
 5. Użyj pauzy: zadanie nie ma być wznawiane przez graf. Wznów jawnie.
 6. Odsuń NPC od skrzyni: brak obserwacji nie powinien zmienić się w raport „zero przedmiotów”.
 
-Dokładny zakres wykonanych prób jest zapisany w `VALIDATION.md`.
 `build_showcase.py` odtwarza projekt i eksporty z katalogu Studio; nie wchodzi do instalowanej paczki.

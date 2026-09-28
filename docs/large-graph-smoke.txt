@@ -1,6 +1,0 @@
-PASS: 12 PL/EN/DE switches on supplied Guardian Escort project.
-80 nodes, 71 edges.
-Menu commands and combobox selection events; 0 Python callback/Tcl background errors.
-Project state and runtime JSON unchanged.
-Python 3.13.5; Tk 8.6.16; Linux/Xvfb.
-Not a native Windows test.

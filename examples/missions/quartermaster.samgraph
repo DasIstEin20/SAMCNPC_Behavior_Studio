@@ -1,0 +1,71 @@
+{
+  "format": "samcnpc-studio",
+  "version": 1,
+  "targetCommit": "schema:107366c897b05d8a7df5e028a7f4a7b606fc40757ab80ae976e72f14fe773e44",
+  "pack": {
+    "id": "acceptance:quartermaster",
+    "description": "Advance the explicitly admitted tutorial operation.",
+    "priority": 200,
+    "channels": [
+      "movement",
+      "look",
+      "combat",
+      "main_hand",
+      "off_hand",
+      "inventory",
+      "interaction",
+      "block_action"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "3e5f767b9c0f",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "advance",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 55.0
+    },
+    {
+      "id": "20d1048726b8",
+      "kind": "condition",
+      "ref": "samcnpc:task_inventory_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 55.0
+    },
+    {
+      "id": "0e16346c811e",
+      "kind": "action",
+      "ref": "samcnpc:run_inventory_task",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 55.0
+    }
+  ],
+  "edges": [
+    [
+      "20d1048726b8",
+      "3e5f767b9c0f"
+    ],
+    [
+      "3e5f767b9c0f",
+      "0e16346c811e"
+    ]
+  ]
+}

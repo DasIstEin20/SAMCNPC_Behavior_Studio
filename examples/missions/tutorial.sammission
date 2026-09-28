@@ -1,0 +1,205 @@
+{
+  "format": "samcnpc-mission-studio",
+  "version": 1,
+  "mission": {
+    "documentType": "samcnpc:mission",
+    "documentVersion": 1,
+    "id": "acceptance:tutorial",
+    "dimensionId": "minecraft:overworld",
+    "requirements": [
+      {
+        "id": "axe",
+        "predicate": {
+          "type": "equipment_matches",
+          "query": "@axe",
+          "destination": "MAIN_HAND",
+          "minimumDurability": 0.2
+        }
+      },
+      {
+        "id": "outbound",
+        "predicate": {
+          "type": "task_success",
+          "stageId": "travel"
+        }
+      },
+      {
+        "id": "home",
+        "predicate": {
+          "type": "at_position",
+          "position": {
+            "x": 0.5,
+            "y": 65,
+            "z": 0.5
+          },
+          "radius": 0.75
+        }
+      }
+    ],
+    "stages": [
+      {
+        "id": "prepare",
+        "pack": "acceptance:quartermaster",
+        "operation": {
+          "documentVersion": 1,
+          "type": "samcnpc:inventory_work",
+          "definitionVersion": 3,
+          "parameters": {
+            "dimensionId": "minecraft:overworld",
+            "work": {
+              "kind": "ENSURE",
+              "query": "@axe",
+              "count": 1,
+              "sources": {
+                "positions": [
+                  {
+                    "x": 3,
+                    "y": 65,
+                    "z": 0
+                  }
+                ]
+              },
+              "minimumDurability": 0.2,
+              "destination": "MAIN_HAND",
+              "sourceReserve": 0
+            },
+            "anchor": {
+              "x": 0.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "workTicks": 800,
+            "budget": {
+              "ticks": 1200
+            }
+          }
+        },
+        "completion": [
+          "axe"
+        ],
+        "timeoutTicks": 1400,
+        "retries": 0,
+        "success": "travel"
+      },
+      {
+        "id": "travel",
+        "pack": "acceptance:tutorial",
+        "operation": {
+          "documentVersion": 1,
+          "type": "samcnpc:navigate",
+          "definitionVersion": 1,
+          "parameters": {
+            "dimensionId": "minecraft:overworld",
+            "destination": {
+              "x": 8.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "budget": {
+              "ticks": 600
+            }
+          }
+        },
+        "completion": [
+          "outbound"
+        ],
+        "timeoutTicks": 700,
+        "retries": 0,
+        "success": "return"
+      },
+      {
+        "id": "return",
+        "pack": "acceptance:tutorial",
+        "operation": {
+          "documentVersion": 1,
+          "type": "samcnpc:navigate",
+          "definitionVersion": 1,
+          "parameters": {
+            "dimensionId": "minecraft:overworld",
+            "destination": {
+              "x": 0.5,
+              "y": 65,
+              "z": 0.5
+            },
+            "budget": {
+              "ticks": 600
+            }
+          }
+        },
+        "completion": [
+          "home"
+        ],
+        "timeoutTicks": 700,
+        "retries": 0,
+        "success": null
+      }
+    ],
+    "guards": []
+  },
+  "packs": [
+    {
+      "schemaVersion": 1,
+      "id": "acceptance:quartermaster",
+      "description": "Advance the explicitly admitted tutorial operation.",
+      "priority": 200,
+      "channels": [
+        "movement",
+        "look",
+        "combat",
+        "main_hand",
+        "off_hand",
+        "inventory",
+        "interaction",
+        "block_action"
+      ],
+      "rules": [
+        {
+          "id": "advance",
+          "priority": 100,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_inventory_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_inventory_task"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "acceptance:tutorial",
+      "description": "Advance the explicitly admitted tutorial operation.",
+      "priority": 200,
+      "channels": [
+        "movement",
+        "look",
+        "combat",
+        "main_hand",
+        "off_hand",
+        "inventory",
+        "interaction",
+        "block_action"
+      ],
+      "rules": [
+        {
+          "id": "advance",
+          "priority": 100,
+          "when": {
+            "test": {
+              "condition": "samcnpc:task_ready"
+            }
+          },
+          "actions": [
+            {
+              "action": "samcnpc:run_navigation_task"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -110,7 +110,7 @@ HELP['en'] += """
 Use inventory_count and equipment_matches with an exact item ID or an authoritative role such as @axe. minecraft:coal excludes charcoal. ensure_equipment equips a suitable carried item; it does not take items from chests. Authorized durable ENSURE/preparation tasks handle chest collection, reserves, backups and safe free-slot recovery. Unknown container stock is not empty.
 
 10. Catalog and ZIP
-File → Load registered catalog reads the matching Behavior registered schema. Invalid candidates retain the current catalog; your graph stays intact. Choose an instance root in Installation; JSON goes to config/samcnpc/behaviors/, ZIP directly to resources/samcnpc/behaviors/. Keep one active source per pack ID. Invalid reloads retain the last good registry. See the 1.2.0 manuals for the chest → tool → work tutorial.
+File → Load registered catalog reads the matching Behavior registered schema. Invalid candidates retain the current catalog; your graph stays intact. Choose an instance root in Installation; JSON goes to config/samcnpc/behaviors/, ZIP directly to resources/samcnpc/behaviors/. Keep one active source per pack ID. Invalid reloads retain the last good registry. See the 1.3.0 manuals for the chest → tool → work tutorial.
 """
 
 HELP['pl'] += """
@@ -118,7 +118,7 @@ HELP['pl'] += """
 Użyj inventory_count i equipment_matches z dokładnym ID lub rolą, np. @axe. minecraft:coal wyklucza charcoal. ensure_equipment wyposaża noszony przedmiot, nie pobiera ze skrzyni. Uprawniony trwały ENSURE/przygotowanie obsługuje źródła, rezerwy, zapas i bezpieczne wolne miejsca. Nieznana skrzynia nie jest pusta.
 
 10. Katalog i ZIP
-Plik → Wczytaj zarejestrowany katalog czyta schemat zgodnego Behavior. Błąd zachowuje poprzedni katalog, graf pozostaje. W Instalacji wybierz instancję; JSON trafia do config/samcnpc/behaviors/, ZIP bezpośrednio do resources/samcnpc/behaviors/. Jedno aktywne źródło na ID. Błędny reload zachowuje ostatni poprawny rejestr. Instrukcje 1.2.0 zawierają ćwiczenie skrzynia → narzędzie → praca.
+Plik → Wczytaj zarejestrowany katalog czyta schemat zgodnego Behavior. Błąd zachowuje poprzedni katalog, graf pozostaje. W Instalacji wybierz instancję; JSON trafia do config/samcnpc/behaviors/, ZIP bezpośrednio do resources/samcnpc/behaviors/. Jedno aktywne źródło na ID. Błędny reload zachowuje ostatni poprawny rejestr. Instrukcje 1.3.0 zawierają ćwiczenie skrzynia → narzędzie → praca.
 """
 
 HELP['de'] += """
@@ -126,5 +126,10 @@ HELP['de'] += """
 inventory_count und equipment_matches verwenden exakte IDs oder Rollen wie @axe. minecraft:coal schließt charcoal aus. ensure_equipment rüstet getragene Gegenstände aus, holt aber nichts aus Truhen. Erlaubte dauerhafte ENSURE/Vorbereitung bearbeitet Quellen, Reserven, Ersatz und sichere freie Plätze. Unbekannte Truhen sind nicht leer.
 
 10. Katalog und ZIP
-Datei → Registrierten Katalog laden liest das passende Behavior-Schema. Fehler behalten den alten Katalog; der Graph bleibt erhalten. Unter Installation die Instanz wählen: JSON nach config/samcnpc/behaviors/, ZIP direkt nach resources/samcnpc/behaviors/. Eine aktive Quelle je ID. Fehlerhafte Reloads behalten den letzten gültigen Bestand. Handbücher 1.2.0 enthalten die Übung Truhe → Werkzeug → Arbeit.
+Datei → Registrierten Katalog laden liest das passende Behavior-Schema. Fehler behalten den alten Katalog; der Graph bleibt erhalten. Unter Installation die Instanz wählen: JSON nach config/samcnpc/behaviors/, ZIP direkt nach resources/samcnpc/behaviors/. Eine aktive Quelle je ID. Fehlerhafte Reloads behalten den letzten gültigen Bestand. Handbücher 1.3.0 enthalten die Übung Truhe → Werkzeug → Arbeit.
 """
+
+# Separate mission editor / osobny edytor
+from mission_ui import TEXT as MISSION_HELP
+for language in ("en", "pl", "de"):
+    HELP[language] += "\n\n" + MISSION_HELP[language]["title"] + "\n" + MISSION_HELP[language]["help"] + "\nexamples/missions/tutorial.sammission · examples/missions/full.sammission\n"

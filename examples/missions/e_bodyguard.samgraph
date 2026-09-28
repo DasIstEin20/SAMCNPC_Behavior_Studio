@@ -1,0 +1,69 @@
+{
+  "format": "samcnpc-studio",
+  "version": 1,
+  "targetCommit": "schema:107366c897b05d8a7df5e028a7f4a7b606fc40757ab80ae976e72f14fe773e44",
+  "pack": {
+    "id": "acceptance:e_bodyguard",
+    "description": "Bounded combat through shared equipment, distance and recovery policy with ordinary Core mechanics.",
+    "priority": 200,
+    "channels": [
+      "movement",
+      "look",
+      "combat",
+      "main_hand",
+      "off_hand",
+      "inventory"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "613c96aea746",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "advance_combat",
+      "priority": 900,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 55.0
+    },
+    {
+      "id": "7c153b641c16",
+      "kind": "condition",
+      "ref": "samcnpc:task_combat_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 55.0
+    },
+    {
+      "id": "c599c2220f20",
+      "kind": "action",
+      "ref": "samcnpc:run_combat_task",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 55.0
+    }
+  ],
+  "edges": [
+    [
+      "7c153b641c16",
+      "613c96aea746"
+    ],
+    [
+      "613c96aea746",
+      "c599c2220f20"
+    ]
+  ]
+}

@@ -1,0 +1,310 @@
+{
+  "format": "samcnpc-studio",
+  "version": 1,
+  "targetCommit": "schema:107366c897b05d8a7df5e028a7f4a7b606fc40757ab80ae976e72f14fe773e44",
+  "pack": {
+    "id": "acceptance:b_lumberjack",
+    "description": "Finite selected wood gathering in an assigned area, with observed resource and world checkpoints.",
+    "priority": 200,
+    "channels": [
+      "movement",
+      "look",
+      "main_hand",
+      "block_action",
+      "inventory",
+      "interaction",
+      "combat",
+      "off_hand"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "1c900c9bf0ae",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "new_damage",
+      "priority": 1000,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 55.0
+    },
+    {
+      "id": "48469742b4ce",
+      "kind": "condition",
+      "ref": "samcnpc:task_reaction_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 55.0
+    },
+    {
+      "id": "b3fc12fa9fac",
+      "kind": "action",
+      "ref": "samcnpc:begin_task_reaction",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 55.0
+    },
+    {
+      "id": "b9fad3fc7fbf",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "advance_combat",
+      "priority": 900,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 245.0
+    },
+    {
+      "id": "a6f44576e6aa",
+      "kind": "condition",
+      "ref": "samcnpc:task_combat_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 245.0
+    },
+    {
+      "id": "ae75a8255cad",
+      "kind": "action",
+      "ref": "samcnpc:run_combat_task",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 245.0
+    },
+    {
+      "id": "42d0331f1dbd",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "begin_inventory",
+      "priority": 800,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 435.0
+    },
+    {
+      "id": "d5a4d64ee0b2",
+      "kind": "condition",
+      "ref": "samcnpc:task_inventory_requested",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 435.0
+    },
+    {
+      "id": "7771a5a1054c",
+      "kind": "action",
+      "ref": "samcnpc:begin_task_inventory",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 435.0
+    },
+    {
+      "id": "b7ddb2674215",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "advance_inventory",
+      "priority": 700,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 625.0
+    },
+    {
+      "id": "72c2531221ab",
+      "kind": "condition",
+      "ref": "samcnpc:task_inventory_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 625.0
+    },
+    {
+      "id": "5ab8df35cbbc",
+      "kind": "action",
+      "ref": "samcnpc:run_inventory_task",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 625.0
+    },
+    {
+      "id": "f87558c056f9",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "advance_lumberjack",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 900,
+      "y": 882.5
+    },
+    {
+      "id": "78a62d186a49",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 882.5
+    },
+    {
+      "id": "0b2319d0f1f2",
+      "kind": "condition",
+      "ref": "samcnpc:task_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 815.0
+    },
+    {
+      "id": "d803183173b7",
+      "kind": "not",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 950.0
+    },
+    {
+      "id": "8293e9c85abb",
+      "kind": "condition",
+      "ref": "samcnpc:task_combat_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 950.0
+    },
+    {
+      "id": "2f4025cb1218",
+      "kind": "action",
+      "ref": "samcnpc:run_lumberjack_task",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 1210,
+      "y": 815.0
+    }
+  ],
+  "edges": [
+    [
+      "48469742b4ce",
+      "1c900c9bf0ae"
+    ],
+    [
+      "1c900c9bf0ae",
+      "b3fc12fa9fac"
+    ],
+    [
+      "a6f44576e6aa",
+      "b9fad3fc7fbf"
+    ],
+    [
+      "b9fad3fc7fbf",
+      "ae75a8255cad"
+    ],
+    [
+      "d5a4d64ee0b2",
+      "42d0331f1dbd"
+    ],
+    [
+      "42d0331f1dbd",
+      "7771a5a1054c"
+    ],
+    [
+      "72c2531221ab",
+      "b7ddb2674215"
+    ],
+    [
+      "b7ddb2674215",
+      "5ab8df35cbbc"
+    ],
+    [
+      "0b2319d0f1f2",
+      "78a62d186a49"
+    ],
+    [
+      "8293e9c85abb",
+      "d803183173b7"
+    ],
+    [
+      "d803183173b7",
+      "78a62d186a49"
+    ],
+    [
+      "78a62d186a49",
+      "f87558c056f9"
+    ],
+    [
+      "f87558c056f9",
+      "2f4025cb1218"
+    ]
+  ]
+}

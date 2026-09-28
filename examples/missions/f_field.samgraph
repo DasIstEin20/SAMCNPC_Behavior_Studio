@@ -1,0 +1,310 @@
+{
+  "format": "samcnpc-studio",
+  "version": 1,
+  "targetCommit": "schema:107366c897b05d8a7df5e028a7f4a7b606fc40757ab80ae976e72f14fe773e44",
+  "pack": {
+    "id": "acceptance:f_field",
+    "description": "Finite soil preparation with a carried hoe, physical farmland confirmation and optional return.",
+    "priority": 200,
+    "channels": [
+      "movement",
+      "look",
+      "main_hand",
+      "block_action",
+      "inventory",
+      "interaction",
+      "combat",
+      "off_hand"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "34452bdf9569",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "new_damage",
+      "priority": 1000,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 55.0
+    },
+    {
+      "id": "6987d43d4b8b",
+      "kind": "condition",
+      "ref": "samcnpc:task_reaction_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 55.0
+    },
+    {
+      "id": "441d2342bd4c",
+      "kind": "action",
+      "ref": "samcnpc:begin_task_reaction",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 55.0
+    },
+    {
+      "id": "3c61fd11b8fa",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "advance_combat",
+      "priority": 900,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 245.0
+    },
+    {
+      "id": "b4bb554ec593",
+      "kind": "condition",
+      "ref": "samcnpc:task_combat_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 245.0
+    },
+    {
+      "id": "742759a4f006",
+      "kind": "action",
+      "ref": "samcnpc:run_combat_task",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 245.0
+    },
+    {
+      "id": "a8227ebbd6d0",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "begin_inventory",
+      "priority": 800,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 435.0
+    },
+    {
+      "id": "e53d8a9c26c0",
+      "kind": "condition",
+      "ref": "samcnpc:task_inventory_requested",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 435.0
+    },
+    {
+      "id": "f3ac4cc07eac",
+      "kind": "action",
+      "ref": "samcnpc:begin_task_inventory",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 435.0
+    },
+    {
+      "id": "5d545db32f71",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "advance_inventory",
+      "priority": 700,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 625.0
+    },
+    {
+      "id": "f9bcf764bd05",
+      "kind": "condition",
+      "ref": "samcnpc:task_inventory_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 625.0
+    },
+    {
+      "id": "80ff9aea6256",
+      "kind": "action",
+      "ref": "samcnpc:run_inventory_task",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 640,
+      "y": 625.0
+    },
+    {
+      "id": "c2bd88a69fe2",
+      "kind": "rule",
+      "ref": "",
+      "args": {},
+      "rule_id": "advance_prepare_field",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 900,
+      "y": 882.5
+    },
+    {
+      "id": "4684def9f814",
+      "kind": "all",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 615,
+      "y": 882.5
+    },
+    {
+      "id": "93154c54aab4",
+      "kind": "condition",
+      "ref": "samcnpc:task_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 815.0
+    },
+    {
+      "id": "585850dcaacc",
+      "kind": "not",
+      "ref": "",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 330,
+      "y": 950.0
+    },
+    {
+      "id": "910441adeb19",
+      "kind": "condition",
+      "ref": "samcnpc:task_combat_ready",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 45,
+      "y": 950.0
+    },
+    {
+      "id": "b02a6efe1c3a",
+      "kind": "action",
+      "ref": "samcnpc:run_prepare_field_task",
+      "args": {},
+      "rule_id": "",
+      "priority": 100,
+      "cooldown": 0,
+      "has_cooldown": false,
+      "has_args": false,
+      "x": 1210,
+      "y": 815.0
+    }
+  ],
+  "edges": [
+    [
+      "6987d43d4b8b",
+      "34452bdf9569"
+    ],
+    [
+      "34452bdf9569",
+      "441d2342bd4c"
+    ],
+    [
+      "b4bb554ec593",
+      "3c61fd11b8fa"
+    ],
+    [
+      "3c61fd11b8fa",
+      "742759a4f006"
+    ],
+    [
+      "e53d8a9c26c0",
+      "a8227ebbd6d0"
+    ],
+    [
+      "a8227ebbd6d0",
+      "f3ac4cc07eac"
+    ],
+    [
+      "f9bcf764bd05",
+      "5d545db32f71"
+    ],
+    [
+      "5d545db32f71",
+      "80ff9aea6256"
+    ],
+    [
+      "93154c54aab4",
+      "4684def9f814"
+    ],
+    [
+      "910441adeb19",
+      "585850dcaacc"
+    ],
+    [
+      "585850dcaacc",
+      "4684def9f814"
+    ],
+    [
+      "4684def9f814",
+      "c2bd88a69fe2"
+    ],
+    [
+      "c2bd88a69fe2",
+      "b02a6efe1c3a"
+    ]
+  ]
+}

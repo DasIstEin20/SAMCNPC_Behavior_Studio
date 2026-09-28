@@ -15,7 +15,7 @@ class DiagnosticsTests(unittest.TestCase):
             text = path.read_text(encoding='utf-8')
             self.assertIn('RuntimeError: test callback', text)
             self.assertIn('Python ', text)
-            self.assertIn('Behavior Studio 1.2.0', text)
+            self.assertIn('Behavior Studio 1.3.0', text)
 
     def test_no_writable_home_does_not_raise(self):
         with patch('diagnostics.Path.home', side_effect=RuntimeError('home unavailable')):

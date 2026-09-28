@@ -9,12 +9,12 @@
 **Ein visueller Offline-Editor für deterministische NPC-Verhaltenspakete — SAMCNPC für Minecraft Forge 1.20.1.**
 
 Bedingungen und Aktionen verbinden, erzeugtes JSON prüfen, den Graphen validieren und
-das Pack in einer Minecraft-Instanz installieren. Studio **1.2.0** bietet einen dunklen
+das Pack in einer Minecraft-Instanz installieren. Studio **1.3.0** bietet einen dunklen
 Knoteneditor, EN/PL/DE-Oberfläche, Beispiele und drei bebilderte GitHub-Handbücher.
 Zum Bearbeiten eines Packs sind keine Programmierkenntnisse nötig.
 
-[SAMCNPC Core](https://github.com/DasIstEin20/SAMCNPC_Core) stellt Körper und Mechanik bereit;
-[SAMCNPC Behavior](https://github.com/DasIstEin20/SAMCNPC_Behavior) führt Regeln und dauerhafte Aufgaben aus.
+SAMCNPC Core stellt Körper und Mechanik bereit;
+SAMCNPC Behavior führt Regeln und dauerhafte Aufgaben aus.
 Studio erstellt ihre Daten. Der Editor funktioniert ohne Minecraft, LLM, API-Schlüssel oder Cloud-Dienst.
 
 ## Funktionen
@@ -85,8 +85,7 @@ arbeitet“. Die [Übungsprojekte](tutorials/examples/) sind enthalten.
 - [Guardian / Forester](examples/advanced/guardian_forester/guardian_forester.samgraph): **33 Regeln, 506 Knoten, 473 Verbindungen**
   für Sicherheit, Vergeltung, Ausrüstung, dauerhafte Logistik und Eskorte.
 
-Das fortgeschrittene Beispiel enthält JSON/ZIP, eine [polnische Anleitung](examples/advanced/guardian_forester/README_PL.md)
-und [Spieltest-Ergebnisse](examples/advanced/guardian_forester/VALIDATION.md). Über **Datei → Öffnen** laden.
+Das fortgeschrittene Beispiel enthält JSON/ZIP, eine [polnische Anleitung](examples/advanced/guardian_forester/README_PL.md). Über **Datei → Öffnen** laden.
 Das Pack allein erstellt weder einen Arbeitsauftrag noch eine Truhenfreigabe.
 
 ![Guardian / Forester im tatsächlichen Studio-Fenster](examples/advanced/guardian_forester/studio_preview.png)
@@ -149,7 +148,6 @@ python cli.py examples/custom/example_follow.samgraph --json-out follow.json --z
 ```
 
 GUI-Tests benötigen einen Desktop; unter Linux ohne Bildschirm Xvfb verwenden. Das CLI
-importiert Tkinter nicht. Der [datierte Bericht](docs/TEST_REPORT.md) trennt die Prüfung dieses
 Pakets von früheren Forge-/Client-Ergebnissen. Studio prüft Graph-Verträge; physische Ergebnisse
 müssen über Reload und Tests in Minecraft bestätigt werden. Das Test-ZIP ist enthalten,
 daher ist kein benachbartes Behavior-Quellcodeverzeichnis nötig.
@@ -157,3 +155,11 @@ daher ist kein benachbartes Behavior-Quellcodeverzeichnis nötig.
 ## Lizenz
 
 [MIT](LICENSE).
+
+## Missionsansicht: echte Verbindungen zwischen Packs
+
+Datei -> Mission öffnet ein separates .sammission-Projekt. Aktionsverbindungen normaler .samgraph-Dateien bleiben gleichzeitige Vorschläge. Stufen sind durch Nach bestätigtem Erfolg verbunden. Bei Fehler wird zur Prüfung angehalten; Stufenwiederholungen sind null.
+
+[Tutorial](examples/missions/tutorial.sammission) · [Full mission](examples/missions/full.sammission) · [ZIP](examples/missions/tutorial.zip)
+
+Inventar, Ausrüstung, Zielbestand, vorbereiteter Boden und sichere Ankunft beschreiben den aktuellen Zustand. Am Missionsende werden sie erneut geprüft. Entfernte gelieferte Stämme können die Endbedingung ungültig machen. Aufgabenerfolg ist ein historischer Beleg einer genauen Zuweisung, kein Beweis anderer Bestände.

@@ -11,7 +11,14 @@ def main():
     a=p.parse_args()
     try:
         if a.input.stat().st_size>MAX_PROJECT_BYTES:raise StudioError('Za duży plik.')
-        value=strict_json(a.input.read_text(encoding='utf-8'),project=a.input.suffix=='.samgraph')
+        value=strict_json(a.input.read_text(encoding='utf-8'),project=a.input.suffix in {'.samgraph','.sammission'})
+        if value.get('format')=='samcnpc-mission-studio':
+            from missions import MissionProject
+            mission=MissionProject.read(value)
+            if a.json_out:atomic_write(a.json_out,dump(mission.mission))
+            if a.zip_out:mission.export(a.zip_out)
+            print('LOCAL PASS — mission bundle; runtime reload/admission remains authoritative.')
+            return 0
         g=Graph.from_project(value) if value.get('format')=='samcnpc-studio' else Graph.from_pack(value)
         pack=g.to_pack();r=validate_pack(pack,external=not a.reference)
         for msg in r.errors:print('ERROR:',msg)

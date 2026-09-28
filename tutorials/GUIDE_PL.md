@@ -1,4 +1,4 @@
-# SAMCNPC Behavior Studio 1.2.0 — Twórz własne paczki zachowań
+# SAMCNPC Behavior Studio 1.3.0 — Twórz własne paczki zachowań
 
 [English](GUIDE_EN.md) | Polski | [Deutsch](GUIDE_DE.md)
 
@@ -32,11 +32,15 @@ Ten poradnik GitHub zastępuje warianty PDF White i Black. GitHub stosuje wybran
 20. [Problemy w grze i materiały](#chapter-20)
 21. [Zaawansowany przykład: Guardian / Forester](#chapter-21)
 
+22. [Widok misji: prawdziwe połączenia paczek](#chapter-22)
+23. [Samouczek trzech etapów i pełna misja](#chapter-23)
+24. [Ukończenie, restart i ręczne sterowanie](#chapter-24)
+
 <a id="chapter-1"></a>
 
 ## 1. Zacznij od bezpiecznej próby
 
-Studio 1.2.0 to edytor offline dla SAMCNPC Behavior. Wymaga Pythona 3.10+ z Tkinterem; sam edytor nie wymaga pakietów pip. Uruchom START\_WINDOWS.bat albo python studio.py z katalogu programu.
+Studio 1.3.0 to edytor offline dla SAMCNPC Behavior. Wymaga Pythona 3.10+ z Tkinterem; sam edytor nie wymaga pakietów pip. Uruchom START\_WINDOWS.bat albo python studio.py z katalogu programu.
 
 Domyślny język to angielski. W prawym górnym rogu lub menu Language wybierz Polski, English albo Deutsch. Zmiana tłumaczy istniejące kontrolki i zachowuje graf, niezastosowane pola, szkic JSON, zaznaczenie, historię cofania oraz widok.
 
@@ -118,7 +122,7 @@ Otwórz przykład odwetu, aby poznać oddzielne reguły wyboru celu i ataku. Tes
 
 ![Zrzut uruchomionego Studio](images/guardian_en.png)
 
-Otwórz [`examples/complex_guardian_escort.samgraph`](examples/complex_guardian_escort.samgraph) z pakietu instrukcji. Istniejący projekt ma 9 reguł, 80 węzłów i 71 przewodów. Pozostaje zgodny ze Studio 1.2.0. Wybierz regułę na liście po lewej i przybliż jej fragment.
+Otwórz [`examples/complex_guardian_escort.samgraph`](examples/complex_guardian_escort.samgraph) z pakietu instrukcji. Istniejący projekt ma 9 reguł, 80 węzłów i 71 przewodów. Pozostaje zgodny ze Studio 1.3.0. Wybierz regułę na liście po lewej i przybliż jej fragment.
 
 Grupy: przerwanie walki/powrót (1000, 950, 940), odwet (850, 800), eskorta (500, 350, 300) i bezpieczna bezczynność bez gracza/celu (100). Najpierw czytaj grupy, później przewody.
 
@@ -352,7 +356,6 @@ Diagnostyka wskazuje wpis ZIP, np. external-zip:tools.zip!/behaviors/axe.json. P
 
 Przetestuj małą macierz: właściwe narzędzie w ręce; zapas w ekwipunku; narzędzie tylko w dozwolonej skrzyni; brak narzędzia; pełny ekwipunek; nieznana skrzynia; dokładny coal przy samym charcoal. Sprawdź fizyczne ilości i punkt powrotu, potem powtórz istotne przypadki po restarcie.
 
-Obecne testy natywne obejmują te ważne przypadki oraz ZIP ze Studio. Same zrzuty i podsumowanie modelu nie są dowodem rozgrywki.
 
 [Spis treści](#contents)
 
@@ -368,7 +371,7 @@ Przy aktualizacji pakietu opiekun uruchamia make\_catalog.py ze ścieżką repoz
 
 Jeśli wartość wydaje się ignorowana, użyj jej Zastosuj i obejrzyj JSON. Przy niezastosowanym JSON wybierz JSON -&gt; graf albo świadomie odtwórz Graf -&gt; JSON. Gdy znikną węzły, naciśnij F i sprawdź zakładkę. Dla liczb używaj kropki dziesiętnej oraz pokazanych granic.
 
-Po błędzie GUI zachowaj %USERPROFILE%/samcnpc-studio-error.log, wersję, język, system i mały projekt odtwarzający błąd. Obecne testy Windows obejmują wszystkie komponenty i wielokrotne zmiany języka.
+Po błędzie GUI zachowaj %USERPROFILE%/samcnpc-studio-error.log, wersję, język, system i mały projekt odtwarzający błąd.
 
 [Spis treści](#contents)
 
@@ -376,7 +379,7 @@ Po błędzie GUI zachowaj %USERPROFILE%/samcnpc-studio-error.log, wersję, języ
 
 ## 20. Problemy w grze i materiały
 
-Brak paczki na liście: sprawdź rzeczywistą instancję, folder, prefiks behaviors/ w ZIP i cały wynik reload. Stare ZIP-y z config/... wyeksportuj ponownie w Studio 1.2.0. Nazwa pliku nie jest ID paczki.
+Brak paczki na liście: sprawdź rzeczywistą instancję, folder, prefiks behaviors/ w ZIP i cały wynik reload. Stare ZIP-y z config/... wyeksportuj ponownie w Studio 1.3.0. Nazwa pliku nie jest ID paczki.
 
 Paczka jest na liście, ale nie działa: sprawdź przypisanie i warunki. Wyższa reguła może zajmować wymagany kanał. Węzeł run\_\* wymaga istniejącego taska, a task własnego kontrolera. Zacznij od kopii świata, jednego NPC i jednej własnej paczki.
 
@@ -384,9 +387,8 @@ Błąd przygotowania: sprawdź współrzędne dozwolonego źródła, odległoś�
 
 Projekty ćwiczeń znajdują się w [examples/](examples/). Zachowaj edytowalny plik `.samgraph` osobno od JSON lub ZIP instalowanego w Minecraft.
 
-Zobacz [lokalne przygotowanie](../docs/LOCAL_AUTONOMY.md), [format i limity ZIP](../docs/EXTERNAL_BEHAVIOR_ZIPS.md), [zarejestrowany schemat](../vendor/behavior-pack-registered.schema.json) oraz [datowane wyniki](../docs/TEST_REPORT.md).
+Zobacz [lokalne przygotowanie](../docs/LOCAL_AUTONOMY.md), [format i limity ZIP](../docs/EXTERNAL_BEHAVIOR_ZIPS.md), [zarejestrowany schemat](../vendor/behavior-pack-registered.schema.json).
 
-Na podstawie instrukcji Studio 1.2.0 z 27 września 2026; adaptacja GitHub z 28 września 2026. Zachowano 20 rozdziałów i przykłady komend, dodano odnośniki repozytorium oraz jeden rozdział zaawansowanego przykładu. Dowody natywnej rozgrywki są oddzielone od walidacji edytora.
 
 [Spis treści](#contents)
 
@@ -398,10 +400,59 @@ Otwórz [guardian_forester.samgraph](../examples/advanced/guardian_forester/guar
 
 Przejrzyj grupy bezpieczeństwa, odwetu, wyposażenia, przygotowania/odzyskiwania trwałych zadań i eskorty. Sprawdź graf w Studio, zmień język i obejrzyj JSON. Układ węzłów ułatwia nawigację, lecz wykonaniem nadal sterują priorytety i kanały.
 
-Obok znajdują się [JSON](../examples/advanced/guardian_forester/guardian_forester.json), [ZIP](../examples/advanced/guardian_forester/guardian_forester.zip), [polska instrukcja pokazu](../examples/advanced/guardian_forester/README_PL.md) i [datowane dowody testów fizycznych](../examples/advanced/guardian_forester/VALIDATION.md). Samo przypisanie paczki nie tworzy misji drwala ani uprawnień do skrzyni. Zachowaj kontroler istniejącego zadania i ustaw jawną politykę przygotowania/rozładunku.
+Obok znajdują się [JSON](../examples/advanced/guardian_forester/guardian_forester.json), [ZIP](../examples/advanced/guardian_forester/guardian_forester.zip), [polska instrukcja pokazu](../examples/advanced/guardian_forester/README_PL.md). Samo przypisanie paczki nie tworzy misji drwala ani uprawnień do skrzyni. Zachowaj kontroler istniejącego zadania i ustaw jawną politykę przygotowania/rozładunku.
 
-Natywna regresja połączyła pełny ekwipunek z brakiem siekiery: NPC rozładował dozwolony nadmiar, pobrał siekierę z uprawnionej skrzyni, ściął i dostarczył trzy kłody. To ujawniło i pozwoliło naprawić ogólny błąd cooldownu przygotowania w Behavior. Użyj zgodnego buildu Behavior; wyniki nie dotyczą automatycznie starszych JAR-ów.
 
 ![Zrzut uruchomionego Studio](../examples/advanced/guardian_forester/studio_preview.png)
 
 [Spis treści](#contents)
+
+<a id="chapter-22"></a>
+
+## 22. Widok misji: prawdziwe połączenia paczek
+
+![Studio mission editor](screenshots/mission_pl.png)
+
+Otwórz Plik -> Misja. Osobne okno edytuje projekt .sammission; przewody akcji zwykłego .samgraph nadal oznaczają równoległe propozycje. Etapy łączy Po potwierdzonym sukcesie. Po błędzie misja zatrzymuje się do przeglądu; liczba ponowień etapu wynosi zero.
+
+Wybierz etap na diagramie lub liście. Ustaw ID, paczkę, limit czasu, ID wymagań ukończenia i następny etap, następnie Zastosuj etap. Diagram można przewijać. Importuj zarejestrowany dokument operacji i zmień jego kontekst przez Edytuj parametry operacji.
+
+Dodaj / edytuj wymaganie udostępnia obsługiwane predykaty, bez wykonywalnych wyrażeń. Importuj paczkę przyjmuje JSON lub .samgraph. Cofnij/ponów zachowuje misję, a zmiana języka niezastosowane pola. Projekt edytowalny zapisuj osobno od runtime ZIP.
+
+Obejrzyj podgląd JSON i waliduj przed eksportem. Poprawny dokument lokalny nie potwierdza istnienia skrzyni, surowca ani drogi w wybranym świecie.
+
+<a id="chapter-23"></a>
+
+## 23. Samouczek trzech etapów i pełna misja
+
+Otwórz examples/missions/tutorial.sammission. Pierwszy etap jawnie zleca ENSURE: pobierz jedną użyteczną siekierę z dozwolonego źródła i wyposaż ją. Drugi zleca dojście do wskazanego punktu, trzeci fizyczny powrót do bezpiecznej kotwicy. Samo przypisanie paczki nie tworzy tych zadań.
+
+Dostosuj współrzędne i uprawnienia do kopii świata. Dołączona arena ma skrzynię z siekierą w 3,65,0, punkt drogi 8.5,65,0.5 oraz dom 0.5,65,0.5. Wymaga rzeczywistego wyposażenia, historycznego sukcesu zadania przejścia i bezpiecznej pozycji końcowej.
+
+full.sammission ma dziesięć etapów: siekiera, kilof, motyka, zbroja, 32 dębowe kłody, 30 bruku, 2 dokładne coal, powrót na powierzchnię, dziewięć pól gleby i powrót końcowy. Skrzynia wynikowa to 0,65,3. Charcoal celowo nie pasuje; narzędzia i rezerwy budowlane są oddzielne.
+
+Eksportuj pakiet ZIP. Zawiera behaviors/, missions/ i mission-manifest.json z osobnymi wersjonowanymi typami. Cały ZIP umieść w resources/samcnpc/behaviors. Nie umieszczaj JSON misji w katalogu luźnych paczek reguł.
+
+`/samcnpc behavior reload`
+
+`/samcnpc behavior mission start Sam acceptance:tutorial`
+
+`/samcnpc behavior mission status Sam`
+
+<a id="chapter-24"></a>
+
+## 24. Ukończenie, restart i ręczne sterowanie
+
+Ekwipunek, wyposażenie, zapas w celu, przygotowana gleba i bezpieczne dojście opisują bieżący stan. Są sprawdzane ponownie na końcu misji. Usunięcie dostarczonych kłód może unieważnić warunek zapasu. Sukces zadania jest historycznym potwierdzeniem konkretnego zlecenia, nie dowodem innych zapasów.
+
+Nieznana obserwacja nigdy nie oznacza sukcesu. Bezruch, przyjęcie akcji i upływ czasu nie są ukończeniem. Sekwencer przechodzi najwyżej jeden etap na tick, zachowując tożsamość operacji i jej pozostały budżet.
+
+`/samcnpc behavior mission pause Sam`
+
+`/samcnpc behavior mission resume Sam`
+
+`/samcnpc behavior mission cancel Sam`
+
+Zgodna ręczna pauza pozwala wznowić pracę. Anulowanie nie uruchamia następnego etapu. Działające zadanie po restarcie podlega uzgodnieniu; niepewne przejście lub zmieniona/usunięta paczka wymaga przeglądu bez powtórzenia zlecenia. Sprawdź stan, anuluj i świadomie zleć nową pracę, jeśli trzeba.
+
+Limity: 16 etapów, 16 wymagań, 3 strażników, 20–72000 ticków na etap i zero ponowień etapu. Cykle, nieosiągalne etapy i brakujące odwołania są odrzucane. Błąd domyślnie zatrzymuje do przeglądu. Ograniczone odzyskiwanie operacji pozostaje osobne.

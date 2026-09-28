@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "acceptance:e_bodyguard",
+  "description": "Bounded combat through shared equipment, distance and recovery policy with ordinary Core mechanics.",
+  "priority": 200,
+  "channels": [
+    "movement",
+    "look",
+    "combat",
+    "main_hand",
+    "off_hand",
+    "inventory"
+  ],
+  "rules": [
+    {
+      "id": "advance_combat",
+      "priority": 900,
+      "when": {
+        "test": {
+          "condition": "samcnpc:task_combat_ready"
+        }
+      },
+      "actions": [
+        {
+          "action": "samcnpc:run_combat_task"
+        }
+      ]
+    }
+  ]
+}

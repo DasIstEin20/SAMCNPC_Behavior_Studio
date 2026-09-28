@@ -1,4 +1,4 @@
-# SAMCNPC Behavior Studio 1.2.0 — Eigene Verhaltenspakete erstellen
+# SAMCNPC Behavior Studio 1.3.0 — Eigene Verhaltenspakete erstellen
 
 [English](GUIDE_EN.md) | [Polski](GUIDE_PL.md) | Deutsch
 
@@ -32,11 +32,15 @@ Dieses GitHub-Handbuch ersetzt die PDF-Varianten White und Black. GitHub verwend
 20. [Probleme im Spiel und Referenzen](#chapter-20)
 21. [Fortgeschrittenes Beispiel: Guardian / Forester](#chapter-21)
 
+22. [Missionsansicht: echte Verbindungen zwischen Packs](#chapter-22)
+23. [Dreistufiges Tutorial und vollständige Mission](#chapter-23)
+24. [Abschluss, Neustart und manuelle Steuerung](#chapter-24)
+
 <a id="chapter-1"></a>
 
 ## 1. Mit einem sicheren Test beginnen
 
-Studio 1.2.0 ist ein Offline-Editor für SAMCNPC Behavior. Er benötigt Python 3.10+ mit Tkinter; für den Editor sind keine pip-Pakete nötig. START\_WINDOWS.bat starten oder python studio.py im Programmordner ausführen.
+Studio 1.3.0 ist ein Offline-Editor für SAMCNPC Behavior. Er benötigt Python 3.10+ mit Tkinter; für den Editor sind keine pip-Pakete nötig. START\_WINDOWS.bat starten oder python studio.py im Programmordner ausführen.
 
 Die Standardsprache ist Englisch. Oben rechts oder im Menü Language stehen Polski, English und Deutsch bereit. Der Wechsel übersetzt vorhandene Steuerelemente und erhält Graph, noch nicht übernommene Felder, JSON-Entwurf, Auswahl, Verlauf und Ansicht.
 
@@ -118,7 +122,7 @@ Das Vergeltungsbeispiel zeigt Zielwahl und Angriff als getrennte Regeln. Mit ein
 
 ![Aufnahme des gestarteten Studio](images/guardian_en.png)
 
-[`examples/complex_guardian_escort.samgraph`](examples/complex_guardian_escort.samgraph) aus diesem Handbuchpaket öffnen. Das vorhandene Projekt besitzt 9 Regeln, 80 Knoten und 71 Verbindungen. Es bleibt mit Studio 1.2.0 kompatibel. Links eine Regel auswählen und ihren Bereich vergrößern.
+[`examples/complex_guardian_escort.samgraph`](examples/complex_guardian_escort.samgraph) aus diesem Handbuchpaket öffnen. Das vorhandene Projekt besitzt 9 Regeln, 80 Knoten und 71 Verbindungen. Es bleibt mit Studio 1.3.0 kompatibel. Links eine Regel auswählen und ihren Bereich vergrößern.
 
 Gruppen: Kampf lösen/Rückkehr (1000, 950, 940), Vergeltung (850, 800), Eskorte (500, 350, 300), sicheres Warten ohne Spieler/Ziel (100). Erst Gruppen, dann einzelne Verbindungen lesen.
 
@@ -352,7 +356,6 @@ Diagnosen nennen ZIP-Einträge, etwa external-zip:tools.zip!/behaviors/axe.json.
 
 Eine kleine Testmatrix nutzen: passendes Werkzeug ausgerüstet; Ersatz getragen; Werkzeug nur in erlaubter Truhe; fehlendes Werkzeug; volles Inventar; unbekannte Truhe; exakte Kohle bei ausschließlich Holzkohle. Physische Mengen und Rückkehr prüfen, relevante Fälle nach Neustart wiederholen.
 
-Aktuelle native Tests decken diese wichtigen Fälle und ein Studio-ZIP ab. Screenshots und Modellzusammenfassungen allein sind kein Spielnachweis.
 
 [Inhalt](#contents)
 
@@ -368,7 +371,7 @@ Für Paketaktualisierungen führen Betreuer make\_catalog.py mit Repository- ode
 
 Wird ein Wert ignoriert, seine Übernehmen-Schaltfläche nutzen und JSON prüfen. Bei nicht übernommenem JSON entweder JSON -&gt; Graph wählen oder bewusst Graph -&gt; JSON wiederherstellen. Verschwundene Knoten mit F einpassen und Register prüfen. Zahlen benötigen Dezimalpunkt und gültige Grenzen.
 
-Nach GUI-Fehlern %USERPROFILE%/samcnpc-studio-error.log sowie Version, Sprache, System und kleines Reproprojekt behalten. Aktuelle Windows-Tests prüfen sämtliche Komponenten und wiederholte Sprachwechsel.
+Nach GUI-Fehlern %USERPROFILE%/samcnpc-studio-error.log sowie Version, Sprache, System und kleines Reproprojekt behalten.
 
 [Inhalt](#contents)
 
@@ -376,7 +379,7 @@ Nach GUI-Fehlern %USERPROFILE%/samcnpc-studio-error.log sowie Version, Sprache, 
 
 ## 20. Probleme im Spiel und Referenzen
 
-Pack fehlt in der Liste: tatsächliche Instanz, Ordner, behaviors/-Präfix im Archiv und vollständiges Reload-Ergebnis prüfen. Alte ZIP-Pakete mit config/... in Studio 1.2.0 neu exportieren. Der Dateiname ist nicht die Pack-ID.
+Pack fehlt in der Liste: tatsächliche Instanz, Ordner, behaviors/-Präfix im Archiv und vollständiges Reload-Ergebnis prüfen. Alte ZIP-Pakete mit config/... in Studio 1.3.0 neu exportieren. Der Dateiname ist nicht die Pack-ID.
 
 Pack gelistet, aber inaktiv: Zuweisung und Bedingungen prüfen. Eine höher priorisierte Aktion kann benötigte Kanäle belegen. Ein run\_\*-Knoten braucht eine vorhandene Aufgabe, die Aufgabe ihren eigenen Controller. Zuerst mit Weltkopie, einem NPC und einem eigenen Pack testen.
 
@@ -384,9 +387,8 @@ Vorbereitung fehlgeschlagen: erlaubte Quellkoordinaten, Abstand, Sicht, Sperre, 
 
 Die Übungsprojekte liegen unter [examples/](examples/). Die bearbeitbare `.samgraph`-Datei getrennt vom in Minecraft installierten JSON oder ZIP aufbewahren.
 
-Siehe [lokale Vorbereitung](../docs/LOCAL_AUTONOMY.md), [ZIP-Format und Grenzen](../docs/EXTERNAL_BEHAVIOR_ZIPS.md), das [registrierte Schema](../vendor/behavior-pack-registered.schema.json) und [datierte Prüfergebnisse](../docs/TEST_REPORT.md).
+Siehe [lokale Vorbereitung](../docs/LOCAL_AUTONOMY.md), [ZIP-Format und Grenzen](../docs/EXTERNAL_BEHAVIOR_ZIPS.md), das [registrierte Schema](../vendor/behavior-pack-registered.schema.json).
 
-Grundlage: Studio-1.2.0-Handbuch vom 27. September 2026; GitHub-Fassung vom 28. September 2026. Die ursprünglichen 20 Kapitel und Befehlsbeispiele bleiben erhalten; Repository-Links und ein Kapitel zum fortgeschrittenen Beispiel wurden ergänzt. Native Spielnachweise bleiben von der Editorprüfung getrennt.
 
 [Inhalt](#contents)
 
@@ -398,10 +400,59 @@ Grundlage: Studio-1.2.0-Handbuch vom 27. September 2026; GitHub-Fassung vom 28. 
 
 Die Gruppen für Sicherheit, Vergeltung, Ausrüstung, Vorbereitung/Wiederaufnahme dauerhafter Aufgaben und Eskorte prüfen. In Studio validieren, die Sprache wechseln und JSON ansehen. Die Anordnung hilft bei der Navigation; Prioritäten und Kanäle bestimmen weiterhin die Ausführung.
 
-Enthalten sind [JSON](../examples/advanced/guardian_forester/guardian_forester.json), [ZIP](../examples/advanced/guardian_forester/guardian_forester.zip), eine [polnische Anleitung](../examples/advanced/guardian_forester/README_PL.md) und [datierte physische Testnachweise](../examples/advanced/guardian_forester/VALIDATION.md). Das Zuweisen des Packs allein erzeugt keinen Holzfällerauftrag und erlaubt keinen Truhenzugriff. Den Controller der vorhandenen Aufgabe zugewiesen lassen und eine ausdrückliche Vorbereitungs-/Entladerichtlinie einrichten.
+Enthalten sind [JSON](../examples/advanced/guardian_forester/guardian_forester.json), [ZIP](../examples/advanced/guardian_forester/guardian_forester.zip), eine [polnische Anleitung](../examples/advanced/guardian_forester/README_PL.md). Das Zuweisen des Packs allein erzeugt keinen Holzfällerauftrag und erlaubt keinen Truhenzugriff. Den Controller der vorhandenen Aufgabe zugewiesen lassen und eine ausdrückliche Vorbereitungs-/Entladerichtlinie einrichten.
 
-Ein nativer Regressionstest kombinierte volles Inventar mit fehlender Axt: erlaubter Überschuss wurde entladen, eine Axt aus der freigegebenen Truhe geholt und drei Stämme wurden gefällt und geliefert. Dabei wurde ein allgemeiner Behavior-Fehler beim Vorbereitungs-Cooldown gefunden und behoben. Den passenden Behavior-Build verwenden; diese Ergebnisse gelten nicht automatisch für ältere JARs.
 
 ![Aufnahme des gestarteten Studio](../examples/advanced/guardian_forester/studio_preview.png)
 
 [Inhalt](#contents)
+
+<a id="chapter-22"></a>
+
+## 22. Missionsansicht: echte Verbindungen zwischen Packs
+
+![Studio mission editor](screenshots/mission_de.png)
+
+Datei -> Mission öffnet ein separates .sammission-Projekt. Aktionsverbindungen normaler .samgraph-Dateien bleiben gleichzeitige Vorschläge. Stufen sind durch Nach bestätigtem Erfolg verbunden. Bei Fehler wird zur Prüfung angehalten; Stufenwiederholungen sind null.
+
+Eine Stufe im Diagramm oder in der Liste auswählen. ID, Pack, Zeitlimit, Abschlussanforderungen und Erfolgsziel einstellen, dann Stufe übernehmen. Das Diagramm ist scrollbar. Ein registriertes Operationsdokument importieren und seinen begrenzten Kontext über Operationsparameter bearbeiten ändern.
+
+Anforderung hinzufügen / bearbeiten bietet unterstützte Prädikate statt ausführbarer Ausdrücke. Paket importieren akzeptiert JSON oder .samgraph. Rückgängig/Wiederholen erhält die Mission, Sprachwechsel ungespeicherte Felder. Das bearbeitbare Projekt getrennt vom Runtime-ZIP speichern.
+
+JSON-Vorschau prüfen und vor Export validieren. Ein lokal gültiges Dokument beweist keine vorhandene Truhe, Ressource oder Route in der gewählten Welt.
+
+<a id="chapter-23"></a>
+
+## 23. Dreistufiges Tutorial und vollständige Mission
+
+examples/missions/tutorial.sammission öffnen. Die erste Stufe lässt ausdrücklich ENSURE zu: eine brauchbare Axt aus der erlaubten Quelle holen und ausrüsten. Die zweite führt zum Wegpunkt, die dritte körperlich zum sicheren Anker zurück. Eine Pack-Zuweisung allein erzeugt diese Aufgaben nicht.
+
+Koordinaten und Berechtigungen an eine Weltkopie anpassen. Die Beispielarena nutzt die Axttruhe 3,65,0, den Wegpunkt 8.5,65,0.5 und Zuhause 0.5,65,0.5. Gefordert sind tatsächliche Ausrüstung, historischer Erfolg der Wegaufgabe und sichere Endposition.
+
+full.sammission hat zehn Stufen: Axt, Spitzhacke, Hacke, Rüstung, 32 Eichenstämme, 30 Bruchstein, 2 exakte Kohle, Oberflächenrückkehr, neun Bodenzellen und abschließende Rückkehr. Zieltruhe: 0,65,3. Holzkohle erfüllt coal nicht; Werkzeuge und Baureserven sind getrennt.
+
+ZIP-Bündel exportieren. Es enthält behaviors/, missions/ und mission-manifest.json mit getrennten versionierten Dokumenttypen. Das ganze ZIP unter resources/samcnpc/behaviors installieren. Missions-JSON gehört nicht zu losen Regelpaketen.
+
+`/samcnpc behavior reload`
+
+`/samcnpc behavior mission start Sam acceptance:tutorial`
+
+`/samcnpc behavior mission status Sam`
+
+<a id="chapter-24"></a>
+
+## 24. Abschluss, Neustart und manuelle Steuerung
+
+Inventar, Ausrüstung, Zielbestand, vorbereiteter Boden und sichere Ankunft beschreiben den aktuellen Zustand. Am Missionsende werden sie erneut geprüft. Entfernte gelieferte Stämme können die Endbedingung ungültig machen. Aufgabenerfolg ist ein historischer Beleg einer genauen Zuweisung, kein Beweis anderer Bestände.
+
+Unbekannte Beobachtungen sind nie Erfolg. Stillstand, akzeptierte Aktionen und verstrichene Zeit bedeuten keinen Abschluss. Pro Tick ist höchstens ein Stufenwechsel möglich; Identität und Restbudget einer Operation bleiben erhalten.
+
+`/samcnpc behavior mission pause Sam`
+
+`/samcnpc behavior mission resume Sam`
+
+`/samcnpc behavior mission cancel Sam`
+
+Eine kompatible manuelle Pause lässt sich fortsetzen. Abbruch startet niemals die Folgestufe. Laufende Arbeit wird nach Neustart abgeglichen; ein unklarer Übergang oder geändertes/entferntes Pack erfordert Prüfung statt erneuter Zuweisung. Zustand prüfen, abbrechen und bei Bedarf bewusst neue Arbeit starten.
+
+Grenzen: 16 Stufen, 16 Anforderungen, 3 Wächter, 20–72000 Ticks je Stufe und null Stufenwiederholungen. Zyklen, unerreichbare Stufen und fehlende Verweise werden abgelehnt. Fehler halten standardmäßig zur Prüfung an. Begrenzte Erholung der Operation bleibt separat.

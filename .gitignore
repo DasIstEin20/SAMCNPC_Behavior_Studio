@@ -3,3 +3,17 @@ __pycache__/
 .venv/
 *.log
 *.tmp
+
+/PROJECT_STATE.md
+
+/AGENTS.md
+
+/docs/adr/
+
+/docs/*VALIDATION*
+
+/docs/*REPORT*
+
+/docs/*AUDIT*
+
+/docs/*HANDOFF*
